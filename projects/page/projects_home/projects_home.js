@@ -18,10 +18,45 @@ wn.module_page["Projects"] = [
 				doctype:"Project"
 			},
 			{
+                                label: wn._("Project Templates"),
+                                description: wn._("Project master."),
+                                doctype:"Project Templates"
+                        },
+
+			{
+                                label: wn._("Project Management"),
+                                description: wn._("Time Log for tasks."),
+                                doctype:"Project Management"
+                        },
+ 
+
+			{
+                                label: wn._("Patient Report"),
+                                description: wn._("Project master."),
+                                doctype:"Patient Report"
+                  	},
+			{
+                                label: wn._("Preventive Health Checkup"),
+                                description: wn._("health checkup."),
+                                doctype:"Preventive Health Checkup"
+                        },
+
+
+			{
 				label: wn._("Time Log"),
 				description: wn._("Time Log for tasks."),
 				doctype:"Time Log"
 			},
+
+			 {
+                                label: wn._("Requisition Form"),
+                                description: wn._("Time Log for tasks."),
+                                doctype:"Requisition Form"
+                        },
+
+
+
+
 		]
 	},
 	{

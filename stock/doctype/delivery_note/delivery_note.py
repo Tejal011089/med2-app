@@ -32,7 +32,30 @@ class DocType(SellingController):
 			'status_field': 'delivery_status',
 			'keyword': 'Delivered'
 		}]
-		
+	def on_update(self):
+		webnotes.errprint("hiee")
+		qry=webnotes.conn.sql("select priority from `tabDelivery Tracking` where status=%s",self.doc.status_d,as_list=1)
+		# webnotes.errprint(qry[0][0])
+		qr=webnotes.conn.sql("select count(priority) from `tabDelivery Tracking`",as_list=1)
+		# webnotes.errprint(qr[0][0])	
+		if qry:
+			p3= flt(qry[0][0])/flt(qr[0][0])
+			p4=p3*100.00
+			clr='white'
+        	    	bclr='green'
+            		w='100%'
+			ww=cstr(p4)
+            		per='&#37;'
+                	ww1=cint(ww)
+               		ww2=cstr(ww1)+per
+			a="<html><body><div style='height: 20px; background-color:"
+                	b=clr+"; width: 100%;'> <div id='progress_bar' style='height: 20px;text-align:center;color:black;background-color:"
+                	c=bclr+"; width:"+ww+"% ;'> "
+                	f=" "+"<b>"+ww2+"</b>"+"</div></div></body></html>"
+                	e=a+" "+b+" "+c+f
+			self.doc.progress_bar=e
+		self.doc.save()
+		webnotes.errprint(self.doc.progress_bar)
 	def onload(self):
 		billed_qty = webnotes.conn.sql("""select sum(ifnull(qty, 0)) from `tabSales Invoice Item`
 			where docstatus=1 and delivery_note=%s""", self.doc.name)

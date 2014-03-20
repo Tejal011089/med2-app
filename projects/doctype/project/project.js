@@ -20,3 +20,10 @@ cur_frm.fields_dict.customer.get_query = function(doc,cdt,cdn) {
 		query:"controllers.queries.customer_query"
 	}
 }
+
+
+cur_frm.cscript.project_category = function(doc,cdt,cdn){
+                console.log("hhh")
+                get_server_fields('get_milestone_details','','',doc,cdt,cdn,1,function(r,rt){refresh_field('project_milestones')});
+ }
+

@@ -32,6 +32,14 @@ wn.module_page["Stock"] = [
 				description: wn._("Goods received from Suppliers."),
 				doctype:"Purchase Receipt"
 			},
+			 {
+                                label: wn._("Delivery Status Priority"),
+                                description: wn._("Goods received from Suppliers."),
+				route:"Form/Delivery Status Priority/Delivery Status Priority"
+                               // doctype:"Delivery Status Priority"
+                        },
+
+	
 		]
 	},
 	{

@@ -9,6 +9,7 @@ from webnotes.model.bean import getlist
 from webnotes import msgprint
 from stock.utils import get_valid_serial_nos	
 
+from datetime import datetime, timedelta,date
 from utilities.transaction_base import TransactionBase
 
 class DocType(TransactionBase):
@@ -30,7 +31,64 @@ class DocType(TransactionBase):
 			'status_field': 'installation_status',
 			'keyword': 'Installed'
 		}]
+	
 
+#	def on_update(self):
+#		webnotes.errprint("in update")
+#		from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
+#               #from datetime import datetime
+#		#now = datetime.datetime.now().strftime("%Y-%m-%d")
+#		#webnotes.errprint(now)
+#		#yesterday = now - datetime.timedelta(days=1)
+#		#earlier = today - DD
+#		#earlier_str = earlier.strftime("%Y%m%d")
+#		#webnotes.errprint(now)
+#		#webnotes.errprint(yesterday)
+#		#webnotes.errprint(earlier)
+#		#webnotes.errprint(earlier_str)
+#		
+#               #today=nowdate()
+#                i = datetime.now()
+#		#webnotes.errprint(i)
+#                p=i.strftime('%Y-%m-%d %H:%M:%S')
+#                #webnotes.errprint(p)
+#                #day=p-timedelta(hours=24)
+#                #webnotes.errprint(day)
+#		qry=webnotes.conn.sql("select name from `tabSupport Ticket` t where t.status='Open' and t.creation < DATE_SUB(NOW(), INTERVAL 24 HOUR) AND          t.creation > DATE_SUB(NOW(), INTERVAL 48 HOUR)",as_list=1);
+		
+#		webnotes.errprint(qry)
+#		if qry:
+
+#			for [i] in qry:
+#				webnotes.errprint(i)
+#				p=webnotes.conn.sql("select territory from `tabSupport Ticket` where name='"+i+"'")
+#				webnotes.errprint(p)
+#				w=webnotes.conn.sql("select parent from `tabDefaultValue` where  defkey = '%s' and defvalue = '%s'"%('territory',p[0][0]))
+#				webnotes.errprint(w)
+#				webnotes.conn.sql("update `tabSupport Ticket` set assigned_to=' ',assigned_to_higher_level='"+w[0][0]+"' where name='"+i+"'")
+#				webnotes.errprint("Updated")
+#		qr=webnotes.conn.sql("select name from `tabSupport Ticket` t where t.status='Open' and  t.creation < DATE_SUB(NOW(), INTERVAL 48 HOUR) AND creation > DATE_SUB(NOW(), INTERVAL 72 HOUR)",as_list=1);
+		
+#		webnotes.errprint(qr)
+#		if qr:
+		
+#			for [j] in qr:
+#				webnotes.errprint(j)
+#				q=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='National Manager' and r.parent=p.name")
+#				qt=webnotes.conn.sql("update `tabSupport Ticket` set assigned_to_higher_level='%s' where name='%s'"%(q[0][0],j))
+#				webnotes.errprint(q)
+	
+#		q=webnotes.conn.sql("select name from `tabSupport Ticket` t where t.status='Open' and t.creation < DATE_SUB(NOW(), INTERVAL 72 HOUR)",as_list=1);
+#		webnotes.errprint(q)
+#		if q:
+#			for [k] in q:
+#				webnotes.errprint(k)
+#				q=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='COO' and r.parent=p.name")
+#				qd=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='CEO' and r.parent=p.name")
+				
+#				qt=webnotes.conn.sql("update `tabSupport Ticket` set assigned_to='"+q[0][0]+"',assigned_to_higher_level=        '"+qd[0][0]+"' where name='"+k+"'")
+#				webnotes.errprint("Updated")
+		
 	def validate(self):
 		self.validate_fiscal_year()
 		self.validate_installation_date()
@@ -103,8 +161,8 @@ class DocType(TransactionBase):
 		if not(getlist(self.doclist, 'installed_item_details')):
 			msgprint("Please fetch items from Delivery Note selected", raise_exception=1)
 	
-	def on_update(self):
-		webnotes.conn.set(self.doc, 'status', 'Draft')
+	#def on_update(self):
+	#	webnotes.conn.set(self.doc, 'status', 'Draft')
 	
 	def on_submit(self):
 		valid_lst = []

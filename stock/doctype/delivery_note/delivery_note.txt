@@ -2,7 +2,7 @@
  {
   "creation": "2013-05-24 19:29:09", 
   "docstatus": 0, 
-  "modified": "2013-12-14 17:26:12", 
+  "modified": "2014-03-06 13:30:50", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -44,6 +44,18 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "section_break_1", 
+  "fieldtype": "Section Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "progress_bar", 
+  "fieldtype": "Small Text", 
+  "label": "Delivery Progress ", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "delivery_to_section", 
   "fieldtype": "Section Break", 
   "label": "Delivery To", 
@@ -62,6 +74,7 @@
   "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "label": "Series", 
   "no_copy": 1, 
   "oldfieldname": "naming_series", 
@@ -69,7 +82,14 @@
   "options": "DN", 
   "print_hide": 1, 
   "read_only": 0, 
-  "reqd": 1
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status_d", 
+  "fieldtype": "Link", 
+  "label": "Delivery Status", 
+  "options": "Status"
  }, 
  {
   "doctype": "DocField", 
@@ -209,6 +229,13 @@
   "reqd": 1, 
   "search_index": 1, 
   "width": "100px"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "delivery_status", 
+  "fieldtype": "Link", 
+  "label": "Delivery Status", 
+  "options": "Status"
  }, 
  {
   "doctype": "DocField", 

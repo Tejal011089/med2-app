@@ -62,6 +62,7 @@
    "type": "setup"
   }, 
   "Stock": {
+   "Label":"Inventory",
    "color": "#f39c12", 
    "icon": "icon-truck", 
    "link": "stock-home", 

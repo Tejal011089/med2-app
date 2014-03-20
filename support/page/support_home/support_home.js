@@ -17,6 +17,15 @@ wn.module_page["Support"] = [
 				description: wn._("Customer Issue against Serial No."),
 				doctype:"Customer Issue"
 			},
+
+			 {
+                                label: wn._("Activity Data"),
+                                description: wn._("Customer Issue against Serial No."),
+                                doctype:"Activity Data"
+                        },
+
+	
+		
 		]
 	},
 

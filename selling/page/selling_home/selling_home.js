@@ -12,6 +12,13 @@ wn.module_page["Selling"] = [
 				description: wn._("Customer database."),
 				doctype:"Customer"
 			},
+
+			{
+                                label: wn._("Installation Note"),
+                                description: wn._("Customer database."),
+                                doctype:"Installation Note"
+                        },
+
 			{
 				label: wn._("Lead"),
 				description: wn._("Database of potential customers."),
@@ -32,6 +39,22 @@ wn.module_page["Selling"] = [
 				description: wn._("Confirmed orders from Customers."),
 				doctype:"Sales Order"
 			},
+			
+			{
+                                label: wn._("Internal Order Form"),
+                                description: wn._("Confirmed orders from Customers."),
+                                doctype:"Internal Order Form" 
+                        },
+
+
+			                        {
+                                label: wn._("Referral Management"),
+                                description: wn._("Confirmed orders from Customers."),
+                                doctype:"Referral Master"
+                        },
+
+
+			
 		]
 	},
 	{
@@ -186,6 +209,13 @@ wn.module_page["Selling"] = [
 				route: "query-report/Customer Addresses And Contacts",
 				doctype: "Contact"
 			},
+
+			{
+                                "label":wn._("Target Setting And Monitoring"),
+                                route: "query-report/Target Setting and Monitoring",
+                                doctype: "Sales Order"
+                        },
+
 			{
 				"label":wn._("Ordered Items To Be Delivered"),
 				route: "query-report/Ordered Items To Be Delivered",

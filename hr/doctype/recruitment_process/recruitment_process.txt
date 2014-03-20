@@ -1,0 +1,233 @@
+[
+ {
+  "creation": "2014-02-24 10:48:32", 
+  "docstatus": 0, 
+  "modified": "2014-03-20 12:09:12", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "naming_series:", 
+  "doctype": "DocType", 
+  "document_type": "Transaction", 
+  "icon": "icon-file-text", 
+  "is_submittable": 1, 
+  "module": "HR", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Recruitment Process", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Recruitment Process", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Recruitment Process"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "recruiter_details", 
+  "fieldtype": "Section Break", 
+  "label": "Recruiter Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amended_from", 
+  "fieldtype": "Link", 
+  "label": "Amended From", 
+  "no_copy": 1, 
+  "options": "Recruitment Process", 
+  "print_hide": 1, 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "naming_series", 
+  "fieldtype": "Select", 
+  "hidden": 1, 
+  "label": "Series", 
+  "options": "RP-", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "posting_date", 
+  "fieldtype": "Date", 
+  "label": "Posting Date", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status", 
+  "fieldtype": "Select", 
+  "label": "Status", 
+  "options": "\nOpen \nApproved\nRejected"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "r_salutations", 
+  "fieldtype": "Select", 
+  "label": " Recruiter Salutations", 
+  "options": "\nMr\nMs"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "recruiter_name", 
+  "fieldtype": "Data", 
+  "label": "Recruiter Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "r_gender", 
+  "fieldtype": "Select", 
+  "label": "Gender", 
+  "options": "\nMale\nFemale", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "birth_date", 
+  "fieldtype": "Date", 
+  "label": "Date Of Birth", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_8", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "email_id", 
+  "fieldtype": "Data", 
+  "label": "Email Id ", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "alternate_emailid", 
+  "fieldtype": "Data", 
+  "label": "Alternate Emailid"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "phone_number", 
+  "fieldtype": "Data", 
+  "label": "Phone Number", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "educational_details_table", 
+  "fieldtype": "Section Break", 
+  "label": "Educational Details Table"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "educational_qualification_details", 
+  "fieldtype": "Table", 
+  "label": "Educational Qualification Details", 
+  "options": "Employee Education"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "work_experience_details", 
+  "fieldtype": "Section Break", 
+  "label": "Work Experience Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "work_details", 
+  "fieldtype": "Table", 
+  "label": "Employee External Work History", 
+  "options": "Employee External Work History"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "history_in_company", 
+  "fieldtype": "Section Break", 
+  "label": "History In Company"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_internal_work_historys", 
+  "fieldtype": "Table", 
+  "label": "Employee Internal Work Historys", 
+  "options": "Employee Internal Work History"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "certifications_details", 
+  "fieldtype": "Section Break", 
+  "label": "Certifications Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "certification_details", 
+  "fieldtype": "Table", 
+  "label": "Certification Details", 
+  "options": "Certifications"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_17", 
+  "fieldtype": "Section Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remark_by_hr", 
+  "fieldtype": "Small Text", 
+  "label": "Remark By HR"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "section_break_18", 
+  "fieldtype": "Section Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remark_by_manager", 
+  "fieldtype": "Small Text", 
+  "label": "Remark By Manager"
+ }, 
+ {
+  "cancel": 0, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Administrator", 
+  "submit": 1
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "HR", 
+  "submit": 1
+ }, 
+ {
+  "cancel": 1, 
+  "create": 0, 
+  "doctype": "DocPerm", 
+  "role": "Manager", 
+  "submit": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Employee"
+ }
+]

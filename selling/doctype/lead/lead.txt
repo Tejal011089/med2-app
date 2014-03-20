@@ -2,7 +2,7 @@
  {
   "creation": "2013-04-10 11:45:37", 
   "docstatus": 0, 
-  "modified": "2013-11-25 11:38:00", 
+  "modified": "2014-03-10 14:04:33", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -25,7 +25,6 @@
   "permlevel": 0
  }, 
  {
-  "amend": 0, 
   "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
@@ -34,8 +33,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 0, 
   "write": 1
  }, 
  {
@@ -53,11 +50,13 @@
   "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "label": "Series", 
   "no_copy": 1, 
   "oldfieldname": "naming_series", 
   "oldfieldtype": "Select", 
   "options": "LEAD\nLEAD/10-11/\nLEAD/MUMBAI/", 
+  "read_only": 0, 
   "reqd": 0
  }, 
  {
@@ -129,6 +128,13 @@
   "search_index": 0
  }, 
  {
+  "doctype": "DocField", 
+  "fieldname": "demo_date", 
+  "fieldtype": "Date", 
+  "label": "Demo Date", 
+  "reqd": 1
+ }, 
+ {
   "depends_on": "eval:doc.source == 'Customer'", 
   "doctype": "DocField", 
   "fieldname": "customer", 
@@ -187,9 +193,9 @@
   "label": "Next Contact By", 
   "oldfieldname": "contact_by", 
   "oldfieldtype": "Link", 
-  "options": "Profile", 
+  "options": "Employee", 
   "print_hide": 0, 
-  "reqd": 0, 
+  "reqd": 1, 
   "width": "100px"
  }, 
  {
@@ -396,13 +402,23 @@
   "print_hide": 1
  }, 
  {
+  "amend": 0, 
   "cancel": 1, 
   "doctype": "DocPerm", 
-  "role": "Sales Manager"
+  "report": 1, 
+  "role": "Sales Manager", 
+  "submit": 0
  }, 
  {
+  "amend": 0, 
   "cancel": 0, 
   "doctype": "DocPerm", 
-  "role": "Sales User"
+  "report": 1, 
+  "role": "Sales User", 
+  "submit": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Employee"
  }
 ]

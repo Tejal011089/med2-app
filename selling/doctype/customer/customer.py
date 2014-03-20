@@ -5,9 +5,17 @@ from __future__ import unicode_literals
 import webnotes
 
 from webnotes.model.doc import Document, make_autoname
-from webnotes import msgprint, _
+#from webnotes import msgprint, 
+from webnotes.utils import cstr, cint, flt, comma_or, nowdate,add_months,getdate,add_days
+
 import webnotes.defaults
 
+from webnotes.model.code import get_obj
+from webnotes.model.bean import getlist, copy_doclist
+from datetime import datetime, timedelta,date
+from webnotes.utils.email_lib import sendmail
+
+from webnotes import msgprint, _
 
 from utilities.transaction_base import TransactionBase
 
@@ -116,7 +124,145 @@ class DocType(TransactionBase):
 		self.update_credit_days_limit()
 		#create address and contact from lead
 		self.create_lead_address_contact()
+		#self.payment_follow_up()	
+
+
+	def send_sms(self,sender_no,msg):
+			webnotes.errprint("in sms")
+			ss = get_obj('SMS Settings', 'SMS Settings', with_children=1)
+            #webnotes.errprint("In send SMS ")
+			webnotes.errprint(ss)
+	       	#return ss
+			args = {}
+			#msg="Ticket Created"
+			for d in getlist(ss.doclist, 'static_parameter_details'):
+				args[d.parameter] = d.value
+			sms_url=webnotes.conn.get_value('SMS Settings', None, 'sms_gateway_url')
+			msg_parameter=webnotes.conn.get_value('SMS Settings', None, 'message_parameter')
+			receiver_parameter=webnotes.conn.get_value('SMS Settings', None, 'receiver_parameter')
+			url = sms_url +"?user="+ args["user"] +"&senderID="+ args["sender ID"] +"&receipientno="+ sender_no +"\
+					&dcs="+ args["dcs"]+ "&msgtxt=" + msg +"&state=" +args["state"]
+			webnotes.errprint(url)
+			import requests
+			r = requests.get(url)
+	def send_email(self,email,msg):
+		webnotes.errprint("in email")
+		webnotes.msgprint(email)
+		from webnotes.utils.email_lib import sendmail
+		sendmail(email, subject="Payment Due", msg = msg)
+	def payment_follow_up(self):
+		#from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
+		#from import datetime,date,timedelta
+		i = datetime.now()
+                p=i.strftime('%Y-%m-%d')
 		
+		
+		webnotes.errprint(p)
+		qry=webnotes.conn.sql("select name from `tabSales Invoice` where outstanding_amount>0",as_list=1)
+		webnotes.errprint(qry)
+		#x=webnotes.conn.sql("select grand_total_export from `tabSales Invoice` where outstanding_amount>0",as_list=1)
+		#wevbnotes.conn.sql(x)
+	
+		for [i] in qry:
+			qr=webnotes.conn.sql("select installation from `tabSales Invoice` where name='"+i+"'",as_list=1)
+			webnotes.errprint(qr)
+			if qr:
+
+				q=webnotes.conn.sql("select inst_date,employee_id  from `tabInstallation Note` where name='"+qr[0][0]+"'")
+				#webnotes.errprint([q,"qqqq"])
+				webnotes.errprint(q[0][1])
+				
+				y=webnotes.conn.sql("select grand_total_export from `tabSales Invoice` where name='"+qry[0][0]+"'",as_list=1)
+ 		               	webnotes.errprint(y)
+				v=webnotes.conn.sql("select outstanding_amount from `tabSales Invoice` where name='"+qry[0][0]+"'",as_list=1)
+				webnotes.errprint(v)
+				paid=flt(y[0][0]-v[0][0])
+				webnotes.errprint(paid)
+				if q:
+				
+					webnotes.errprint(q)
+					s=q[0][0].strftime('%Y-%m-%d')
+					a=getdate(p)
+					e=cint((getdate(p) - getdate(s)).days)
+					webnotes.errprint(e)
+				if e== 8:
+					webnotes.errprint("in e")
+					z=webnotes.conn.sql("select cell_number,user_id from `tabEmployee` where name='"+q[0][1]+"'")
+					webnotes.errprint(z)
+					ss=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='Manager' and r.parent=p.name")
+					webnotes.errprint(ss)
+					if ss:
+
+						qq=webnotes.conn.sql("select cell_number from `tabEmployee` where user_id='"+ss[0][0]+"' and designation='Manager'")
+						webnotes.errprint(qq)
+					dic1={
+						'Sales Invoice No':qry[0][0],
+						'Installation Date':s,
+						'Grand Total':y[0][0],
+						'Outstanding Amount':v[0][0],
+						'Paid Amount Till date': paid
+						
+					}
+					#webnotes.errprint(flt(y[0][0]))
+					msg="Dear Sir,sales Invoice No= '"+qry[0][0]+"' ,Installation Date='"+s+"',Total Amount for specified Sales Invoice is='"+cstr(y[0][0])+"', And Outstanding Amount='"+cstr(v[0][0])+"',And Paid Amount Till Date='"+cstr(paid)+"' " 
+					webnotes.errprint(msg)
+					#p=self.send_sms(z[0][0],msg)
+					#q=self.send_sms(qq[0][0],msg)
+					#r=self.send_email(z[0][1],msg)
+					#s=self.send_email(ss[0][0],msg)
+					x=self.send_email(z[0][1],msg)
+					#webnotes.errprint(qry[0][0])
+					
+				elif e== 30:
+					ss=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='National Manager' and r.parent=p.name")
+					webnotes.errprint(ss)
+					if ss:
+
+						qq=webnotes.conn.sql("select cell_number from `tabEmployee` where user_id='"+ss[0][0]+"' and designation='National Manager'",as_list=1)
+						#webnotes.errprint(qq)
+
+					dic1={
+                            'Sales Invoice No':qry[0][0],
+                 			'Installation Date':s,
+                            'Grand Total':x[0][0],
+                            'Outstanding Amount':v[0][0],
+                            'Paid Amount Till date':paid
+                                               
+                    }
+
+					msg ="Dear Sir,sales Invoice No= '"+qry[0][0]+"' ,Installation Date='"+s+"',Grand Total='"+cstr(y[0][0])+"',Outstanding Amount='"+cstr(v[0][0])+"',Paid Amount Till Date='"+cstr(paid)+"' " 
+					p=self.send_sms(qq[0][0],msg)
+				elif e== 60:
+
+					ss=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='CEO' and r.parent=p.name")
+					webnotes.errprint(ss)
+					if ss:
+
+						qq=webnotes.conn.sql("select cell_number from `tabEmployee` where user_id='"+ss[0][0]+"' and designation='CEO'",as_list=1)
+						webnotes.errprint(qq)
+
+					ss1=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='COO' and r.parent=p.name")
+					webnotes.errprint(ss1)
+					if ss1:
+
+						qq1=webnotes.conn.sql("select cell_number from `tabEmployee` where user_id='"+ss[0][0]+"' and designation='COO'",as_list=1)
+						webnotes.errprint(qq1)
+
+					dic1={
+                        						'Sales Invoice No':qry[0][0],
+                                                'Installation Date':s,
+                                                'Grand Total':x[0][0],
+                                                'Outstanding Amount':v[0][0],
+                                                'Paid Amount Till date':paid
+                                                
+                    }
+
+					msg="Dear Sir,sales Invoice No= '"+qry[0][0]+"' ,Installation Date='"+s+"',Grand Total='"+cstr(y[0][0])+"',Outstanding Amount='"+cstr(v[0][0])+"',Paid Amount Till Date='"+cstr(paid)+"' " 
+					p=self.send_sms(qq[0][0],msg)	
+					a=self.send_sms(qq1[0][0],msg)				
+
+				else:
+					webnotes.errprint("in last")
 	def validate_name_with_customer_group(self):
 		if webnotes.conn.exists("Customer Group", self.doc.name):
 			webnotes.msgprint("An Customer Group exists with same name (%s), \

@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:30", 
   "docstatus": 0, 
-  "modified": "2014-01-14 15:56:22", 
+  "modified": "2014-03-07 16:17:09", 
   "modified_by": "Administrator", 
   "owner": "harshada@webnotestech.com"
  }, 
@@ -21,23 +21,15 @@
   "name": "__common__", 
   "parent": "Customer Issue", 
   "parentfield": "fields", 
-  "parenttype": "DocType", 
-  "permlevel": 0
+  "parenttype": "DocType"
  }, 
  {
-  "amend": 0, 
-  "cancel": 1, 
-  "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
   "parent": "Customer Issue", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
-  "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "role": "Maintenance User", 
-  "submit": 0, 
   "write": 1
  }, 
  {
@@ -49,19 +41,22 @@
   "fieldname": "customer_section", 
   "fieldtype": "Section Break", 
   "label": "Customer", 
-  "options": "icon-user"
+  "options": "icon-user", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "in_filter": 0, 
   "label": "Series", 
   "no_copy": 1, 
   "oldfieldname": "naming_series", 
   "oldfieldtype": "Select", 
-  "options": "\nCI/2010-2011/", 
-  "reqd": 1, 
+  "options": "CI/2013-2014/\nCI/2010-2011/", 
+  "permlevel": 0, 
+  "reqd": 0, 
   "search_index": 0
  }, 
  {
@@ -76,6 +71,7 @@
   "oldfieldname": "status", 
   "oldfieldtype": "Select", 
   "options": "\nOpen\nClosed\nWork In Progress\nCancelled", 
+  "permlevel": 0, 
   "reqd": 1, 
   "search_index": 1
  }, 
@@ -88,6 +84,7 @@
   "label": "Issue Date", 
   "oldfieldname": "complaint_date", 
   "oldfieldtype": "Date", 
+  "permlevel": 0, 
   "reqd": 1, 
   "search_index": 1
  }, 
@@ -96,6 +93,7 @@
   "fieldname": "column_break0", 
   "fieldtype": "Column Break", 
   "oldfieldtype": "Column Break", 
+  "permlevel": 0, 
   "width": "50%"
  }, 
  {
@@ -108,9 +106,27 @@
   "oldfieldname": "customer", 
   "oldfieldtype": "Link", 
   "options": "Customer", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "reqd": 1, 
   "search_index": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "assigned_to", 
+  "fieldtype": "Link", 
+  "label": "Assigned To", 
+  "options": "Profile", 
+  "permlevel": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ass_to", 
+  "fieldtype": "Select", 
+  "hidden": 1, 
+  "label": "Assigned To", 
+  "options": "\nManager", 
+  "permlevel": 2
  }, 
  {
   "doctype": "DocField", 
@@ -118,6 +134,7 @@
   "fieldtype": "Link", 
   "label": "Customer Address", 
   "options": "Address", 
+  "permlevel": 0, 
   "print_hide": 1
  }, 
  {
@@ -126,6 +143,7 @@
   "fieldtype": "Link", 
   "label": "Contact Person", 
   "options": "Contact", 
+  "permlevel": 0, 
   "print_hide": 1
  }, 
  {
@@ -134,7 +152,8 @@
   "fieldtype": "Section Break", 
   "label": "Issue Details", 
   "oldfieldtype": "Section Break", 
-  "options": "icon-ticket"
+  "options": "icon-ticket", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
@@ -144,6 +163,7 @@
   "no_copy": 1, 
   "oldfieldname": "complaint", 
   "oldfieldtype": "Small Text", 
+  "permlevel": 0, 
   "reqd": 1
  }, 
  {
@@ -153,7 +173,8 @@
   "fieldtype": "Link", 
   "in_list_view": 0, 
   "label": "Serial No", 
-  "options": "Serial No"
+  "options": "Serial No", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
@@ -165,6 +186,7 @@
   "oldfieldname": "item_code", 
   "oldfieldtype": "Link", 
   "options": "Item", 
+  "permlevel": 0, 
   "reqd": 0, 
   "search_index": 1
  }, 
@@ -173,6 +195,7 @@
   "fieldname": "column_break1", 
   "fieldtype": "Column Break", 
   "oldfieldtype": "Column Break", 
+  "permlevel": 0, 
   "width": "50%"
  }, 
  {
@@ -183,6 +206,7 @@
   "label": "Item Name", 
   "oldfieldname": "item_name", 
   "oldfieldtype": "Data", 
+  "permlevel": 0, 
   "read_only": 1
  }, 
  {
@@ -193,6 +217,7 @@
   "label": "Description", 
   "oldfieldname": "description", 
   "oldfieldtype": "Small Text", 
+  "permlevel": 0, 
   "read_only": 1, 
   "width": "300px"
  }, 
@@ -204,19 +229,22 @@
   "in_filter": 1, 
   "in_list_view": 1, 
   "label": "Warranty / AMC Status", 
-  "options": "\nUnder Warranty\nOut of Warranty\nUnder AMC\nOut of AMC"
+  "options": "\nUnder Warranty\nOut of Warranty\nUnder AMC\nOut of AMC", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "warranty_expiry_date", 
   "fieldtype": "Date", 
-  "label": "Warranty Expiry Date"
+  "label": "Warranty Expiry Date", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "amc_expiry_date", 
   "fieldtype": "Date", 
-  "label": "AMC Expiry Date"
+  "label": "AMC Expiry Date", 
+  "permlevel": 0
  }, 
  {
   "description": "To assign this issue, use the \"Assign\" button in the sidebar.", 
@@ -225,7 +253,8 @@
   "fieldtype": "Section Break", 
   "label": "Resolution", 
   "oldfieldtype": "Section Break", 
-  "options": "icon-thumbs-up"
+  "options": "icon-thumbs-up", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
@@ -236,6 +265,7 @@
   "no_copy": 1, 
   "oldfieldname": "resolution_date", 
   "oldfieldtype": "Date", 
+  "permlevel": 0, 
   "search_index": 1
  }, 
  {
@@ -248,6 +278,7 @@
   "oldfieldname": "resolved_by", 
   "oldfieldtype": "Link", 
   "options": "Profile", 
+  "permlevel": 0, 
   "search_index": 1
  }, 
  {
@@ -257,19 +288,22 @@
   "label": "Resolution Details", 
   "no_copy": 1, 
   "oldfieldname": "resolution_details", 
-  "oldfieldtype": "Text"
+  "oldfieldtype": "Text", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "contact_info", 
   "fieldtype": "Section Break", 
   "label": "Contact Info", 
-  "options": "icon-bullhorn"
+  "options": "icon-bullhorn", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "col_break3", 
   "fieldtype": "Column Break", 
+  "permlevel": 0, 
   "width": "50%"
  }, 
  {
@@ -277,6 +311,7 @@
   "fieldname": "customer_name", 
   "fieldtype": "Data", 
   "label": "Customer Name", 
+  "permlevel": 0, 
   "read_only": 1
  }, 
  {
@@ -286,6 +321,7 @@
   "fieldtype": "Link", 
   "label": "Customer Group", 
   "options": "Customer Group", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "reqd": 0
  }, 
@@ -299,6 +335,7 @@
   "oldfieldname": "territory", 
   "oldfieldtype": "Link", 
   "options": "Territory", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "reqd": 0, 
   "search_index": 1
@@ -308,12 +345,14 @@
   "fieldname": "address_display", 
   "fieldtype": "Small Text", 
   "label": "Address", 
+  "permlevel": 0, 
   "read_only": 1
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "col_break4", 
   "fieldtype": "Column Break", 
+  "permlevel": 0, 
   "width": "50%"
  }, 
  {
@@ -321,6 +360,7 @@
   "fieldname": "contact_display", 
   "fieldtype": "Small Text", 
   "label": "Contact", 
+  "permlevel": 0, 
   "read_only": 1
  }, 
  {
@@ -328,6 +368,7 @@
   "fieldname": "contact_mobile", 
   "fieldtype": "Data", 
   "label": "Mobile No", 
+  "permlevel": 0, 
   "read_only": 1
  }, 
  {
@@ -335,6 +376,7 @@
   "fieldname": "contact_email", 
   "fieldtype": "Data", 
   "label": "Contact Email", 
+  "permlevel": 0, 
   "read_only": 1
  }, 
  {
@@ -343,19 +385,22 @@
   "fieldtype": "Small Text", 
   "label": "Service Address", 
   "oldfieldname": "service_address", 
-  "oldfieldtype": "Small Text"
+  "oldfieldtype": "Small Text", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "more_info", 
   "fieldtype": "Section Break", 
   "label": "More Info", 
-  "options": "icon-file-text"
+  "options": "icon-file-text", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "col_break5", 
   "fieldtype": "Column Break", 
+  "permlevel": 0, 
   "width": "50%"
  }, 
  {
@@ -367,6 +412,7 @@
   "oldfieldname": "company", 
   "oldfieldtype": "Link", 
   "options": "Company", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "reqd": 1, 
   "search_index": 1
@@ -380,6 +426,7 @@
   "oldfieldname": "fiscal_year", 
   "oldfieldtype": "Select", 
   "options": "link:Fiscal Year", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "reqd": 1, 
   "search_index": 1
@@ -388,6 +435,7 @@
   "doctype": "DocField", 
   "fieldname": "col_break6", 
   "fieldtype": "Column Break", 
+  "permlevel": 0, 
   "width": "50%"
  }, 
  {
@@ -396,7 +444,8 @@
   "fieldtype": "Data", 
   "label": "Raised By", 
   "oldfieldname": "complaint_raised_by", 
-  "oldfieldtype": "Data"
+  "oldfieldtype": "Data", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
@@ -404,7 +453,8 @@
   "fieldtype": "Data", 
   "label": "From Company", 
   "oldfieldname": "from_company", 
-  "oldfieldtype": "Data"
+  "oldfieldtype": "Data", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
@@ -415,10 +465,45 @@
   "no_copy": 1, 
   "oldfieldname": "amended_from", 
   "oldfieldtype": "Data", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "width": "150px"
  }, 
  {
-  "doctype": "DocPerm"
+  "amend": 0, 
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "Maintenance User", 
+  "submit": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Administrator"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Administrator"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 2, 
+  "role": "Administrator"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Regional Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Regional Manager"
  }
 ]

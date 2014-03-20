@@ -2,7 +2,7 @@
  {
   "creation": "2012-03-27 14:36:09", 
   "docstatus": 0, 
-  "modified": "2013-07-05 14:40:42", 
+  "modified": "2014-03-10 14:32:13", 
   "modified_by": "Administrator", 
   "owner": "harshada@webnotestech.com"
  }, 
@@ -35,8 +35,7 @@
   "parentfield": "permissions", 
   "parenttype": "DocType", 
   "permlevel": 0, 
-  "read": 1, 
-  "report": 1
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -48,17 +47,26 @@
  {
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales Manager", 
   "write": 1
  }, 
  {
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales User"
  }, 
  {
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales Master Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Employee", 
   "write": 1
  }
 ]

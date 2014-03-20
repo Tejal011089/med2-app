@@ -14,8 +14,11 @@ class DocType:
 		self.doc,self.doclist = doc,doclist
 		
 	def get_months(self):
-		month_list = ['January','February','March','April','May','June','July','August','September',
-		'October','November','December']
+		#month_list = ['January','February','March','April','May','June','July','August','September',
+		#'October','November','December']
+		month_list = ['January-March','April-June','July-September',
+                'October-December']
+
 		idx =1
 		for m in month_list:
 			mnth = addchild(self.doc, 'budget_distribution_details',

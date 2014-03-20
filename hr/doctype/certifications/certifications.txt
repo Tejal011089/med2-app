@@ -1,0 +1,49 @@
+[
+ {
+  "creation": "2014-02-27 11:54:49", 
+  "docstatus": 0, 
+  "modified": "2014-02-27 12:12:25", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "C.##", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "HR", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "in_list_view": 1, 
+  "name": "__common__", 
+  "parent": "Certifications", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Certifications"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "certification_name", 
+  "fieldtype": "Data", 
+  "label": "Certification Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "name_of_institute", 
+  "fieldtype": "Data", 
+  "label": "Name Of Institute "
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "grade", 
+  "fieldtype": "Select", 
+  "label": "Grade", 
+  "options": "\nA\nA+\nB\nC\nD"
+ }
+]

@@ -1,0 +1,117 @@
+[
+ {
+  "creation": "2014-03-11 13:35:49", 
+  "docstatus": 0, 
+  "modified": "2014-03-11 13:41:24", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "naming_series:", 
+  "doctype": "DocType", 
+  "document_type": "Transaction", 
+  "icon": "icon-file-text", 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Requisition Form", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Requisition Form", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Requisition Form"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "material_requisition_slip", 
+  "fieldtype": "Section Break", 
+  "label": "Material Requisition Slip"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "naming_series", 
+  "fieldtype": "Select", 
+  "hidden": 1, 
+  "label": "Series", 
+  "options": "RQ-"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "client_name", 
+  "fieldtype": "Data", 
+  "label": "Client Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "date", 
+  "fieldtype": "Date", 
+  "label": "Date", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "time", 
+  "fieldtype": "Time", 
+  "label": "Time"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status", 
+  "fieldtype": "Select", 
+  "label": "Status", 
+  "options": "\nRequired\nReturn"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_5", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "purpose", 
+  "fieldtype": "Select", 
+  "label": "Purpose", 
+  "options": "\nDemo"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "client_address", 
+  "fieldtype": "Small Text", 
+  "label": "Client Address"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "material_details", 
+  "fieldtype": "Section Break", 
+  "label": "Material Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "requisition_material_table", 
+  "fieldtype": "Table", 
+  "label": "Requisition Material Table", 
+  "options": "Requisition Material"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

@@ -1,0 +1,70 @@
+[
+ {
+  "creation": "2014-02-24 10:41:10", 
+  "docstatus": 0, 
+  "modified": "2014-02-27 11:46:01", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "WE.##", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "HR", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Work Experience", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Work Experience"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "work_experience", 
+  "fieldtype": "Section Break", 
+  "label": "Work Experience"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "work_exprience", 
+  "fieldtype": "Select", 
+  "in_list_view": 1, 
+  "label": "Work Exprience", 
+  "options": "\n0-1 Year\n1+ Year\n2 Year\n2+ Year\n3 Year\n3+ Year\n4 Year", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "previous_company_name", 
+  "fieldtype": "Data", 
+  "label": "Previous Company Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "currently_working_in", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Currently Working In"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "computer_skills", 
+  "fieldtype": "Data", 
+  "label": "Computer Skills"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "computer_language_known", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Computer Language Known"
+ }
+]

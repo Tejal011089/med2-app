@@ -1,0 +1,72 @@
+[
+ {
+  "creation": "2014-02-24 14:48:17", 
+  "docstatus": 0, 
+  "modified": "2014-03-06 14:38:48", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "DT.##", 
+  "custom": 0, 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Stock", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Delivery Tracking", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Delivery Tracking", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "read": 1, 
+  "role": "All"
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Delivery Tracking"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Status", 
+  "options": "Status", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "priority", 
+  "fieldtype": "Int", 
+  "in_list_view": 1, 
+  "label": "Priority", 
+  "options": "\n"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "is_negative", 
+  "fieldtype": "Check", 
+  "label": "Is Negative"
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1
+ }
+]

@@ -94,3 +94,33 @@ erpnext.hr.EmployeeController = wn.ui.form.Controller.extend({
 	},
 });
 cur_frm.cscript = new erpnext.hr.EmployeeController({frm: cur_frm});
+
+
+cur_frm.cscript.cell_number = function(doc){
+        phone=doc.cell_number;
+        phone = phone.replace(/[^0-9]/g, '');
+        if(phone.length != 10)
+	{
+               alert("not 10 digits");
+        } 
+	//else {
+        //        alert("yep, its 10 digits");
+        // }
+
+}
+
+
+cur_frm.cscript.company_email = function(doc){
+
+        var x=doc.company_email;
+        //console.log(x)
+        var atpos=x.indexOf("@");
+        var dotpos=x.lastIndexOf(".");
+        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+       {
+                alert("Not a valid e-mail address");
+                return false;
+        }
+                //else
+                //console.log("bbbb")
+}

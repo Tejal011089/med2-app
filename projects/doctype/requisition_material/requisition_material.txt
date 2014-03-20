@@ -1,0 +1,56 @@
+[
+ {
+  "creation": "2014-03-11 13:33:31", 
+  "docstatus": 0, 
+  "modified": "2014-03-13 10:29:03", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "RM.##", 
+  "doctype": "DocType", 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "in_list_view": 1, 
+  "name": "__common__", 
+  "parent": "Requisition Material", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Requisition Material"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item", 
+  "fieldtype": "Link", 
+  "label": "Item", 
+  "options": "Item", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "particulars", 
+  "fieldtype": "Data", 
+  "label": "particulars"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "quantity", 
+  "fieldtype": "Int", 
+  "label": "Quantity", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "barcode", 
+  "fieldtype": "Data", 
+  "label": "Barcode", 
+  "reqd": 1
+ }
+]

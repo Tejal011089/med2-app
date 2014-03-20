@@ -18,6 +18,41 @@ cur_frm.cscript.load_defaults = function(doc, dt, dn) {
 cur_frm.add_fetch('lead_name', 'company_name', 'customer_name');
 cur_frm.add_fetch('default_sales_partner','commission_rate','default_commission_rate');
 
+
+
+
+cur_frm.cscript.email = function(doc){
+
+        var x=doc.email;
+        //console.log(x)
+        var atpos=x.indexOf("@");
+        var dotpos=x.lastIndexOf(".");
+        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+       {
+                alert("Not a valid e-mail address");
+                return false;
+        }
+                //else
+                //console.log("bbbb")
+}
+
+
+
+cur_frm.cscript.customer_no = function(doc){
+        phone=doc.customer_no;
+        phone = phone.replace(/[^0-9]/g, '');
+        if(phone.length != 10)
+	{
+               alert("not 10 digits");
+        } 
+	//else {
+        //        alert("yep, its 10 digits");
+        // }
+
+}
+                            
+
+
 cur_frm.cscript.refresh = function(doc,dt,dn) {
 	cur_frm.cscript.setup_dashboard(doc);
 	erpnext.hide_naming_series();

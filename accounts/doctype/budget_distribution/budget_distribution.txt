@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:05", 
   "docstatus": 0, 
-  "modified": "2013-07-22 15:30:37", 
+  "modified": "2014-02-24 19:12:09", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -20,8 +20,7 @@
   "name": "__common__", 
   "parent": "Budget Distribution", 
   "parentfield": "fields", 
-  "parenttype": "DocType", 
-  "permlevel": 0
+  "parenttype": "DocType"
  }, 
  {
   "doctype": "DocPerm", 
@@ -29,10 +28,7 @@
   "parent": "Budget Distribution", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
-  "read": 1, 
-  "report": 1, 
-  "role": "Accounts Manager", 
-  "submit": 0
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -46,6 +42,7 @@
   "label": "Distribution Name", 
   "oldfieldname": "distribution_id", 
   "oldfieldtype": "Data", 
+  "permlevel": 0, 
   "reqd": 1
  }, 
  {
@@ -57,7 +54,29 @@
   "oldfieldname": "fiscal_year", 
   "oldfieldtype": "Select", 
   "options": "link:Fiscal Year", 
+  "permlevel": 0, 
   "search_index": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_3", 
+  "fieldtype": "Column Break", 
+  "permlevel": 0
+ }, 
+ {
+  "default": "300000", 
+  "doctype": "DocField", 
+  "fieldname": "annual_budget", 
+  "fieldtype": "Float", 
+  "hidden": 1, 
+  "label": "Annual Budget", 
+  "permlevel": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "section_break_5", 
+  "fieldtype": "Section Break", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
@@ -66,7 +85,8 @@
   "label": "Budget Distribution Details", 
   "oldfieldname": "budget_distribution_details", 
   "oldfieldtype": "Table", 
-  "options": "Budget Distribution Detail"
+  "options": "Budget Distribution Detail", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
@@ -75,6 +95,7 @@
   "label": "Trash Reason", 
   "oldfieldname": "trash_reason", 
   "oldfieldtype": "Small Text", 
+  "permlevel": 0, 
   "read_only": 1
  }, 
  {
@@ -83,10 +104,39 @@
   "create": 1, 
   "doctype": "DocPerm", 
   "permlevel": 0, 
+  "report": 1, 
+  "role": "Accounts Manager", 
+  "submit": 0, 
   "write": 1
  }, 
  {
   "doctype": "DocPerm", 
-  "permlevel": 2
+  "permlevel": 2, 
+  "report": 1, 
+  "role": "Accounts Manager", 
+  "submit": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 2, 
+  "role": "Administrator"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Accounts Manager"
  }
 ]

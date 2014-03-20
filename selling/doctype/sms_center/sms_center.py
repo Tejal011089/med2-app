@@ -59,3 +59,15 @@ class DocType:
       receiver_list = self.get_receiver_nos()
       if receiver_list:
         msgprint(get_obj('SMS Control', 'SMS Control').send_sms(receiver_list, cstr(self.doc.message)))
+
+
+  def send_email(self):
+    if not self.doc.email_body:
+       msgprint("Please enter message before sending")
+
+    else:
+      receiver_list = self.get_receiver_nos()
+      if receiver_list:
+        from webnotes.utils.email_lib import sendmail
+        sendmail(receiver_list, subject=self.doc.subject, msg = self.doc.email_body)
+

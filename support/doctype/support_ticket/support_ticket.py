@@ -6,12 +6,23 @@ import webnotes
 
 from utilities.transaction_base import TransactionBase
 from webnotes.utils import now, extract_email_id
-
+from webnotes.utils import cint, cstr, flt, now, nowdate
+from datetime import datetime, timedelta,date
 class DocType(TransactionBase):
 	def __init__(self, doc, doclist=[]):
 		self.doc = doc
 		self.doclist = doclist
-	
+	#def on_update(self):
+	#	from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
+	#	from datetime import datetime
+      
+	#	i = datetime.now()
+	#	p=i.strftime('%Y-%m-%d %H:%M:%S')
+	#	webnotes.errprint(p)
+	#	q=datetime.datetime.now() - datetime.timedelta(minutes=1440)
+	#	webnotes.errprint(q)
+	#	#webnotes.errprint("select name from `tabInstallation Note` where status='Open' and creation<='%s'"%(p));
+	#	#webnotes.errprint(qry)
 	def get_sender(self, comm):
 		return webnotes.conn.get_value('Email Settings',None,'support_email')
 

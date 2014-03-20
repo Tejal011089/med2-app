@@ -1,0 +1,35 @@
+[
+ {
+  "creation": "2014-03-03 18:53:37", 
+  "docstatus": 0, 
+  "modified": "2014-03-03 19:17:28", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "PT/.##", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "milestone", 
+  "fieldtype": "Small Text", 
+  "in_list_view": 1, 
+  "label": "Milestone", 
+  "name": "__common__", 
+  "parent": "Milestones", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Milestones"
+ }, 
+ {
+  "doctype": "DocField"
+ }
+]

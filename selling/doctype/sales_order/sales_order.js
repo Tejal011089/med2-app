@@ -155,6 +155,11 @@ cur_frm.fields_dict['project_name'].get_query = function(doc, cdt, cdn) {
 	}
 }
 
+//cur_frm_cscript.installation_no = function(doc,cdt,cdn){
+//	if (doc.installation_no)
+//		return get_server_fields('get_installation_details', '', '', doc, cdt, cdn, 1)
+
+//}
 cur_frm.cscript['Stop Sales Order'] = function() {
 	var doc = cur_frm.doc;
 

@@ -2,7 +2,7 @@
  {
   "creation": "2013-02-22 01:27:45", 
   "docstatus": 0, 
-  "modified": "2013-07-10 14:54:08", 
+  "modified": "2014-03-11 17:09:18", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -28,38 +28,38 @@
  {
   "doctype": "DocField", 
   "fieldname": "branch", 
-  "fieldtype": "Select", 
+  "fieldtype": "Link", 
   "label": "Branch", 
   "oldfieldname": "branch", 
   "oldfieldtype": "Select", 
-  "options": "link:Branch"
+  "options": "Branch"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "department", 
-  "fieldtype": "Select", 
+  "fieldtype": "Link", 
   "label": "Department", 
   "oldfieldname": "department", 
   "oldfieldtype": "Select", 
-  "options": "link:Department"
+  "options": "Department"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "designation", 
-  "fieldtype": "Select", 
+  "fieldtype": "Link", 
   "label": "Designation", 
   "oldfieldname": "designation", 
   "oldfieldtype": "Select", 
-  "options": "link:Designation"
+  "options": "Designation"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "grade", 
-  "fieldtype": "Select", 
+  "fieldtype": "Link", 
   "label": "Grade", 
   "oldfieldname": "grade", 
   "oldfieldtype": "Select", 
-  "options": "link:Grade"
+  "options": "Grade"
  }, 
  {
   "doctype": "DocField", 

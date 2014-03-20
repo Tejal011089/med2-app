@@ -1,0 +1,76 @@
+[
+ {
+  "creation": "2014-02-24 10:24:10", 
+  "docstatus": 0, 
+  "modified": "2014-02-27 11:42:38", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "ED.##", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "HR", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Educational Details", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Educational Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "degree", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Degree", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "year_of_passing", 
+  "fieldtype": "Select", 
+  "in_list_view": 1, 
+  "label": "Year Of Passing", 
+  "options": "\n2008\n2009\n2010\n2011\n2012\n2013\n2014", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "university", 
+  "fieldtype": "Select", 
+  "label": "University", 
+  "options": "\nBabasaheb Ambedkar Marathwada University\nBabasaheb Ambedkar Technological University\nPunjabrao Deshmukh Krishi Vidyapeeth, Akola\nKavi Kulguru Kalidas Sanskrit Vishwavidyalaya, Nagpur\nKonkan Krishi Vidyapeeth, Dapoli, District Ratnagiri\nMaharashtra Animal & Fishery Sciences University, Seminary Hills, Nagpur\nMaharashtra University of Health Sciences, Nashik\nMahatma Phule Krishi Vidyapeeth, Rahuri\nMarathwada Agricultural University, Parbhani\nMumbai University, Mumbai\nNagpur University\nNorth Maharashtra University, Jalgaon\nPune University, Pune\nSant Gadge Baba Amravati University, Amravati\nShivaji University, Kolhapur\nSmt. Nathibai Damodar Thackersey Women's University, Mumbai\nSolapur University, Solapur, Solapur Pune Road, Kegaon, Solapur\nSwami Ramanand Teerth Marathwada University, Nanded\nThe Rashtrasant Tukadoji Maharaj Nagpur University, Nagpur\nYashwant Rao Chavan Maharashtra Open University, Nashik"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "specialisation", 
+  "fieldtype": "Select", 
+  "label": "Specialisation", 
+  "options": "\nArt\nCommerce\nComputer Science\nScience", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "percentage", 
+  "fieldtype": "Percent", 
+  "in_list_view": 1, 
+  "label": "Percentage", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "class", 
+  "fieldtype": "Select", 
+  "in_list_view": 1, 
+  "label": "Class", 
+  "options": "\nDistinction\nFirst Class\nScond Class"
+ }
+]

@@ -1,0 +1,151 @@
+[
+ {
+  "creation": "2014-03-08 11:56:17", 
+  "docstatus": 0, 
+  "modified": "2014-03-14 10:54:30", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "custom": 0, 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "HR", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Insurance Details", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Insurance Details", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Insurance Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "short_description", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "in_list_view": 1, 
+  "label": "Short Description"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "insurance_name", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Insurance Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "insurance_type", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Insurance Type", 
+  "options": "Insurance Type", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "priority", 
+  "fieldtype": "Select", 
+  "hidden": 1, 
+  "in_list_view": 1, 
+  "label": "Priority", 
+  "options": "\nPrimary\nSecondary\nTernary"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "fax", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "Fax"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amount", 
+  "fieldtype": "Currency", 
+  "in_list_view": 1, 
+  "label": "Installment Amount", 
+  "options": "Currency", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "installment_date", 
+  "fieldtype": "Date", 
+  "label": "Installment Date", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "end_date", 
+  "fieldtype": "Date", 
+  "label": "End Date"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amount_paid_type", 
+  "fieldtype": "Select", 
+  "label": "Amount Paid Type", 
+  "options": "\nEmployee Paid\nCompany Paid\nPartial Paid"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "policy_number", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Policy Number"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "policy_name", 
+  "fieldtype": "Data", 
+  "label": "Policy Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "company_name", 
+  "fieldtype": "Data", 
+  "label": "Insurance Company"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "telephone", 
+  "fieldtype": "Data", 
+  "label": "Telephone"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "plan_type", 
+  "fieldtype": "Data", 
+  "label": "Plan Type"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "lump_sum_amount", 
+  "fieldtype": "Currency", 
+  "label": "Lump Sum Amount", 
+  "options": "Currency"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

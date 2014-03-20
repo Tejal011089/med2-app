@@ -1,0 +1,59 @@
+[
+ {
+  "creation": "2014-03-10 11:06:06", 
+  "docstatus": 0, 
+  "modified": "2014-03-10 11:12:34", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "L.##", 
+  "doctype": "DocType", 
+  "document_type": "Master", 
+  "module": "Manufacturing", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Location", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "reqd": 1
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Location", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Location"
+ }, 
+ {
+  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "region", 
+  "fieldtype": "Link", 
+  "label": "Region", 
+  "options": "Territory"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "location", 
+  "fieldtype": "Data", 
+  "label": "Location"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

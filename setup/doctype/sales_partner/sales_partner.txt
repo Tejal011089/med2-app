@@ -2,7 +2,7 @@
  {
   "creation": "2013-04-12 15:34:06", 
   "docstatus": 0, 
-  "modified": "2013-11-02 16:59:04", 
+  "modified": "2014-03-10 14:33:56", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -26,16 +26,13 @@
   "permlevel": 0
  }, 
  {
-  "amend": 0, 
   "doctype": "DocPerm", 
   "name": "__common__", 
   "parent": "Sales Partner", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
   "permlevel": 0, 
-  "read": 1, 
-  "report": 1, 
-  "submit": 0
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -218,24 +215,39 @@
   "label": "Description"
  }, 
  {
+  "amend": 0, 
   "cancel": 0, 
   "create": 0, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales Manager", 
+  "submit": 0, 
   "write": 0
  }, 
  {
+  "amend": 0, 
   "cancel": 0, 
   "create": 0, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales User", 
+  "submit": 0, 
   "write": 0
  }, 
  {
+  "amend": 0, 
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales Master Manager", 
+  "submit": 0, 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Employee", 
   "write": 1
  }
 ]

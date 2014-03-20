@@ -2,7 +2,7 @@
  {
   "creation": "2013-02-22 01:27:58", 
   "docstatus": 0, 
-  "modified": "2013-11-02 19:41:37", 
+  "modified": "2014-02-28 11:05:29", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -14,7 +14,6 @@
  }, 
  {
   "doctype": "DocField", 
-  "in_list_view": 1, 
   "name": "__common__", 
   "parent": "Target Detail", 
   "parentfield": "fields", 
@@ -31,6 +30,7 @@
   "fieldname": "item_group", 
   "fieldtype": "Link", 
   "in_filter": 1, 
+  "in_list_view": 1, 
   "label": "Item Group", 
   "oldfieldname": "item_group", 
   "oldfieldtype": "Link", 
@@ -43,6 +43,7 @@
   "fieldname": "fiscal_year", 
   "fieldtype": "Select", 
   "in_filter": 1, 
+  "in_list_view": 1, 
   "label": "Fiscal Year", 
   "oldfieldname": "fiscal_year", 
   "oldfieldtype": "Select", 
@@ -53,7 +54,8 @@
  {
   "doctype": "DocField", 
   "fieldname": "target_qty", 
-  "fieldtype": "Float", 
+  "fieldtype": "Int", 
+  "in_list_view": 1, 
   "label": "Target Qty", 
   "oldfieldname": "target_qty", 
   "oldfieldtype": "Currency"
@@ -63,10 +65,17 @@
   "fieldname": "target_amount", 
   "fieldtype": "Float", 
   "in_filter": 1, 
+  "in_list_view": 1, 
   "label": "Target  Amount", 
   "oldfieldname": "target_amount", 
   "oldfieldtype": "Currency", 
   "reqd": 0, 
   "search_index": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "variable_pay", 
+  "fieldtype": "Float", 
+  "label": "Variable Pay"
  }
 ]

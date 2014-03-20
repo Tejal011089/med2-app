@@ -1,0 +1,57 @@
+[
+ {
+  "creation": "2014-02-21 16:00:41", 
+  "docstatus": 0, 
+  "modified": "2014-02-22 13:54:16", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "LID.##", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "HR", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Loan Installment Details", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Loan Installment Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "date_of_installment", 
+  "fieldtype": "Date", 
+  "in_list_view": 1, 
+  "label": "Date Of Installment"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amount_to_be_paid", 
+  "fieldtype": "Currency", 
+  "in_list_view": 1, 
+  "label": "Amount To Be Paid", 
+  "options": "currency"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "section_break_3", 
+  "fieldtype": "Section Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status", 
+  "fieldtype": "Select", 
+  "in_list_view": 1, 
+  "label": "Status", 
+  "options": "\nPaid \nUnpaid", 
+  "read_only": 1
+ }
+]

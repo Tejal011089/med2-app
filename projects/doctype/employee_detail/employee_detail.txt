@@ -1,0 +1,59 @@
+[
+ {
+  "creation": "2014-03-04 14:54:41", 
+  "docstatus": 0, 
+  "modified": "2014-03-04 17:40:07", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "EDT.##", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Employee Detail", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Employee Detail"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_details", 
+  "fieldtype": "Section Break", 
+  "label": "Employee Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_name", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Employee Name", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_contact_no", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Employee Contact No", 
+  "read_only": 1
+ }
+]

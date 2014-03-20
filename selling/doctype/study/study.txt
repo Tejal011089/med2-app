@@ -1,0 +1,112 @@
+[
+ {
+  "creation": "2014-02-21 16:33:02", 
+  "docstatus": 0, 
+  "modified": "2014-02-26 12:32:19", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "document_type": "Master", 
+  "module": "Selling", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Study", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Study", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "report": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Study"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "study_detail", 
+  "fieldtype": "Section Break", 
+  "label": "Study Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "modality", 
+  "fieldtype": "Link", 
+  "label": "Modality", 
+  "options": "Modality"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "study_name", 
+  "fieldtype": "Data", 
+  "label": "Study Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "study_fee", 
+  "fieldtype": "Data", 
+  "label": "Study Fee"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_4", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "study_details", 
+  "fieldtype": "Small Text", 
+  "label": "Study Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "referral_fee_detail", 
+  "fieldtype": "Section Break", 
+  "label": "Referral Fee Detail"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "referral_rule", 
+  "fieldtype": "Select", 
+  "label": "Referral Rule", 
+  "options": "\nFixed Cost\nPercent"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "referral_fee", 
+  "fieldtype": "Data", 
+  "label": "Referral Fee"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "discount_details", 
+  "fieldtype": "Section Break", 
+  "label": "Discount Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "discount_type", 
+  "fieldtype": "Select", 
+  "label": "Discount Type", 
+  "options": "\nRegular Discount\nReferral Discount"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

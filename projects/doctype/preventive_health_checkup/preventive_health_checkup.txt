@@ -1,0 +1,85 @@
+[
+ {
+  "creation": "2014-03-04 15:24:58", 
+  "docstatus": 0, 
+  "modified": "2014-03-18 11:12:57", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "field:special_type_project", 
+  "doctype": "DocType", 
+  "document_type": "Transaction", 
+  "icon": "icon-file-text", 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Preventive Health Checkup", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Preventive Health Checkup", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "All", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Preventive Health Checkup"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "special_project_details", 
+  "fieldtype": "Section Break", 
+  "label": "Special Project Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "special_type_project", 
+  "fieldtype": "Link", 
+  "label": "Special Project Type", 
+  "options": "Project Type", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_details", 
+  "fieldtype": "Section Break", 
+  "label": "Employee Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_details_table", 
+  "fieldtype": "Table", 
+  "label": "Employee Details Table", 
+  "options": "Employee Detail"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "material_required_details", 
+  "fieldtype": "Section Break", 
+  "label": "Material Required Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item_details_table", 
+  "fieldtype": "Table", 
+  "label": "Item Details Table", 
+  "options": "Item Detail"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

@@ -25,7 +25,9 @@ cur_frm.cscript.fiscal_year = function(doc,dt,dn){
 			var doc = locals[dt][dn];
 			cur_frm.refresh();
 			calculate_all(doc, dt, dn);
+			refresh_field('deduction_details')
 		});
+		
 }
 
 cur_frm.cscript.month = cur_frm.cscript.employee = cur_frm.cscript.fiscal_year;
@@ -36,6 +38,8 @@ cur_frm.cscript.leave_without_pay = function(doc,dt,dn){
 			var doc = locals[dt][dn];
 			cur_frm.refresh();
 			calculate_all(doc, dt, dn);
+			cur_frm.refresh_fields();
+			refresh_field('deduction_details')
 		});
 	}
 }
@@ -75,15 +79,21 @@ var calculate_earning_total = function(doc, dt, dn) {
 		}
 		total_earn += flt(tbl[i].e_modified_amount);
 	}
-	doc.gross_pay = total_earn + flt(doc.arrear_amount) + flt(doc.leave_encashment_amount);
+	doc.gross_pay = total_earn + flt(doc.arrear_amount) + flt(doc.leave_encashment_amount)+flt(doc.variable_pay);
 	refresh_many(['e_modified_amount', 'gross_pay']);
 }
 
 // Calculate deduction total
 // ------------------------------------------------------------------------
 var calculate_ded_total = function(doc, dt, dn) {
+	//refresh_field('deduction_details');
+	//console.log("in js ded calc");
+	//var jv = wn.model.make_new_doc_and_get_name('Salary Slip Deduction');
+	//var d1 = wn.model.add_child(jv,'Salary Slip Deduction','deduction_details');
+	//	d1.d_amount='500';
+	//	console.log(d1);
 	var tbl = getchildren('Salary Slip Deduction', doc.name, 'deduction_details', doc.doctype);
-
+	console.log(tbl)
 	var total_ded = 0;
 	for(var i = 0; i < tbl.length; i++){
 		if(cint(tbl[i].d_depends_on_lwp) == 1) {
@@ -92,7 +102,7 @@ var calculate_ded_total = function(doc, dt, dn) {
 		}
 		total_ded += flt(tbl[i].d_modified_amount);
 	}
-	doc.total_deduction = total_ded;
+	doc.total_deduction = total_ded + doc.loan_amount;
 	refresh_field('total_deduction');	
 }
 

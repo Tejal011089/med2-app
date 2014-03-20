@@ -1,0 +1,232 @@
+[
+ {
+  "creation": "2014-03-10 11:44:18", 
+  "docstatus": 0, 
+  "modified": "2014-03-18 18:32:17", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "allow_import": 1, 
+  "autoname": "##########", 
+  "doctype": "DocType", 
+  "document_type": "Transaction", 
+  "icon": "icon-mobile-phone", 
+  "module": "Support", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Activity Data", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Activity Data", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "report": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Activity Data"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "activity_details", 
+  "fieldtype": "Section Break", 
+  "label": "Activity Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "activity_id", 
+  "fieldtype": "Data", 
+  "label": "Activity ID"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "activity_type", 
+  "fieldtype": "Data", 
+  "label": "Activity Type"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "activity_subtype", 
+  "fieldtype": "Data", 
+  "label": "Activity SubType"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "emp_id", 
+  "fieldtype": "Data", 
+  "label": "Emp ID", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_6", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "activity_date", 
+  "fieldtype": "Datetime", 
+  "label": "Activity Date"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "activity_time", 
+  "fieldtype": "Time", 
+  "label": "Activity Time"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sender_phone_no", 
+  "fieldtype": "Data", 
+  "label": "Sender Phone No", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "client_details", 
+  "fieldtype": "Section Break", 
+  "label": "Client Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "client_name", 
+  "fieldtype": "Data", 
+  "label": "Client Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "place", 
+  "fieldtype": "Data", 
+  "label": "Place", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "product_name", 
+  "fieldtype": "Data", 
+  "label": "Product Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_14", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "default": "0", 
+  "doctype": "DocField", 
+  "fieldname": "amount", 
+  "fieldtype": "Currency", 
+  "label": "Amount", 
+  "options": "Company:company:default_currency", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ir_no", 
+  "fieldtype": "Data", 
+  "label": "IR NO"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "barcode", 
+  "fieldtype": "Data", 
+  "label": "Barcode", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "payment_details", 
+  "fieldtype": "Section Break", 
+  "label": "Payment Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "payment_type", 
+  "fieldtype": "Data", 
+  "label": "Payment Type"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "payment_mode", 
+  "fieldtype": "Data", 
+  "label": "Payment Mode"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "cheque_no", 
+  "fieldtype": "Data", 
+  "label": "Cheque No"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_22", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "cheque_bank", 
+  "fieldtype": "Data", 
+  "label": "Cheque Bank"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "cheque_status", 
+  "fieldtype": "Data", 
+  "label": "Cheque Status"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "service_call_type", 
+  "fieldtype": "Data", 
+  "label": "Service Call Type"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "other_information", 
+  "fieldtype": "Section Break", 
+  "label": "Other Information"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "phone_no", 
+  "fieldtype": "Data", 
+  "label": "Phone No", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "email_file_name", 
+  "fieldtype": "Data", 
+  "label": "Email File Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_29", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "entry_type", 
+  "fieldtype": "Data", 
+  "label": "Entry Type"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

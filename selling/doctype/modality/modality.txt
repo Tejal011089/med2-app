@@ -1,0 +1,89 @@
+[
+ {
+  "creation": "2014-02-21 16:51:00", 
+  "docstatus": 0, 
+  "modified": "2014-02-21 16:56:10", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "document_type": "Master", 
+  "module": "Selling", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Modality", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Modality", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "report": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Modality"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "modality_name", 
+  "fieldtype": "Data", 
+  "label": "Modality Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item_name", 
+  "fieldtype": "Link", 
+  "label": "Item Name", 
+  "options": "Item"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ae_title", 
+  "fieldtype": "Data", 
+  "label": "AE Title"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_4", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "active", 
+  "fieldtype": "Select", 
+  "label": "Active", 
+  "options": "\nYes\nNo", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "scheduled_station_name", 
+  "fieldtype": "Data", 
+  "label": "Scheduled Station Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "time_required", 
+  "fieldtype": "Data", 
+  "label": "Time Required"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

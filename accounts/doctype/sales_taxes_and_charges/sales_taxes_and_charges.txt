@@ -2,7 +2,7 @@
  {
   "creation": "2013-04-24 11:39:32", 
   "docstatus": 0, 
-  "modified": "2013-12-17 12:38:08", 
+  "modified": "2014-03-10 15:11:43", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -21,6 +21,18 @@
   "parentfield": "fields", 
   "parenttype": "DocType", 
   "permlevel": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Sales Taxes and Charges", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Employee", 
+  "write": 1
  }, 
  {
   "doctype": "DocType", 
@@ -152,5 +164,8 @@
   "oldfieldtype": "Data", 
   "print_hide": 1, 
   "search_index": 1
+ }, 
+ {
+  "doctype": "DocPerm"
  }
 ]

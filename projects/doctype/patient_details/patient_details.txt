@@ -1,0 +1,237 @@
+[
+ {
+  "creation": "2014-03-08 12:33:23", 
+  "docstatus": 0, 
+  "modified": "2014-03-19 18:51:53", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Patient Details", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Patient Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "patient_id", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Patient ID", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "patient_name", 
+  "fieldtype": "Data", 
+  "label": "Patient Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "age", 
+  "fieldtype": "Int", 
+  "label": "Age"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "gender", 
+  "fieldtype": "Select", 
+  "label": "Gender", 
+  "options": "\nMale\nFemale"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "date_of_screening", 
+  "fieldtype": "Date", 
+  "label": "Date Of Screening", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "p_company", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Patient Company "
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "company_address", 
+  "fieldtype": "Small Text", 
+  "label": "Company Address"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "general_body_profile", 
+  "fieldtype": "Section Break", 
+  "label": "General Body Profile"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "body_weight", 
+  "fieldtype": "Int", 
+  "label": "Body Weight"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "body_weight_unit", 
+  "fieldtype": "Link", 
+  "label": "Body Weight Unit", 
+  "options": "UOM"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "height", 
+  "fieldtype": "Float", 
+  "label": "Height"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "height_unit", 
+  "fieldtype": "Link", 
+  "label": "Height Unit ", 
+  "options": "UOM"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "bone_mineral_mass", 
+  "fieldtype": "Int", 
+  "label": "Bone Mineral Mass"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "metabolic_age", 
+  "fieldtype": "Int", 
+  "label": "Metabolic Age"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "whole_body_fat", 
+  "fieldtype": "Int", 
+  "label": "Whole Body Fat"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "total_body_water", 
+  "fieldtype": "Int", 
+  "label": "Total Body Water", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "blood_pressure", 
+  "fieldtype": "Int", 
+  "in_list_view": 1, 
+  "label": "Blood Pressure"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "muscle_mass", 
+  "fieldtype": "Int", 
+  "label": "Muscle Mass"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "visceral_fat", 
+  "fieldtype": "Int", 
+  "label": "Visceral Fat", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "segment_body_fat", 
+  "fieldtype": "Int", 
+  "label": "Segment Body Fat"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "daily_calorie_intake", 
+  "fieldtype": "Int", 
+  "label": "Daily Calorie Intake", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "blood_group", 
+  "fieldtype": "Select", 
+  "in_list_view": 1, 
+  "label": "Blood Group", 
+  "options": "\nA Rh+\nA Rh-\nB Rh+\nB Rh-\t\t\nAB Rh+\t\nAB Rh-\n0 Rh+\t\n0 Rh-"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "hb", 
+  "fieldtype": "Float", 
+  "label": "HB "
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "name_of_the_test", 
+  "fieldtype": "Section Break", 
+  "label": "Name Of The Test"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "body_mass_index", 
+  "fieldtype": "Data", 
+  "label": "Body Mass Index"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "total_cholesterol", 
+  "fieldtype": "Data", 
+  "label": "Total Cholesterol"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ldl_cholesterol", 
+  "fieldtype": "Data", 
+  "label": "LDL Cholesterol", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "hdl_cholesterol", 
+  "fieldtype": "Data", 
+  "label": "HDL Cholesterol"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "serum_triglycerides", 
+  "fieldtype": "Data", 
+  "label": "Serum Triglycerides", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sugar_level", 
+  "fieldtype": "Data", 
+  "label": "Random Blood Sugar Level"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "hba1c", 
+  "fieldtype": "Data", 
+  "label": "HbA1C", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "cholesterol_ratio", 
+  "fieldtype": "Data", 
+  "label": "Cholesterol Ratio(Total Cholesterol/HDL)", 
+  "reqd": 1
+ }
+]

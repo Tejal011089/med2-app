@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:32", 
   "docstatus": 0, 
-  "modified": "2013-12-12 12:18:19", 
+  "modified": "2014-03-07 12:40:09", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -33,8 +33,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 0, 
   "write": 1
  }, 
  {
@@ -241,49 +239,75 @@
  {
   "cancel": 1, 
   "doctype": "DocPerm", 
-  "role": "System Manager"
+  "report": 1, 
+  "role": "System Manager", 
+  "submit": 0
  }, 
  {
   "amend": 0, 
   "cancel": 1, 
   "doctype": "DocPerm", 
-  "role": "Sales Master Manager"
+  "report": 1, 
+  "role": "Sales Master Manager", 
+  "submit": 0
  }, 
  {
   "cancel": 1, 
   "doctype": "DocPerm", 
-  "role": "Purchase Master Manager"
+  "report": 1, 
+  "role": "Purchase Master Manager", 
+  "submit": 0
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Sales Manager"
+  "report": 1, 
+  "role": "Sales Manager", 
+  "submit": 0
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Purchase Manager"
+  "report": 1, 
+  "role": "Purchase Manager", 
+  "submit": 0
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Maintenance Manager"
+  "report": 1, 
+  "role": "Maintenance Manager", 
+  "submit": 0
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Accounts Manager"
+  "report": 1, 
+  "role": "Accounts Manager", 
+  "submit": 0
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Sales User"
+  "report": 1, 
+  "role": "Sales User", 
+  "submit": 0
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Purchase User"
+  "report": 1, 
+  "role": "Purchase User", 
+  "submit": 0
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Maintenance User"
+  "report": 1, 
+  "role": "Maintenance User", 
+  "submit": 0
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Accounts User"
+  "report": 1, 
+  "role": "Accounts User", 
+  "submit": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Employee"
  }
 ]

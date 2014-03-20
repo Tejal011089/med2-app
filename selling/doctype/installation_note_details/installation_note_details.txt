@@ -1,0 +1,35 @@
+[
+ {
+  "creation": "2014-03-07 11:22:56", 
+  "docstatus": 0, 
+  "modified": "2014-03-07 11:24:00", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Selling", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "installation_note", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Installation Note", 
+  "name": "__common__", 
+  "options": "Installation Note", 
+  "parent": "Installation Note Details", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Installation Note Details"
+ }, 
+ {
+  "doctype": "DocField"
+ }
+]

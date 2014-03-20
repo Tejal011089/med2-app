@@ -2,7 +2,7 @@
  {
   "creation": "2013-06-25 11:54:50", 
   "docstatus": 0, 
-  "modified": "2013-07-10 14:54:22", 
+  "modified": "2014-03-10 15:12:48", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -21,6 +21,18 @@
   "parentfield": "fields", 
   "parenttype": "DocType", 
   "permlevel": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Shipping Rule Condition", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Employee", 
+  "write": 1
  }, 
  {
   "doctype": "DocType", 
@@ -47,5 +59,8 @@
   "label": "Shipping Amount", 
   "options": "Company:company:default_currency", 
   "reqd": 1
+ }, 
+ {
+  "doctype": "DocPerm"
  }
 ]

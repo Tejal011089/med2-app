@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 18:50:29", 
   "docstatus": 0, 
-  "modified": "2013-08-06 17:15:53", 
+  "modified": "2014-03-14 19:46:09", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -22,7 +22,6 @@
   "permlevel": 0
  }, 
  {
-  "amend": 0, 
   "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
@@ -31,8 +30,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 0, 
   "write": 1
  }, 
  {
@@ -272,11 +269,22 @@
   "read_only": 1
  }, 
  {
+  "amend": 0, 
   "doctype": "DocPerm", 
-  "role": "HR User"
+  "report": 1, 
+  "role": "HR User", 
+  "submit": 0
  }, 
  {
+  "amend": 0, 
   "doctype": "DocPerm", 
-  "role": "HR Manager"
+  "report": 1, 
+  "role": "HR Manager", 
+  "submit": 0
+ }, 
+ {
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "role": "Administrator"
  }
 ]

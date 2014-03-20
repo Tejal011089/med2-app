@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 11:55:07", 
   "docstatus": 0, 
-  "modified": "2013-11-06 15:13:55", 
+  "modified": "2014-03-14 10:37:54", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -43,6 +43,18 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "section_break_1", 
+  "fieldtype": "Section Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sts", 
+  "fieldtype": "Small Text", 
+  "label": "Progress", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "overview", 
   "fieldtype": "Section Break", 
   "label": "Overview", 
@@ -55,6 +67,14 @@
   "label": "Status"
  }, 
  {
+  "doctype": "DocField", 
+  "fieldname": "project_category", 
+  "fieldtype": "Link", 
+  "label": "Project Category", 
+  "options": "Project Category", 
+  "reqd": 1
+ }, 
+ {
   "description": "Project will get saved and will be searchable with project name given", 
   "doctype": "DocField", 
   "fieldname": "project_name", 
@@ -63,7 +83,7 @@
   "no_copy": 0, 
   "oldfieldname": "project_name", 
   "oldfieldtype": "Data", 
-  "reqd": 1
+  "reqd": 0
  }, 
  {
   "default": "Open", 
@@ -146,7 +166,7 @@
   "no_copy": 0, 
   "oldfieldname": "project_type", 
   "oldfieldtype": "Data", 
-  "options": "Internal\nExternal\nOther", 
+  "options": "\nInternal\nExternal\nOther", 
   "search_index": 0
  }, 
  {

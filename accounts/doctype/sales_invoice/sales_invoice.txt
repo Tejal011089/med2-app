@@ -2,7 +2,7 @@
  {
   "creation": "2013-05-24 19:29:05", 
   "docstatus": 0, 
-  "modified": "2013-11-18 15:16:50", 
+  "modified": "2014-03-14 10:57:29", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -53,6 +53,7 @@
   "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "label": "Series", 
   "no_copy": 1, 
   "oldfieldname": "naming_series", 
@@ -60,7 +61,7 @@
   "options": "INV\nINV/10-11/", 
   "print_hide": 1, 
   "read_only": 0, 
-  "reqd": 1
+  "reqd": 0
  }, 
  {
   "doctype": "DocField", 
@@ -119,6 +120,14 @@
   "label": "Contact Email", 
   "print_hide": 1, 
   "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "installation", 
+  "fieldtype": "Link", 
+  "label": "Installation Note", 
+  "options": "Installation Note", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 

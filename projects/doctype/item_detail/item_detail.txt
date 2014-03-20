@@ -1,0 +1,65 @@
+[
+ {
+  "creation": "2014-03-04 14:57:54", 
+  "docstatus": 0, 
+  "modified": "2014-03-04 18:12:02", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "ID.##", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Item Detail", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Item Detail"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item_details", 
+  "fieldtype": "Section Break", 
+  "label": "Item Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Item", 
+  "options": "Item", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "description", 
+  "fieldtype": "Small Text", 
+  "in_list_view": 1, 
+  "label": "Description"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "warehouse", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Warehouse", 
+  "options": "Warehouse"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "quantity", 
+  "fieldtype": "Int", 
+  "in_list_view": 1, 
+  "label": "Quantity"
+ }
+]

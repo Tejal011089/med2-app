@@ -57,6 +57,26 @@ def get_support_mails():
 		SupportMailbox()
 		
 def add_support_communication(subject, content, sender, docname=None, mail=None):
+
+	qr="select customer,employee_id from `tabInstallation Note` where name="+subject+" "
+        res=webnotes.conn.sql(qr)
+        
+        w="select status,user_id from `tabEmployee` where name='%s'"%(res[0][1]);
+        t=webnotes.conn.sql(w)
+
+	q=" select territory from `tabCustomer` where name='%s'"%(res[0][0]);
+
+        r=webnotes.conn.sql(q)
+       	w=" select parent from `tabDefaultValue` where  defkey = '%s' and defvalue = '%s'"%('territory',r[0][0])
+        a=webnotes.conn.sql(w)
+	if t[0][0] == 'Active':
+		assigned_to=t[0][1]
+		assigned_to_higher_level=a[0][0]
+	else:
+		assigned_to=a[0][0]
+		assigned_to_higher_level=a[0][0]
+		
+
 	if docname:
 		ticket = webnotes.bean("Support Ticket", docname)
 		ticket.doc.status = 'Open'
@@ -69,7 +89,9 @@ def add_support_communication(subject, content, sender, docname=None, mail=None)
 			"subject": subject,
 			"raised_by": sender,
 			"content_type": mail.content_type if mail else None,
-			"status": "Open",
+			"status": "Open"
+			#"assigned_to":assigned_to,
+			#"assigned_to_higher_level":assigned_to_higher_level
 		})])
 		ticket.ignore_permissions = True
 		ticket.insert()

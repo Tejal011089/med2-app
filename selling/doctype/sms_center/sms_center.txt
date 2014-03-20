@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:22", 
   "docstatus": 0, 
-  "modified": "2013-07-05 14:55:36", 
+  "modified": "2014-03-06 16:35:02", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -38,7 +38,7 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
+  "report": 0, 
   "role": "System Manager", 
   "submit": 0, 
   "write": 1
@@ -52,6 +52,13 @@
   "fieldname": "column_break1", 
   "fieldtype": "Column Break", 
   "width": "50%"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "send_email_sms", 
+  "fieldtype": "Select", 
+  "label": "Send Email/SMS", 
+  "options": "Sms\nEmail"
  }, 
  {
   "doctype": "DocField", 
@@ -100,6 +107,7 @@
   "options": "create_receiver_list"
  }, 
  {
+  "description": "Format To Add New Entries:\nName-1234567899-abc@gmail.com", 
   "doctype": "DocField", 
   "fieldname": "receiver_list", 
   "fieldtype": "Code", 
@@ -112,6 +120,7 @@
   "width": "50%"
  }, 
  {
+  "depends_on": "eval:doc.send_email_sms=='Sms'", 
   "description": "Messages greater than 160 characters will be split into multiple messages", 
   "doctype": "DocField", 
   "fieldname": "message", 
@@ -120,11 +129,34 @@
   "reqd": 1
  }, 
  {
+  "depends_on": "eval:doc.send_email_sms=='Email'", 
+  "doctype": "DocField", 
+  "fieldname": "subject", 
+  "fieldtype": "Data", 
+  "label": "Subject"
+ }, 
+ {
+  "depends_on": "eval:doc.send_email_sms=='Email'", 
+  "doctype": "DocField", 
+  "fieldname": "email_body", 
+  "fieldtype": "Text Editor", 
+  "label": "Email Body"
+ }, 
+ {
+  "depends_on": "eval:doc.send_email_sms=='Sms'", 
   "doctype": "DocField", 
   "fieldname": "send_sms", 
   "fieldtype": "Button", 
   "label": "Send SMS", 
   "options": "send_sms"
+ }, 
+ {
+  "depends_on": "eval:doc.send_email_sms=='Email'", 
+  "doctype": "DocField", 
+  "fieldname": "send_email", 
+  "fieldtype": "Button", 
+  "label": "Send Email", 
+  "options": "send_email"
  }, 
  {
   "doctype": "DocPerm"

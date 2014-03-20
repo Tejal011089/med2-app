@@ -1,0 +1,171 @@
+[
+ {
+  "creation": "2014-03-04 15:01:57", 
+  "docstatus": 0, 
+  "modified": "2014-03-19 18:51:17", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "naming_series:", 
+  "doctype": "DocType", 
+  "document_type": "Transaction", 
+  "icon": "icon-puzzle-piece", 
+  "is_submittable": 1, 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Project Management", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Project Management", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "All", 
+  "submit": 1, 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Project Management"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "project_details", 
+  "fieldtype": "Section Break", 
+  "label": "Project Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amended_from", 
+  "fieldtype": "Link", 
+  "label": "Amended From", 
+  "no_copy": 1, 
+  "options": "Project Management", 
+  "print_hide": 1, 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "naming_series", 
+  "fieldtype": "Select", 
+  "hidden": 1, 
+  "label": "Series", 
+  "options": "PM-"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "special_type_project", 
+  "fieldtype": "Link", 
+  "label": "Select  Project Template", 
+  "options": "Project Type", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_person", 
+  "fieldtype": "Data", 
+  "label": "Organisation", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "c_name", 
+  "fieldtype": "Data", 
+  "label": "Contact Person Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "project_date", 
+  "fieldtype": "Date", 
+  "label": "Project Date", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_no", 
+  "fieldtype": "Data", 
+  "label": "Contact No"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_4", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "address", 
+  "fieldtype": "Small Text", 
+  "label": "Address"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amount_paid_type", 
+  "fieldtype": "Select", 
+  "label": "Amount Paid Type", 
+  "options": "\nPer Employee\nTotal Amount"
+ }, 
+ {
+  "depends_on": "eval:doc.amount_paid_type!=null", 
+  "doctype": "DocField", 
+  "fieldname": "amount", 
+  "fieldtype": "Currency", 
+  "label": "Amount ", 
+  "options": "Company:company:default_currency"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_details", 
+  "fieldtype": "Section Break", 
+  "label": "Employee Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_details_table", 
+  "fieldtype": "Table", 
+  "label": "Employee Details Table", 
+  "options": "Employee Detail"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item_details", 
+  "fieldtype": "Section Break", 
+  "label": "Item Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item_details_table", 
+  "fieldtype": "Table", 
+  "label": "Item Details Table", 
+  "options": "Item Detail"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "patient_details", 
+  "fieldtype": "Section Break", 
+  "label": "Patient Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "patient_test_details", 
+  "fieldtype": "Table", 
+  "label": "Patient Test Details", 
+  "options": "Patient Details"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

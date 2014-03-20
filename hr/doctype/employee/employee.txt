@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 09:04:18", 
   "docstatus": 0, 
-  "modified": "2013-11-03 11:19:10", 
+  "modified": "2014-03-14 11:05:15", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -35,7 +35,8 @@
   "permlevel": 0, 
   "read": 1, 
   "report": 1, 
-  "submit": 0
+  "submit": 0, 
+  "write": 1
  }, 
  {
   "doctype": "DocType", 
@@ -76,6 +77,7 @@
   "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "label": "Series", 
   "no_copy": 1, 
   "oldfieldname": "naming_series", 
@@ -112,6 +114,12 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "location", 
+  "fieldtype": "Data", 
+  "label": "Location"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "column_break1", 
   "fieldtype": "Column Break", 
   "width": "50%"
@@ -122,7 +130,8 @@
   "fieldname": "user_id", 
   "fieldtype": "Link", 
   "label": "User ID", 
-  "options": "Profile"
+  "options": "Profile", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -164,7 +173,7 @@
   "oldfieldname": "gender", 
   "oldfieldtype": "Select", 
   "options": "\nMale\nFemale", 
-  "reqd": 1, 
+  "reqd": 0, 
   "search_index": 0
  }, 
  {
@@ -176,6 +185,14 @@
   "options": "link:Company", 
   "print_hide": 1, 
   "reqd": 1
+ }, 
+ {
+  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "region", 
+  "fieldtype": "Link", 
+  "label": "Region", 
+  "options": "Territory"
  }, 
  {
   "doctype": "DocField", 
@@ -309,7 +326,7 @@
   "oldfieldname": "designation", 
   "oldfieldtype": "Link", 
   "options": "Designation", 
-  "reqd": 0, 
+  "reqd": 1, 
   "search_index": 1
  }, 
  {
@@ -407,6 +424,19 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "insurance_details", 
+  "fieldtype": "Section Break", 
+  "label": "Insurance Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "insurance_profile", 
+  "fieldtype": "Table", 
+  "label": "Insurance Profile", 
+  "options": "Insurance Details"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "organization_profile", 
   "fieldtype": "Section Break", 
   "label": "Organization Profile"
@@ -444,7 +474,8 @@
   "doctype": "DocField", 
   "fieldname": "cell_number", 
   "fieldtype": "Data", 
-  "label": "Cell Number"
+  "label": "Cell Number", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -750,22 +781,19 @@
   "create": 0, 
   "doctype": "DocPerm", 
   "match": "employee", 
-  "role": "Employee", 
-  "write": 0
+  "role": "Employee"
  }, 
  {
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
   "match": "company", 
-  "role": "HR User", 
-  "write": 1
+  "role": "HR User"
  }, 
  {
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
-  "role": "HR Manager", 
-  "write": 1
+  "role": "HR Manager"
  }
 ]

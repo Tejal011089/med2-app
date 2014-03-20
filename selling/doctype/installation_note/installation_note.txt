@@ -2,11 +2,12 @@
  {
   "creation": "2013-04-30 13:13:06", 
   "docstatus": 0, 
-  "modified": "2013-11-02 16:58:44", 
+  "modified": "2014-03-14 11:01:51", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
  {
+  "allow_import": 1, 
   "autoname": "naming_series:", 
   "doctype": "DocType", 
   "icon": "icon-wrench", 
@@ -28,9 +29,7 @@
   "parent": "Installation Note", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
-  "read": 1, 
-  "report": 1, 
-  "role": "Sales User"
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -54,12 +53,13 @@
   "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "label": "Series", 
   "no_copy": 1, 
   "oldfieldname": "naming_series", 
   "oldfieldtype": "Select", 
-  "options": "\nIN", 
-  "reqd": 1
+  "options": "IN", 
+  "reqd": 0
  }, 
  {
   "doctype": "DocField", 
@@ -88,6 +88,14 @@
   "label": "Contact Person", 
   "options": "Contact", 
   "print_hide": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_id", 
+  "fieldtype": "Link", 
+  "label": "Employee Id", 
+  "options": "Employee", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -194,6 +202,7 @@
   "doctype": "DocField", 
   "fieldname": "company", 
   "fieldtype": "Select", 
+  "hidden": 0, 
   "in_filter": 1, 
   "label": "Company", 
   "oldfieldname": "company", 
@@ -207,6 +216,7 @@
   "doctype": "DocField", 
   "fieldname": "fiscal_year", 
   "fieldtype": "Select", 
+  "hidden": 0, 
   "in_filter": 1, 
   "label": "Fiscal Year", 
   "oldfieldname": "fiscal_year", 
@@ -258,6 +268,8 @@
   "create": 1, 
   "doctype": "DocPerm", 
   "permlevel": 0, 
+  "report": 1, 
+  "role": "Sales User", 
   "submit": 1, 
   "write": 1
  }, 
@@ -267,6 +279,15 @@
   "create": 0, 
   "doctype": "DocPerm", 
   "permlevel": 1, 
+  "report": 1, 
+  "role": "Sales User", 
   "submit": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Employee", 
+  "write": 1
  }
 ]

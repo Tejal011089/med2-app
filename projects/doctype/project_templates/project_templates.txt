@@ -1,0 +1,95 @@
+[
+ {
+  "creation": "2014-03-03 18:57:16", 
+  "docstatus": 0, 
+  "modified": "2014-03-18 11:12:10", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "field:project_type", 
+  "doctype": "DocType", 
+  "document_type": "Transaction", 
+  "icon": "icon-puzzle-piece", 
+  "is_submittable": 1, 
+  "module": "Projects", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Project Templates", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Project Templates", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Project Templates"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "project_details", 
+  "fieldtype": "Section Break", 
+  "label": "Project Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amended_from", 
+  "fieldtype": "Link", 
+  "label": "Amended From", 
+  "no_copy": 1, 
+  "options": "Project Templates", 
+  "print_hide": 1, 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "project_type", 
+  "fieldtype": "Link", 
+  "label": "Project Category", 
+  "options": "Project Category", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "project_name", 
+  "fieldtype": "Data", 
+  "label": "Project Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "milestones_details", 
+  "fieldtype": "Section Break", 
+  "label": "Milestones Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "milestones", 
+  "fieldtype": "Table", 
+  "label": "Milestone", 
+  "options": "Milestones", 
+  "reqd": 1
+ }, 
+ {
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "role": "All", 
+  "submit": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Administrator"
+ }
+]

@@ -4,6 +4,8 @@
 from __future__ import unicode_literals
 import webnotes
 import webnotes.utils
+from webnotes.utils import add_days, cint, cstr, flt, getdate, nowdate, _round
+
 
 from webnotes.utils import cstr, flt, getdate
 from webnotes.model.bean import getlist
@@ -12,7 +14,8 @@ from webnotes import msgprint
 from webnotes.model.mapper import get_mapped_doclist
 
 from controllers.selling_controller import SellingController
-
+import time
+import calendar
 class DocType(SellingController):
 	def __init__(self, doc, doclist=None):
 		self.doc = doc
@@ -167,7 +170,81 @@ class DocType(SellingController):
 		
 		self.update_prevdoc_status('submit')
 		webnotes.conn.set(self.doc, 'status', 'Submitted')
+		#self.cal_salestarget()	
 	
+
+	#ef get_installation_details(self):
+
+		
+	def cal_salestarget(self):
+		webnotes.errprint("in sales target")
+		#import time
+		## dd/mm/yyyy format
+		r=time.strftime("%Y-%m-%d")
+		webnotes.errprint(r)	
+		webnotes.errprint(getdate(r).month)
+		m=getdate(r).month
+		webnotes.errprint(m)
+		m_name=calendar.month_name[m]
+		webnotes.errprint(m_name)
+		if m==1 or m==2 or m==3:
+			webnotes.errprint("in first")
+			s_date='2014-01-01'
+			e_date='2014-03-31'
+			webnotes.errprint(s_date)
+			webnotes.errprint(e_date)
+		elif m==4 or m==5 or m==6:
+			webnotes.errprint("in second")
+			s_date='2014-04-01'
+			e_date='2014-06-30'
+		elif m==7 or m==8 or m==9:
+			webnotes.errprint("in third")
+			s_date='2014-07-01'
+			e_date='2014-09-30'
+		else :
+			webnotes.errprint("in forth")
+			s_date='2014-07-01'
+			e_date='2014-12-31'
+		#webnotes.errprint([select name from `tabSales Order` where transaction_date between %s and %s ,(s_date,e_date))]
+ 
+		qry1=webnotes.conn.sql("""select parent,target_amount ,variable_pay from `tabTarget Detail` where parent in  (select sales_person from `tabSales Team` where parent in 
+                                        (select name from `tabSales Order` where transaction_date between %s and %s  
+                                       group by sales_person)) """,(s_date,e_date) ,debug=1)
+		webnotes.errprint(qry1)
+		
+		#list1=[]
+		for i in qry1:
+			#webnotes.errprint(i[0])		
+			qr=webnotes.conn.sql("""select distribution_id  from `tabSales Person` where name=%s""",i[0],as_list=1)
+			#webnotes.errprint(qr)
+			if m_name=='January' or m_name=='February' or m_name=='March':
+				month='January-March'
+			
+			elif m_name=='April' or m_name=='May' or m_name=='June':
+				month='April-June'
+			elif m_name=='July' or m_name=='August' or m_name=='September':
+				month='July-September'
+			else:
+				month='October-December'
+			webnotes.errprint(month)
+			qt=webnotes.conn.sql(""" select percentage_allocation/100 from `tabBudget Distribution Detail` where 
+						month=%s and parent=%s""",(month,qr[0][0]))
+			webnotes.errprint(qt[0][0])
+			#webnotes.errprint(qt[0][0]*i[1])
+			amt=qt[0][0]*i[1]
+			webnotes.errprint(amt)
+			qry=webnotes.conn.sql(""" select sum(allocated_amount) as amount from `tabSales Team` where parent in 
+                                       (select name from `tabSales Order` where transaction_date between %s and %s ) 
+                                     and  sales_person=%s """,(s_date,e_date,i[0]))
+			webnotes.errprint(qry)
+			name=webnotes.conn.sql("""select employee from `tabSales Person` where name=%s """,i[0],as_list=1)
+			webnotes.errprint(name[0][0])
+			#webnotes.errprint(["pay",i[2]])
+			t= ((qry[0][0]/amt)*100)/100
+			webnotes.errprint(t)
+			pay= i[2]*t
+			webnotes.errprint(pay)
+
 	def on_cancel(self):
 		# Cannot cancel stopped SO
 		if self.doc.status == 'Stopped':

@@ -2,7 +2,7 @@
  {
   "creation": "2013-06-11 14:26:44", 
   "docstatus": 0, 
-  "modified": "2013-12-25 11:15:05", 
+  "modified": "2014-03-14 11:04:50", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -51,9 +51,10 @@
   "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "label": "Series", 
   "no_copy": 1, 
-  "options": "\nCUST\nCUSTMUM", 
+  "options": "CUST\nCUSTMUM", 
   "permlevel": 0, 
   "print_hide": 0
  }, 
@@ -99,6 +100,22 @@
   "permlevel": 0, 
   "print_hide": 1, 
   "report_hide": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "customer_no", 
+  "fieldtype": "Data", 
+  "label": "Customer No", 
+  "permlevel": 0, 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "email", 
+  "fieldtype": "Data", 
+  "label": "Email", 
+  "permlevel": 0, 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -372,6 +389,20 @@
   "doctype": "DocPerm", 
   "permlevel": 1, 
   "role": "Sales Master Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Employee", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Sales Manager", 
   "write": 1
  }
 ]

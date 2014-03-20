@@ -32,6 +32,20 @@ wn.module_page["HR"] = [
 				description: wn._("Attendance record."),
 				doctype:"Attendance"
 			},
+			{
+                                label: wn._("Employee Loan"),
+                                description: wn._("Attendance record."),
+                                doctype:"Employee Loan"
+                        },
+
+			{
+                                label: wn._("Recruitment Process"),
+                                description: wn._("Attendance record."),
+                                doctype:"Recruitment Process"
+                        },
+			
+			
+	
 		]
 	},
 	{
