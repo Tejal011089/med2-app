@@ -48,11 +48,11 @@ wn.module_page["Projects"] = [
 				doctype:"Time Log"
 			},
 
-			 {
-                                label: wn._("Requisition Form"),
-                                description: wn._("Time Log for tasks."),
-                                doctype:"Requisition Form"
-                        },
+//		        {
+//                              label: wn._("Requisition Form"),
+//                              description: wn._("Time Log for tasks."),
+//                              doctype:"Requisition Form"
+//                      },
 
 
 

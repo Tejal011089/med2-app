@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import webnotes
 
 from webnotes import msgprint
-from webnotes.utils import cstr, cint
+from webnotes.utils import cstr, cint, validate_email_add
 
 class DocType:
 	def __init__(self, doc, doclist=[]):
@@ -25,6 +25,12 @@ class DocType:
 	def validate(self):
 		self.validate_primary_address()
 		self.validate_shipping_address()
+		self.validate_email()
+
+	def validate_email(self):
+		if self.doc.email_id and not validate_email_add(self.doc.email_id):
+			msgprint("Please enter valid Email Address")
+			raise Exception
 	
 	def validate_primary_address(self):
 		"""Validate that there can only be one primary address for particular customer, supplier"""

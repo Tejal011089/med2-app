@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:13", 
   "docstatus": 0, 
-  "modified": "2013-11-02 14:05:42", 
+  "modified": "2014-08-08 23:40:52", 
   "modified_by": "Administrator", 
   "owner": "ashwini@webnotestech.com"
  }, 
@@ -25,7 +25,6 @@
   "permlevel": 0
  }, 
  {
-  "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
@@ -34,8 +33,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 1, 
   "write": 1
  }, 
  {
@@ -81,6 +78,13 @@
   "label": "Employee Name", 
   "oldfieldname": "employee_name", 
   "oldfieldtype": "Data"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "label": "Territory", 
+  "read_only": 1
  }, 
  {
   "default": "Present", 
@@ -161,15 +165,38 @@
   "read_only": 1
  }, 
  {
+  "cancel": 1, 
   "doctype": "DocPerm", 
-  "role": "System Manager"
+  "report": 1, 
+  "role": "System Manager", 
+  "submit": 1
+ }, 
+ {
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "report": 1, 
+  "role": "HR User", 
+  "submit": 1
+ }, 
+ {
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "report": 1, 
+  "role": "HR Manager", 
+  "submit": 1
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "HR User"
+  "match": "employee", 
+  "role": "Employee"
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "HR Manager"
+  "match": "territory", 
+  "role": "Regional Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Admin"
  }
 ]

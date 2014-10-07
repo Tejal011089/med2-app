@@ -12,6 +12,7 @@ from webnotes.model.bean import getlist
 from webnotes.model.code import get_obj
 from webnotes import msgprint
 from webnotes.model.mapper import get_mapped_doclist
+from webnotes.model.doc import addchild
 
 from controllers.selling_controller import SellingController
 import time
@@ -84,7 +85,7 @@ class DocType(SellingController):
 				if not res:
 					msgprint("""Order Type (%s) should be same in Quotation: %s \
 						and current Sales Order""" % (self.doc.order_type, d.prevdoc_docname))
-
+                #msgprint(res)
 	def validate_order_type(self):
 		super(DocType, self).validate_order_type()
 		
@@ -113,7 +114,7 @@ class DocType(SellingController):
 		self.validate_uom_is_integer("stock_uom", "qty")
 		self.validate_for_items()
 		self.validate_warehouse()
-		
+		self.validate_taxentry()
 		from stock.doctype.packed_item.packed_item import make_packing_list
 		self.doclist = make_packing_list(self,'sales_order_details')
 		
@@ -138,6 +139,17 @@ class DocType(SellingController):
 		for w in warehouses:
 			validate_warehouse_user(w)
 			validate_warehouse_company(w, self.doc.company)
+
+	def validate_taxentry(self):
+		#count=0
+		length=len(getlist(self.doclist, 'other_charges'))
+		#webnotes.errprint(length)
+			
+		if length>=1:
+			pass
+		else:
+			#webnotes.errprint(count)
+			webnotes.msgprint("Minimum one entry must be specify in tax table",raise_exception=1);
 		
 	def validate_with_previous_doc(self):
 		super(DocType, self).validate_with_previous_doc(self.tname, {
@@ -155,11 +167,13 @@ class DocType(SellingController):
 
 	def update_prevdoc_status(self, flag):				
 		for quotation in self.doclist.get_distinct_values("prevdoc_docname"):
+			#webnotes.errprint(internal)
 			bean = webnotes.bean("Quotation", quotation)
+			#webnotes.errprint(bean)
 			if bean.doc.docstatus==2:
-				webnotes.throw(quotation + ": " + webnotes._("Quotation is cancelled."))
+				webnotes.throw( internal + ": " + webnotes._("Quotation is cancelled."))
 				
-			bean.get_controller().set_status(update=True)
+			#bean.get_controller().set_status(update=True)
 
 	def on_submit(self):
 		self.update_stock_ledger(update_stock = 1)
@@ -176,74 +190,74 @@ class DocType(SellingController):
 	#ef get_installation_details(self):
 
 		
-	def cal_salestarget(self):
-		webnotes.errprint("in sales target")
-		#import time
-		## dd/mm/yyyy format
-		r=time.strftime("%Y-%m-%d")
-		webnotes.errprint(r)	
-		webnotes.errprint(getdate(r).month)
-		m=getdate(r).month
-		webnotes.errprint(m)
-		m_name=calendar.month_name[m]
-		webnotes.errprint(m_name)
-		if m==1 or m==2 or m==3:
-			webnotes.errprint("in first")
-			s_date='2014-01-01'
-			e_date='2014-03-31'
-			webnotes.errprint(s_date)
-			webnotes.errprint(e_date)
-		elif m==4 or m==5 or m==6:
-			webnotes.errprint("in second")
-			s_date='2014-04-01'
-			e_date='2014-06-30'
-		elif m==7 or m==8 or m==9:
-			webnotes.errprint("in third")
-			s_date='2014-07-01'
-			e_date='2014-09-30'
-		else :
-			webnotes.errprint("in forth")
-			s_date='2014-07-01'
-			e_date='2014-12-31'
-		#webnotes.errprint([select name from `tabSales Order` where transaction_date between %s and %s ,(s_date,e_date))]
+	# def cal_salestarget(self):
+	# 	webnotes.errprint("in sales target")
+	# 	#import time
+	# 	## dd/mm/yyyy format
+	# 	r=time.strftime("%Y-%m-%d")
+	# 	webnotes.errprint(r)	
+	# 	webnotes.errprint(getdate(r).month)
+	# 	m=getdate(r).month
+	# 	webnotes.errprint(m)
+	# 	m_name=calendar.month_name[m]
+	# 	webnotes.errprint(m_name)
+	# 	if m==1 or m==2 or m==3:
+	# 		webnotes.errprint("in first")
+	# 		s_date='2014-01-01'
+	# 		e_date='2014-03-31'
+	# 		webnotes.errprint(s_date)
+	# 		webnotes.errprint(e_date)
+	# 	elif m==4 or m==5 or m==6:
+	# 		webnotes.errprint("in second")
+	# 		s_date='2014-04-01'
+	# 		e_date='2014-06-30'
+	# 	elif m==7 or m==8 or m==9:
+	# 		webnotes.errprint("in third")
+	# 		s_date='2014-07-01'
+	# 		e_date='2014-09-30'
+	# 	else :
+	# 		webnotes.errprint("in forth")
+	# 		s_date='2014-07-01'
+	# 		e_date='2014-12-31'
+	# 	#webnotes.errprint([select name from `tabSales Order` where transaction_date between %s and %s ,(s_date,e_date))]
  
-		qry1=webnotes.conn.sql("""select parent,target_amount ,variable_pay from `tabTarget Detail` where parent in  (select sales_person from `tabSales Team` where parent in 
-                                        (select name from `tabSales Order` where transaction_date between %s and %s  
-                                       group by sales_person)) """,(s_date,e_date) ,debug=1)
-		webnotes.errprint(qry1)
+	# 	qry1=webnotes.conn.sql("""select parent,target_amount ,variable_pay from `tabTarget Detail` where parent in  (select sales_person from `tabSales Team` where parent in 
+ #                                        (select name from `tabSales Order` where transaction_date between %s and %s  
+ #                                       group by sales_person)) """,(s_date,e_date) ,debug=1)
+	# 	webnotes.errprint(qry1)
 		
-		#list1=[]
-		for i in qry1:
-			#webnotes.errprint(i[0])		
-			qr=webnotes.conn.sql("""select distribution_id  from `tabSales Person` where name=%s""",i[0],as_list=1)
-			#webnotes.errprint(qr)
-			if m_name=='January' or m_name=='February' or m_name=='March':
-				month='January-March'
+	# 	#list1=[]
+	# 	for i in qry1:
+	# 		#webnotes.errprint(i[0])		
+	# 		qr=webnotes.conn.sql("""select distribution_id  from `tabSales Person` where name=%s""",i[0],as_list=1)
+	# 		#webnotes.errprint(qr)
+	# 		if m_name=='January' or m_name=='February' or m_name=='March':
+	# 			month='January-March'
 			
-			elif m_name=='April' or m_name=='May' or m_name=='June':
-				month='April-June'
-			elif m_name=='July' or m_name=='August' or m_name=='September':
-				month='July-September'
-			else:
-				month='October-December'
-			webnotes.errprint(month)
-			qt=webnotes.conn.sql(""" select percentage_allocation/100 from `tabBudget Distribution Detail` where 
-						month=%s and parent=%s""",(month,qr[0][0]))
-			webnotes.errprint(qt[0][0])
-			#webnotes.errprint(qt[0][0]*i[1])
-			amt=qt[0][0]*i[1]
-			webnotes.errprint(amt)
-			qry=webnotes.conn.sql(""" select sum(allocated_amount) as amount from `tabSales Team` where parent in 
-                                       (select name from `tabSales Order` where transaction_date between %s and %s ) 
-                                     and  sales_person=%s """,(s_date,e_date,i[0]))
-			webnotes.errprint(qry)
-			name=webnotes.conn.sql("""select employee from `tabSales Person` where name=%s """,i[0],as_list=1)
-			webnotes.errprint(name[0][0])
-			#webnotes.errprint(["pay",i[2]])
-			t= ((qry[0][0]/amt)*100)/100
-			webnotes.errprint(t)
-			pay= i[2]*t
-			webnotes.errprint(pay)
+	# 		elif m_name=='April' or m_name=='May' or m_name=='June':
+	# 			month='April-June'
+	# 		elif m_name=='July' or m_name=='August' or m_name=='September':
+	# 			month='July-September'
+	# 		else:
+	# 			month='October-December'
+	# 		webnotes.errprint(month)
+	# 		qt=webnotes.conn.sql(""" select percentage_allocation/100 from `tabBudget Distribution Detail` where 
+	# 					month=%s and parent=%s""",(month,qr[0][0]))
+	# 		webnotes.errprint(qt[0][0])
+	# 		#webnotes.errprint(qt[0][0]*i[1])
+	# 		amt=qt[0][0]*i[1]
+	# 		webnotes.errprint(amt)
+	# 		qry=webnotes.conn.sql(""" select sum(allocated_amount) as amount from `tabSales Team` where parent in 
+ #                                       (select name from `tabSales Order` where transaction_date between %s and %s ) 
+ #                                     and  sales_person=%s """,(s_date,e_date,i[0]))
+	# 		webnotes.errprint(qry)
+	# 		name=webnotes.conn.sql("""select employee from `tabSales Person` where name=%s """,i[0],as_list=1)
+	# 		webnotes.errprint(name[0][0])
+	# 		#webnotes.errprint(["pay",i[2]])
+	# 		t= ((qry[0][0]/amt)*100)/100
+	# 		webnotes.errprint(t)
+	# 		pay= i[2]*t
+	# 		webnotes.errprint(pay)
 
 	def on_cancel(self):
 		# Cannot cancel stopped SO
@@ -326,10 +340,132 @@ class DocType(SellingController):
 		
 	def get_portal_page(self):
 		return "order" if self.doc.docstatus==1 else None
-		
+	
+	def get_accessories_details(self,item):
+                #webnotes.errprint(item)
+                qry=webnotes.conn.sql("select default_warehouse,stock_uom from `tabItem` where name='"+item+"'")
+                #webnotes.errprint(qry[0][1])
+                q=webnotes.conn.sql("select description from `tabItem` where name='"+item+"'")
+                #webnotes.errprint(q[0][0])
+                qr=webnotes.conn.sql("select sum(actual_qty) from `tabStock Ledger Entry` where item_code='"+item+"' and warehouse='"+qry[0][0]+"'")
+                #webnotes.errprint(qr)
+                ch = addchild(self.doc, 'sales_order_details',
+                                        'Sales Order Item', self.doclist)
+                #webnotes.errprint(ch)
+                ch.item_code= item
+                ch.item_name= item
+                ch.description= q[0][0]
+                ch.qty= 1.00
+                ch.export_rate=0.00
+                ch.reserved_warehouse= qry[0][0]
+                ch.stock_uom=qry[0][1]
+                ch.actual_qty=qr[0][0]
+                ch.adj_rate=0.00
+                ch.save(new=1)
+
+
 def set_missing_values(source, target):
 	bean = webnotes.bean(target)
 	bean.run_method("onload_post_render")
+
+
+
+
+@webnotes.whitelist()
+def make_internal_order(source_name, target_doclist=None):
+	#webnotes.errprint("in internal order")	
+	return _make_internal_order(source_name, target_doclist)
+
+def _make_internal_order(source_name, target_doclist=None, ignore_permissions=False):
+	#webnotes.errprint("in make internal order 2")
+	from webnotes.model.mapper import get_mapped_doclist
+
+	customer = _make_customer(source_name, ignore_permissions)
+
+	def set_missing_values(source, target):
+		if customer:
+			target[0].customer = customer.doc.name
+			target[0].customer_name = customer.doc.customer_name
+			
+		si = webnotes.bean(target)
+		si.run_method("onload_post_render")
+			
+	doclist = get_mapped_doclist("Sales Order", source_name, {
+			"Sales Order": {
+				"doctype": "Internal Order Form", 
+				"validation": {
+					"docstatus": ["=", 1]
+				}
+			}, 
+			"Accessories Details": {
+				"doctype": "Internal Order Accessories Details", 
+				"field_map": {
+					"parent": "prevdoc_docname"
+				}
+			}, 
+			"Customer Details": {
+                                "doctype": "Internal Order Customer Details",
+                                "field_map": {
+                                        "parent": "prevdoc_docname"
+                                }
+                        },
+			"Consignee Details": {
+                                "doctype": "Internal Order Consignee Details",
+                                "field_map": {
+                                        "parent": "prevdoc_docname"
+                                }
+                        },
+
+
+			"Sales Order Item": {
+				"doctype": "Internal Order Item Details", 
+				"field_map": {
+					"parent": "prevdoc_docname"
+				}
+			}, 
+			"Sales Taxes and Charges": {
+				"doctype": "Sales Taxes and Charges",
+				"add_if_empty": True
+			}, 
+			"Sales Team": {
+				"doctype": "Sales Team",
+				"add_if_empty": True
+			}
+		}, target_doclist, set_missing_values, ignore_permissions=ignore_permissions)
+		
+	# postprocess: fetch shipping address, set missing values
+		
+	return [d.fields for d in doclist]
+
+def _make_customer(source_name, ignore_permissions=False):
+	quotation = webnotes.conn.get_value("Quotation", source_name, ["lead", "order_type"])
+	if quotation and quotation[0]:
+		lead_name = quotation[0]
+		customer_name = webnotes.conn.get_value("Customer", {"lead_name": lead_name})
+		if not customer_name:
+			from selling.doctype.lead.lead import _make_customer
+			customer_doclist = _make_customer(lead_name, ignore_permissions=ignore_permissions)
+			customer = webnotes.bean(customer_doclist)
+			customer.ignore_permissions = ignore_permissions
+			if quotation[1] == "Shopping Cart":
+				customer.doc.customer_group = webnotes.conn.get_value("Shopping Cart Settings", None,
+					"default_customer_group")
+			
+			try:
+				customer.insert()
+				return customer
+			except NameError, e:
+				if webnotes.defaults.get_global_default('cust_master_name') == "Customer Name":
+					customer.run_method("autoname")
+					customer.doc.name += "-" + lead_name
+					customer.insert()
+					return customer
+				else:
+					raise
+			except webnotes.MandatoryError:
+				from webnotes.utils import get_url_to_form
+				webnotes.throw(_("Before proceeding, please create Customer from Lead") + \
+					(" - %s" % get_url_to_form("Lead", lead_name)))
 	
 @webnotes.whitelist()
 def make_material_request(source_name, target_doclist=None):	

@@ -13,7 +13,7 @@ from stock.utils import update_bin
 
 class DocType(StockController):
 	def setup(self):
-		self.head_row = ["Item Code", "Warehouse", "Quantity", "Valuation Rate"]
+		self.head_row = ["Item Code", "Warehouse", "Quantity"]
 		self.entries = []
 		
 	def validate(self):
@@ -68,9 +68,9 @@ class DocType(StockController):
 			# note: warehouse will be validated through link validation
 			
 			# if both not specified
-			if row[2] == "" and row[3] == "":
+			if row[2] == "" :
 				self.validation_messages.append(_get_msg(row_num,
-					"Please specify either Quantity or Valuation Rate or both"))
+					"Please specify Quantity "))
 			
 			# do not allow negative quantity
 			if flt(row[2]) < 0:
@@ -78,9 +78,9 @@ class DocType(StockController):
 					"Negative Quantity is not allowed"))
 			
 			# do not allow negative valuation
-			if flt(row[3]) < 0:
-				self.validation_messages.append(_get_msg(row_num, 
-					"Negative Valuation Rate is not allowed"))
+			#if flt(row[3]) < 0:
+			#	self.validation_messages.append(_get_msg(row_num, 
+			#		"Negative Valuation Rate is not allowed"))
 		
 		# throw all validation messages
 		if self.validation_messages:
@@ -138,12 +138,12 @@ class DocType(StockController):
 			})
 
 			# check valuation rate mandatory
-			if row.qty != "" and not row.valuation_rate and \
-					flt(previous_sle.get("qty_after_transaction")) <= 0:
-				webnotes.msgprint(_("As existing qty for item: ") + row.item_code + 
-					_(" at warehouse: ") + row.warehouse +
-					_(" is less than equals to zero in the system, \
-						valuation rate is mandatory for this item"), raise_exception=1)
+			#if row.qty != "" and not row.valuation_rate and \
+			#		flt(previous_sle.get("qty_after_transaction")) <= 0:
+			#	webnotes.msgprint(_("As existing qty for item: ") + row.item_code + 
+			#		_(" at warehouse: ") + row.warehouse +
+			#		_(" is less than equals to zero in the system, \
+			#			valuation rate is mandatory for this item"), raise_exception=1)
 			
 			change_in_qty = row.qty != "" and \
 				(flt(row.qty) - flt(previous_sle.get("qty_after_transaction")))

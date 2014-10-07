@@ -19,6 +19,7 @@ cur_frm.cscript.refresh = function(doc, dt, dn){
 }
 
 cur_frm.cscript['Make Salary Slip'] = function() {
+  console.log("in salary Structure")
 	wn.model.open_mapped_doc({
 		method: "hr.doctype.salary_structure.salary_structure.make_salary_slip",
 		source_name: cur_frm.doc.name
@@ -36,6 +37,75 @@ cur_frm.cscript.modified_value = function(doc, cdt, cdn){
 
 cur_frm.cscript.d_modified_amt = function(doc, cdt, cdn){
   calculate_totals(doc, cdt, cdn);
+}
+
+cur_frm.cscript.ctc = function(doc, cdt, cdn){
+  //alert("hi");
+  var d = locals[cdt][cdn];
+  var pf =0;
+  var gross=0;
+  if (doc.ctc >= 13780) {
+    pf = 780;
+    gross=doc.ctc-780;
+  }
+  else{
+    pf = (doc.ctc * 780) / 13780 ;
+    gross=doc.ctc - pf;
+  }
+
+  
+  var cl = getchildren('Salary Structure Earning', doc.name, 'earning_details', doc.doctype);
+  for(var i = 0; i < cl.length; i++){
+      if(cl[i].e_type=='Basic+D.A') cl[i].modified_value = gross/2;
+      else if(cl[i].e_type=='H.R.A') cl[i].modified_value = (gross/2) * 0.40;
+      else if(cl[i].e_type=='CONV') cl[i].modified_value = 800;
+      else if(cl[i].e_type=='Fix Gross') cl[i].modified_value = gross;
+      else if(cl[i].e_type=='Med All') {
+        if (gross >7000) cl[i].modified_value = 1250;
+        else cl[i].modified_value = 0;
+      }
+      else if(cl[i].e_type=='Other Allowances') {
+        if (gross >=7000){
+          Other=gross-((gross/2)+((gross/2) * 0.40)+800+1250);
+          cl[i].modified_value = Other;
+        }
+        else {
+          Other=gross-((gross/2)+((gross/2) * 0.40) + 800);
+          cl[i].modified_value = Other;
+        }
+        
+      }
+    // console.log(cl[i].e_type=='Basic+D.A' && cl[i].modified_value < 6500)
+  //if (cl[i].e_type=='Basic+D.A' && cl[i].modified_value < 6500){
+     // var aa = (cl[i].modified_value * 0.12);
+      // console.log(aa)
+ // }
+    }  
+  refresh_field('earning_details');
+
+
+  var cll = getchildren('Salary Structure Deduction', doc.name, 'deduction_details', doc.doctype);
+  for(var i = 0; i < cll.length; i++){
+      if(cll[i].d_type=='PF') {
+        if (doc.ctc >= 13780) {
+          pf = 780;
+          cll[i].d_modified_amt = pf;
+        }
+        else{
+          pf = (doc.ctc * 780) / 13780 ;
+          cll[i].d_modified_amt = pf;
+        }
+      }
+
+      else if(cll[i].d_type=='P.TAX'){
+          if (gross > 10000) cll[i].d_modified_amt = 200;
+          else if (gross > 5000 && gross <= 10000) cll[i].d_modified_amt = 175;
+          else cll[i].d_modified_amt = 0;
+      }
+    }
+  
+  refresh_field('deduction_details');
+    
 }
 
 var calculate_totals = function(doc, cdt, cdn) {
@@ -60,5 +130,5 @@ cur_frm.cscript.validate = function(doc, cdt, cdn) {
 }
 
 cur_frm.fields_dict.employee.get_query = function(doc,cdt,cdn) {
-  return{ query:"controllers.queries.employee_query" } 
+  // return{ query:"controllers.queries.employee_query" } 
 }

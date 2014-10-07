@@ -2,7 +2,7 @@
  {
   "creation": "2013-02-20 11:18:11", 
   "docstatus": 0, 
-  "modified": "2013-07-05 14:44:37", 
+  "modified": "2014-08-26 14:59:14", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -154,6 +154,14 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "label": "Territory", 
+  "permlevel": 0, 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "sb10", 
   "fieldtype": "Section Break", 
   "label": "More Info", 
@@ -259,7 +267,7 @@
  {
   "amend": 1, 
   "cancel": 0, 
-  "create": 0, 
+  "create": 1, 
   "doctype": "DocPerm", 
   "match": "leave_approver:user", 
   "permlevel": 0, 
@@ -288,6 +296,63 @@
   "report": 1, 
   "role": "Leave Approver", 
   "submit": 0, 
+  "write": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "create": 0, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "CEO", 
+  "submit": 1, 
+  "write": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "COO", 
+  "submit": 1, 
+  "write": 1
+ }, 
+ {
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "HR Manager", 
+  "submit": 1, 
+  "write": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "Administrator", 
+  "submit": 1, 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "permlevel": 0, 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Admin", 
   "write": 1
  }
 ]

@@ -23,7 +23,7 @@ class DocType(TransactionBase):
 	def __init__(self, doc, doclist=[]):
 		self.doc = doc
 		self.doclist = doclist
-				
+	'''			
 	def autoname(self):
 		cust_master_name = webnotes.defaults.get_global_default('cust_master_name')
 		if cust_master_name == 'Customer Name':
@@ -31,10 +31,23 @@ class DocType(TransactionBase):
 				msgprint(_("A Supplier exists with same name"), raise_exception=1)
 			self.doc.name = self.doc.customer_name
 		else:
-			self.doc.name = make_autoname(self.doc.naming_series+'.#####')
+			self.doc.name = self.doc.customer_name
+	'''
 
 	def get_company_abbr(self):
 		return webnotes.conn.get_value('Company', self.doc.company, 'abbr')
+
+
+	def fetch_details(self):
+		webnotes.errprint("server")
+		res=webnotes.conn.sql("select city,pin_code from `tabPin Codes` where name=%s",self.doc.city_pin_code,debug=1)
+		webnotes.errprint(res)
+		ret={
+		   'city':res and res[0][0],
+		   'pin_code':res and res[0][1]
+		}
+		return ret
+
 
 	def get_receivables_group(self):
 		g = webnotes.conn.sql("select receivables_group from tabCompany where name=%s", self.doc.company)
@@ -323,7 +336,7 @@ def get_dashboard_info(customer):
 		webnotes.msgprint("No Permission", raise_exception=True)
 	
 	out = {}
-	for doctype in ["Opportunity", "Quotation", "Sales Order", "Delivery Note", "Sales Invoice"]:
+	for doctype in ["Opportunity", "Quotation", "Sales Order", "Delivery Note", "Sales Invoice","Internal Order Form"]:
 		out[doctype] = webnotes.conn.get_value(doctype, 
 			{"customer": customer, "docstatus": ["!=", 2] }, "count(*)")
 	
@@ -337,3 +350,12 @@ def get_dashboard_info(customer):
 	out["total_unpaid"] = billing[0][1]
 	
 	return out
+
+
+def get_pincode(doctype, txt, searchfield, start, page_len, filters):
+		#webnotes.errprint("pincode")
+		return webnotes.conn.sql("""select city, pin_code from `tabPin Codes` 
+		where name=%s 
+		and (city like '%%%(txt)s%%' 
+			or pin_code like '%%%(txt)s%%' )"""%{'txt':txt},self.doc.name)
+		

@@ -2,7 +2,7 @@
  {
   "creation": "2013-02-22 01:27:45", 
   "docstatus": 0, 
-  "modified": "2013-07-10 14:54:08", 
+  "modified": "2014-03-26 11:51:14", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -69,9 +69,10 @@
  {
   "doctype": "DocField", 
   "fieldname": "total_experience", 
-  "fieldtype": "Data", 
+  "fieldtype": "Select", 
   "label": "Total Experience", 
   "oldfieldname": "total_experience", 
-  "oldfieldtype": "Data"
+  "oldfieldtype": "Data", 
+  "options": "\n0-6(Months)\n1 -2 years\n2-3 years\n3-4 years\n4-5 years\n6-7 Years\nMore Than 7 years"
  }
 ]

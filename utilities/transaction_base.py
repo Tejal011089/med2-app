@@ -365,7 +365,7 @@ def get_address_display(address_dict):
 	display = ""
 	for separator, fieldname in sequence:
 		if address_dict.get(fieldname):
-			display += separator + address_dict.get(fieldname)
+			display += cstr(separator) + cstr(address_dict.get(fieldname))
 		
 	return display.strip()
 	

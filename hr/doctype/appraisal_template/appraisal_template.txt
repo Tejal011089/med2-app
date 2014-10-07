@@ -2,7 +2,7 @@
  {
   "creation": "2012-07-03 13:30:39", 
   "docstatus": 0, 
-  "modified": "2013-07-05 14:25:14", 
+  "modified": "2014-05-06 17:47:44", 
   "modified_by": "Administrator", 
   "owner": "ashwini@webnotestech.com"
  }, 
@@ -31,8 +31,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "role": "HR User", 
   "write": 1
  }, 
  {
@@ -74,6 +72,12 @@
   "label": "Total Points"
  }, 
  {
-  "doctype": "DocPerm"
+  "doctype": "DocPerm", 
+  "report": 1, 
+  "role": "HR User"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Leave Approver"
  }
 ]

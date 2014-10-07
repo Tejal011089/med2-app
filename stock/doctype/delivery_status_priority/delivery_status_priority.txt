@@ -2,15 +2,15 @@
  {
   "creation": "2014-02-24 14:53:10", 
   "docstatus": 0, 
-  "modified": "2014-03-18 11:13:48", 
+  "modified": "2014-03-21 12:07:24", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
  {
   "autoname": "naming_series:", 
-  "custom": 1, 
+  "custom": 0, 
   "doctype": "DocType", 
-  "icon": "icon-file-text", 
+  "icon": "icon-truck", 
   "issingle": 1, 
   "module": "Stock", 
   "name": "__common__"

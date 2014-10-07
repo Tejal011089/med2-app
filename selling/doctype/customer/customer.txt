@@ -2,14 +2,14 @@
  {
   "creation": "2013-06-11 14:26:44", 
   "docstatus": 0, 
-  "modified": "2014-03-14 11:04:50", 
+  "modified": "2014-10-07 16:22:48", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
  {
   "allow_print": 0, 
   "allow_rename": 1, 
-  "autoname": "naming_series:", 
+  "autoname": "MSC/.#########", 
   "description": "Buyer of Goods and Services.", 
   "doctype": "DocType", 
   "document_type": "Master", 
@@ -105,9 +105,9 @@
   "doctype": "DocField", 
   "fieldname": "customer_no", 
   "fieldtype": "Data", 
-  "label": "Customer No", 
+  "label": "Customer Mobile No", 
   "permlevel": 0, 
-  "reqd": 1
+  "reqd": 0
  }, 
  {
   "doctype": "DocField", 
@@ -115,7 +115,7 @@
   "fieldtype": "Data", 
   "label": "Email", 
   "permlevel": 0, 
-  "reqd": 1
+  "reqd": 0
  }, 
  {
   "doctype": "DocField", 
@@ -141,18 +141,58 @@
   "search_index": 1
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
   "doctype": "DocField", 
-  "fieldname": "territory", 
+  "fieldname": "employee", 
   "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "permlevel": 0, 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_name", 
+  "fieldtype": "Data", 
+  "label": "Employee Name", 
+  "permlevel": 0, 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "region", 
+  "fieldtype": "Data", 
   "in_list_view": 1, 
   "label": "Territory", 
   "oldfieldname": "territory", 
   "oldfieldtype": "Link", 
-  "options": "Territory", 
   "permlevel": 0, 
   "print_hide": 1, 
-  "reqd": 1
+  "read_only": 1, 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "city_pin_code", 
+  "fieldtype": "Link", 
+  "label": "City Pin Code", 
+  "options": "Pin Codes", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "city", 
+  "fieldtype": "Data", 
+  "label": "City", 
+  "permlevel": 0, 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "pin_code", 
+  "fieldtype": "Data", 
+  "label": "Pin Code", 
+  "permlevel": 0, 
+  "read_only": 1
  }, 
  {
   "depends_on": "eval:!doc.__islocal", 
@@ -253,6 +293,7 @@
   "width": "50%"
  }, 
  {
+  "default": "INR", 
   "doctype": "DocField", 
   "fieldname": "default_currency", 
   "fieldtype": "Link", 
@@ -394,6 +435,7 @@
  {
   "create": 1, 
   "doctype": "DocPerm", 
+  "match": "employee", 
   "permlevel": 0, 
   "role": "Employee", 
   "write": 1
@@ -403,6 +445,21 @@
   "doctype": "DocPerm", 
   "permlevel": 0, 
   "role": "Sales Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "permlevel": 0, 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Admin", 
   "write": 1
  }
 ]

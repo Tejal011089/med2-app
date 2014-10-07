@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:30", 
   "docstatus": 0, 
-  "modified": "2014-03-07 16:17:09", 
+  "modified": "2014-08-09 00:18:42", 
   "modified_by": "Administrator", 
   "owner": "harshada@webnotestech.com"
  }, 
@@ -326,17 +326,25 @@
   "reqd": 0
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "permlevel": 0, 
+  "reqd": 1
+ }, 
+ {
   "doctype": "DocField", 
   "fieldname": "territory", 
-  "fieldtype": "Link", 
+  "fieldtype": "Data", 
   "in_filter": 1, 
   "label": "Territory", 
   "oldfieldname": "territory", 
   "oldfieldtype": "Link", 
-  "options": "Territory", 
   "permlevel": 0, 
   "print_hide": 1, 
+  "read_only": 1, 
   "reqd": 0, 
   "search_index": 1
  }, 
@@ -498,6 +506,7 @@
  {
   "create": 1, 
   "doctype": "DocPerm", 
+  "match": "territory", 
   "permlevel": 0, 
   "role": "Regional Manager"
  }, 
@@ -505,5 +514,18 @@
   "doctype": "DocPerm", 
   "permlevel": 1, 
   "role": "Regional Manager"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "permlevel": 0, 
+  "role": "Employee"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Admin"
  }
 ]

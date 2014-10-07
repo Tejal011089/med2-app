@@ -1,0 +1,44 @@
+[
+ {
+  "creation": "2014-04-26 18:32:13", 
+  "docstatus": 0, 
+  "modified": "2014-04-26 18:32:13", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "Page", 
+  "module": "HR", 
+  "name": "__common__", 
+  "page_name": "attendance-upload", 
+  "standard": "Yes", 
+  "title": "Attendance Upload"
+ }, 
+ {
+  "doctype": "Page Role", 
+  "name": "__common__", 
+  "parent": "attendance-upload", 
+  "parentfield": "roles", 
+  "parenttype": "Page"
+ }, 
+ {
+  "doctype": "Page", 
+  "name": "attendance-upload"
+ }, 
+ {
+  "doctype": "Page Role", 
+  "role": "Administrator"
+ }, 
+ {
+  "doctype": "Page Role", 
+  "role": "HR Manager"
+ }, 
+ {
+  "doctype": "Page Role", 
+  "role": "HR User"
+ }, 
+ {
+  "doctype": "Page Role", 
+  "role": "HR"
+ }
+]

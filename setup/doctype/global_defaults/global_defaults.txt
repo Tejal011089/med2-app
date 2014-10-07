@@ -2,7 +2,7 @@
  {
   "creation": "2013-05-02 17:53:24", 
   "docstatus": 0, 
-  "modified": "2013-10-23 18:06:04", 
+  "modified": "2014-05-21 20:23:50", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -187,6 +187,12 @@
   "fieldname": "time_zone", 
   "fieldtype": "Select", 
   "label": "Time Zone"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "customer_credit_days", 
+  "fieldtype": "Data", 
+  "label": "Customer Credit days"
  }, 
  {
   "doctype": "DocPerm"

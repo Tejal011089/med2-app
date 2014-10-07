@@ -4,6 +4,9 @@
 cur_frm.cscript.tname = "Stock Entry Detail";
 cur_frm.cscript.fname = "mtn_details";
 
+cur_frm.add_fetch('client_name', 'employee', 'employee');
+cur_frm.add_fetch('client_name', 'territory', 'territory');
+
 wn.require("public/app/js/controllers/stock_controller.js");
 wn.provide("erpnext.stock");
 
@@ -251,6 +254,44 @@ cur_frm.cscript.toggle_related_fields = function(doc) {
 		
 	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("s_warehouse", !disable_from_warehouse);
 	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("t_warehouse", !disable_to_warehouse);
+
+	
+	disable_item = inList(["Material Transfer"], doc.purpose);
+	disable_batch = inList(["Material Transfer"], doc.purpose);
+	disable_acc = inList(["Material Transfer"], doc.purpose);
+	disable_mi = inList(["Material Transfer"], doc.purpose);
+	disable_amt = inList(["Material Transfer"], doc.purpose);
+	disable_cc = inList(["Material Transfer"], doc.purpose);
+	disable_cf = inList(["Material Transfer"], doc.purpose);
+	disable_st = inList(["Material Transfer"], doc.purpose);
+	disable_vr = inList(["Material Transfer"], doc.purpose);
+	disable_da = inList(["Material Transfer"], doc.purpose);
+	disable_aq = inList(["Material Transfer"], doc.purpose);
+	disable_q = inList(["Material Transfer"], doc.purpose);
+	disable_sr = inList(["Material Transfer"], doc.purpose);
+
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("item_name", !disable_item);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("batch_no", !disable_batch);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("accounting", !disable_acc);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("more_info", !disable_mi);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("amount", !disable_amt);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("cost_center", !disable_cc);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("conversion_factor", !disable_cf);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("stock_uom", !disable_st);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("incoming_rate", !disable_vr);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("expense_account", !disable_da);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("actual_qty", !disable_aq);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("transfer_qty", !disable_q);
+	cur_frm.fields_dict["mtn_details"].grid.set_column_disp("serial_no_batch", !disable_sr);
+	if (user!="Administrator" && doc.purpose=="Material Transfer"){
+		disable_srno = inList(["Material Transfer"], doc.purpose);	
+		cur_frm.fields_dict["mtn_details"].grid.set_column_disp("serial_no", !disable_srno);
+	}
+	else if (user!="Administrator" && doc.purpose!="Material Transfer"){
+		// unhide_field('serial_no');
+		enable_srno = inList(["Material Transfer"], doc.purpose);	
+		cur_frm.fields_dict["mtn_details"].grid.set_column_disp("serial_no", !enable_srno);
+	}
 		
 	if(doc.purpose == 'Purchase Return') {
 		doc.customer = doc.customer_name = doc.customer_address = 
@@ -276,8 +317,8 @@ cur_frm.cscript.sales_invoice_no = function(doc, cdt, cdn) {
 		return get_server_fields('get_cust_values', '', '', doc, cdt, cdn, 1);
 }
 
-cur_frm.cscript.customer = function(doc, cdt, cdn) {
-	if(doc.customer) 
+cur_frm.cscript.client_name = function(doc, cdt, cdn) {
+	if(doc.client_name) 
 		return get_server_fields('get_cust_addr', '', '', doc, cdt, cdn, 1);
 }
 

@@ -30,6 +30,13 @@ class DocType(BuyingController):
 			'source_field': 'qty',
 			'percent_join_field': 'prevdoc_docname',
 		}]
+
+	def shipment_date(self):
+		if self.doc.challan_date >= self.doc.posting_date:
+			pass
+		else:
+			webnotes.msgprint("Supplier shipment date cannot be less than Posting Date")
+			raise Exception
 		
 	def onload(self):
 		billed_qty = webnotes.conn.sql("""select sum(ifnull(qty, 0)) from `tabPurchase Invoice Item`

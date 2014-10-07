@@ -74,7 +74,8 @@ class DocType:
 		
 @webnotes.whitelist()
 def make_salary_slip(source_name, target_doclist=None):
-	webnotes.errprint([d.fields for d in get_mapped_doclist(source_name, target_doclist)])
+	#webnotes.errprint([d.fields for d in get_mapped_doclist(source_name, target_doclist)])
+	#return "iiii"
 	return [d.fields for d in get_mapped_doclist(source_name, target_doclist)]
 	
 def get_mapped_doclist(source_name, target_doclist=None):

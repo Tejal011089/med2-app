@@ -2,7 +2,7 @@
  {
   "creation": "2013-05-24 19:29:09", 
   "docstatus": 0, 
-  "modified": "2014-03-06 13:30:50", 
+  "modified": "2014-09-13 12:52:53", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -35,8 +35,7 @@
   "parentfield": "permissions", 
   "parenttype": "DocType", 
   "permlevel": 0, 
-  "read": 1, 
-  "report": 1
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -89,7 +88,8 @@
   "fieldname": "status_d", 
   "fieldtype": "Link", 
   "label": "Delivery Status", 
-  "options": "Status"
+  "options": "Status", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -234,6 +234,7 @@
   "doctype": "DocField", 
   "fieldname": "delivery_status", 
   "fieldtype": "Link", 
+  "hidden": 1, 
   "label": "Delivery Status", 
   "options": "Status"
  }, 
@@ -717,17 +718,24 @@
   "read_only": 0
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "hidden": 1, 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 0
+ }, 
+ {
   "doctype": "DocField", 
   "fieldname": "territory", 
-  "fieldtype": "Link", 
-  "hidden": 0, 
+  "fieldtype": "Data", 
+  "hidden": 1, 
   "in_filter": 1, 
   "label": "Territory", 
-  "options": "Territory", 
   "print_hide": 1, 
-  "read_only": 0, 
-  "reqd": 1, 
+  "read_only": 1, 
+  "reqd": 0, 
   "search_index": 1
  }, 
  {
@@ -1053,6 +1061,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Material User", 
   "submit": 1, 
   "write": 1
@@ -1062,6 +1071,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Material Manager", 
   "submit": 1, 
   "write": 1
@@ -1071,6 +1081,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales User", 
   "submit": 1, 
   "write": 1
@@ -1079,6 +1090,7 @@
   "cancel": 0, 
   "create": 0, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Accounts User", 
   "submit": 0, 
   "write": 0
@@ -1086,6 +1098,27 @@
  {
   "doctype": "DocPerm", 
   "match": "customer", 
+  "report": 1, 
   "role": "Customer"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "role": "Employee", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Admin", 
+  "write": 1
  }
 ]

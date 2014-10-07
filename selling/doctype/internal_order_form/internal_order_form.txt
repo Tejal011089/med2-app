@@ -2,7 +2,7 @@
  {
   "creation": "2014-02-21 11:27:45", 
   "docstatus": 0, 
-  "modified": "2014-03-14 20:26:11", 
+  "modified": "2014-10-07 16:18:25", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -63,6 +63,13 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "po_no", 
+  "fieldtype": "Data", 
+  "label": "PO Number Of Customer", 
+  "options": "Purchase Order"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
   "hidden": 1, 
@@ -71,30 +78,10 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "employee_id", 
-  "fieldtype": "Data", 
-  "label": "Employee Id"
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "referring_person", 
-  "fieldtype": "Link", 
-  "label": "Referring Person", 
-  "options": "Referral Master", 
-  "reqd": 1
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "po_number_of_customer", 
-  "fieldtype": "Data", 
-  "label": "PO Number Of Customer", 
-  "options": "Purchase Order"
- }, 
- {
-  "doctype": "DocField", 
   "fieldname": "customer", 
   "fieldtype": "Link", 
-  "label": "Customer Name", 
+  "in_list_view": 0, 
+  "label": "Customer", 
   "options": "Customer", 
   "reqd": 1
  }, 
@@ -102,7 +89,39 @@
   "doctype": "DocField", 
   "fieldname": "customer_name", 
   "fieldtype": "Data", 
-  "label": "Name"
+  "in_list_view": 1, 
+  "label": "Customer Name", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee Id", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "label": "Territory", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_person", 
+  "fieldtype": "Link", 
+  "label": "Contact Person", 
+  "options": "Contact", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_person_designation", 
+  "fieldtype": "Data", 
+  "label": "Contact Person Designation", 
+  "read_only": 1
  }, 
  {
   "doctype": "DocField", 
@@ -113,9 +132,45 @@
   "options": "Installation Note"
  }, 
  {
+  "default": "Today", 
+  "doctype": "DocField", 
+  "fieldname": "transaction_date", 
+  "fieldtype": "Date", 
+  "in_list_view": 0, 
+  "label": "Internal Order Date", 
+  "print_hide": 0, 
+  "reqd": 1
+ }, 
+ {
+  "default": "Sales", 
+  "doctype": "DocField", 
+  "fieldname": "order_type", 
+  "fieldtype": "Select", 
+  "in_list_view": 1, 
+  "label": "Order Type", 
+  "options": "\nSales\nMaintenance\nShopping Cart", 
+  "print_hide": 1, 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "customer_type", 
+  "fieldtype": "Select", 
+  "label": "Customer Type", 
+  "options": "\nDirect\nOEM"
+ }, 
+ {
   "doctype": "DocField", 
   "fieldname": "column_break_7", 
   "fieldtype": "Column Break"
+ }, 
+ {
+  "description": "Select the relevant company name if you have multiple companies.", 
+  "doctype": "DocField", 
+  "fieldname": "company", 
+  "fieldtype": "Link", 
+  "label": "Company", 
+  "options": "Company"
  }, 
  {
   "doctype": "DocField", 
@@ -130,34 +185,51 @@
   "label": "Contact"
  }, 
  {
+  "depends_on": "eval:doc.customer_type=='OEM'", 
   "doctype": "DocField", 
-  "fieldname": "posting_date", 
-  "fieldtype": "Date", 
-  "label": "Posting Date"
+  "fieldname": "customer_details", 
+  "fieldtype": "Section Break", 
+  "label": "Customer Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "customer_table", 
+  "fieldtype": "Table", 
+  "label": "Customer Table", 
+  "options": "Internal Order Customer Details"
+ }, 
+ {
+  "depends_on": "eval:doc.customer_type=='OEM'", 
+  "doctype": "DocField", 
+  "fieldname": "consignee_detail", 
+  "fieldtype": "Section Break", 
+  "label": "Consignee Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "consignee_info", 
+  "fieldtype": "Table", 
+  "label": "Consignee Info", 
+  "options": "Internal Order Consignee Details"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "phone_numbers", 
   "fieldtype": "Section Break", 
+  "hidden": 1, 
   "label": "Phone Numbers"
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "contact_mobile", 
-  "fieldtype": "Text", 
-  "label": "Mobile No"
+  "fieldname": "contact", 
+  "fieldtype": "Data", 
+  "label": "Mobile Number"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "office", 
-  "fieldtype": "Int", 
+  "fieldtype": "Data", 
   "label": "Office"
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "home", 
-  "fieldtype": "Int", 
-  "label": "Home"
  }, 
  {
   "doctype": "DocField", 
@@ -166,37 +238,15 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "home", 
+  "fieldtype": "Data", 
+  "label": "Home"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "contact_email", 
-  "fieldtype": "Text", 
+  "fieldtype": "Data", 
   "label": " Contact Email"
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "contact_person", 
-  "fieldtype": "Link", 
-  "label": "Contact Person", 
-  "options": "Contact", 
-  "reqd": 1
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "contact_person_designation", 
-  "fieldtype": "Link", 
-  "label": "Contact Person Designation", 
-  "options": "Designation"
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "installation_note_details", 
-  "fieldtype": "Section Break", 
-  "label": "Installation Note Details"
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "installation_note", 
-  "fieldtype": "Table", 
-  "label": "Installation Note", 
-  "options": "Installation Note Details"
  }, 
  {
   "doctype": "DocField", 
@@ -212,20 +262,6 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "accessories", 
-  "fieldtype": "Data", 
-  "label": "Accessories"
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "amount_rs", 
-  "fieldtype": "Currency", 
-  "label": "Amount Rs", 
-  "options": "currency", 
-  "reqd": 1
- }, 
- {
-  "doctype": "DocField", 
   "fieldname": "column_break_17", 
   "fieldtype": "Column Break"
  }, 
@@ -237,9 +273,126 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "accessories", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "Accessories"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amount_rs", 
+  "fieldtype": "Currency", 
+  "hidden": 1, 
+  "label": "Advance Amount Rs", 
+  "options": "currency", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "details_of_software", 
   "fieldtype": "Small Text", 
+  "hidden": 1, 
   "label": "Details Of Software"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "currency_and_price_list_rate", 
+  "fieldtype": "Section Break", 
+  "hidden": 1, 
+  "label": "Currency And Price List Rate"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "currency", 
+  "fieldtype": "Link", 
+  "hidden": 1, 
+  "label": "Currency", 
+  "options": "Currency", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "conversion_rate", 
+  "fieldtype": "Float", 
+  "hidden": 1, 
+  "label": "Exchange Rate"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_26", 
+  "fieldtype": "Column Break", 
+  "hidden": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "selling_price_list", 
+  "fieldtype": "Link", 
+  "hidden": 1, 
+  "label": "Price List", 
+  "options": "Price List"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "price_list_currency", 
+  "fieldtype": "Link", 
+  "hidden": 1, 
+  "label": "Price List Currency", 
+  "options": "Currency", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "plc_conversion_rate", 
+  "fieldtype": "Float", 
+  "hidden": 1, 
+  "label": "Price List Exchange Rate", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "installation_note_details", 
+  "fieldtype": "Section Break", 
+  "hidden": 0, 
+  "label": "Items"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "accessories_details", 
+  "fieldtype": "Table", 
+  "label": "Details", 
+  "options": "Internal Order Accessories Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "section_break_41", 
+  "fieldtype": "Section Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "internal_order_item", 
+  "fieldtype": "Table", 
+  "hidden": 0, 
+  "label": "Internal Order Item Details", 
+  "options": "Internal Order Item Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "section_break_25", 
+  "fieldtype": "Section Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "accessory", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "Accessory"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "net_total_export", 
+  "fieldtype": "Currency", 
+  "label": "Net Total", 
+  "options": "currency"
  }, 
  {
   "doctype": "DocField", 
@@ -280,6 +433,12 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "other_charges_calculation", 
+  "fieldtype": "HTML", 
+  "label": "Taxes and Charges Calculation"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "section_break_20", 
   "fieldtype": "Section Break"
  }, 
@@ -292,16 +451,55 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "column_break_41", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "other_charges_total", 
+  "fieldtype": "Currency", 
+  "label": "Taxes and Charges Total (Company Currency)", 
+  "options": "Company:company:default_currency", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "total", 
   "fieldtype": "Section Break", 
   "label": "Total"
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "total_amount_rs", 
+  "fieldname": "grand_total_export", 
   "fieldtype": "Currency", 
-  "label": "Total Amount Rs", 
+  "label": "Grand Total", 
+  "options": "currency", 
+  "read_only": 1, 
+  "width": "200px"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "rounded_total_export", 
+  "fieldtype": "Currency", 
+  "label": "Rounded Total", 
   "options": "currency"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "in_words_export", 
+  "fieldtype": "Data", 
+  "label": "In Words"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_59", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "any_other_instructions", 
+  "fieldtype": "Small Text", 
+  "label": "Any Other Instructions"
  }, 
  {
   "doctype": "DocField", 
@@ -311,7 +509,7 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "select_terms_and_conditions", 
+  "fieldname": "tc_name", 
   "fieldtype": "Link", 
   "label": "Select Terms and Conditions", 
   "options": "Terms and Conditions"
@@ -358,6 +556,14 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "referring_person", 
+  "fieldtype": "Link", 
+  "label": "Referring Person", 
+  "options": "Referral Master", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "column_break_36", 
   "fieldtype": "Column Break"
  }, 
@@ -370,15 +576,94 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "bank_details", 
+  "fieldtype": "Section Break", 
+  "hidden": 0, 
+  "label": "Bank Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "bank_name", 
+  "fieldtype": "Select", 
+  "hidden": 0, 
+  "label": "Bank Name", 
+  "options": "\nAxis Bank\nIDBI Bank\nICICI Bank\nMaharashtra Bank\nPDCC Bank\nSBI Bank"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "account_name", 
+  "fieldtype": "Data", 
+  "hidden": 0, 
+  "label": "Bank Account Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "account_number", 
+  "fieldtype": "Int", 
+  "hidden": 0, 
+  "label": "Bank Account Number"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "account_type", 
+  "fieldtype": "Data", 
+  "hidden": 0, 
+  "label": "Account Type", 
+  "options": "\n"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ifsc_code", 
+  "fieldtype": "Data", 
+  "hidden": 0, 
+  "label": "IFSC code"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_37", 
+  "fieldtype": "Column Break", 
+  "hidden": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "branch_name", 
+  "fieldtype": "Data", 
+  "hidden": 0, 
+  "label": "Branch Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "bank_address", 
+  "fieldtype": "Small Text", 
+  "hidden": 0, 
+  "label": "Bank Address"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "section_break_38", 
   "fieldtype": "Section Break", 
-  "label": "Other Info"
+  "label": "More Info"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "name_on_the_invoice", 
   "fieldtype": "Data", 
   "label": "Name On The Invoice"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "source", 
+  "fieldtype": "Select", 
+  "label": "Surrce", 
+  "options": "\nExisting Customer\nReference\nAdvertisement\nCold Calling\nExhibition\nSupplier Reference\nMass Mailing\nCustomer's Vendor\nCampaign"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "f_status", 
+  "fieldtype": "Select", 
+  "label": "Form Status", 
+  "options": "Draft\nSubmitted\nOrdered\nLost\nCancelled", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -409,24 +694,52 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "any_other_instructions", 
+  "fieldname": "any_other_details", 
   "fieldtype": "Small Text", 
-  "label": "Any Other Instructions"
+  "label": "Any other Instructions"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ascr", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "ascr", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "acr", 
+  "fieldtype": "Small Text", 
+  "hidden": 1, 
+  "label": "acr", 
+  "read_only": 0
  }, 
  {
   "doctype": "DocPerm", 
+  "match": "employee", 
   "role": "Employee"
  }, 
  {
   "cancel": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales Manager", 
   "submit": 1
  }, 
  {
   "cancel": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Administrator", 
   "submit": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Admin"
  }
 ]

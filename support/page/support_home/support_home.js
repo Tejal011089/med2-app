@@ -12,11 +12,11 @@ wn.module_page["Support"] = [
 				description: wn._("Support queries from customers."),
 				doctype:"Support Ticket"
 			},
-			{
-				label: wn._("Customer Issue"),
-				description: wn._("Customer Issue against Serial No."),
-				doctype:"Customer Issue"
-			},
+			//{
+			//	label: wn._("Customer Issue"),
+			//	description: wn._("Customer Issue against Serial No."),
+			//	doctype:"Customer Issue"
+			//},
 
 			 {
                                 label: wn._("Activity Data"),
@@ -98,6 +98,11 @@ wn.module_page["Support"] = [
 				"label":wn._("Maintenance Schedules"),
 				route: "query-report/Maintenance Schedules",
 				doctype: "Maintenance Schedule"
+			},
+			{
+				"label":wn._("Activity Log Report"),
+				route: "query-report/Activity Log Report",
+				doctype: "Activity Data"
 			}
 		]
 	}

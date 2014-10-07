@@ -8,7 +8,7 @@ from webnotes.utils import cstr, flt
 from webnotes.model.bean import getlist
 from webnotes.model.code import get_obj
 from webnotes import msgprint
-
+import datetime
 	
 from controllers.buying_controller import BuyingController
 class DocType(BuyingController):
@@ -29,6 +29,12 @@ class DocType(BuyingController):
 			'percent_join_field': 'prevdoc_docname',
 		}]
 		
+	def autoname(self):
+		from webnotes.model.doc import make_autoname
+		month=datetime.datetime.now().strftime("%B").upper()
+		year=datetime.datetime.now().strftime("%y")
+		self.doc.name = make_autoname('MS-PO/' + month + '/' + year + '/' + '.###')
+
 	def validate(self):
 		super(DocType, self).validate()
 		
@@ -50,6 +56,14 @@ class DocType(BuyingController):
 		self.validate_for_subcontracting()
 		self.update_raw_materials_supplied("po_raw_material_details")
 		
+	def p_date(self):
+		for ch in getlist(self.doclist, 'po_details'):
+			if ch.schedule_date >= self.doc.transaction_date:
+				pass
+			else:
+				webnotes.msgprint("Reqd By date cannot be less than PO Date")
+				raise Exception
+
 	def validate_with_previous_doc(self):
 		super(DocType, self).validate_with_previous_doc(self.tname, {
 			"Supplier Quotation": {
@@ -177,7 +191,8 @@ class DocType(BuyingController):
 		pc_obj.update_last_purchase_rate(self, is_submit = 0)
 				
 	def on_update(self):
-		pass
+		self.doc.po_number=self.doc.name
+                self.doc.save()
 		
 @webnotes.whitelist()
 def make_purchase_receipt(source_name, target_doclist=None):
@@ -204,6 +219,7 @@ def make_purchase_receipt(source_name, target_doclist=None):
 			"doctype": "Purchase Receipt Item", 
 			"field_map": {
 				"name": "prevdoc_detail_docname", 
+				"qty" : "received_qty",
 				"parent": "prevdoc_docname", 
 				"parenttype": "prevdoc_doctype", 
 			},

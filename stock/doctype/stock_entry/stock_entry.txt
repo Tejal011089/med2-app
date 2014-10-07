@@ -2,7 +2,7 @@
  {
   "creation": "2013-04-09 11:43:55", 
   "docstatus": 0, 
-  "modified": "2014-03-05 18:13:51", 
+  "modified": "2014-09-15 12:02:39", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -38,18 +38,12 @@
   "permlevel": 0
  }, 
  {
-  "amend": 1, 
-  "cancel": 1, 
-  "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
   "parent": "Stock Entry", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
-  "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 1, 
   "write": 1
  }, 
  {
@@ -84,20 +78,70 @@
   "search_index": 0
  }, 
  {
+  "doctype": "DocField", 
+  "fieldname": "client_name", 
+  "fieldtype": "Link", 
+  "label": "Client Name", 
+  "options": "Customer"
+ }, 
+ {
   "allow_on_submit": 0, 
-  "default": "Material Issue", 
+  "default": "Material Transfer", 
   "doctype": "DocField", 
   "fieldname": "purpose", 
   "fieldtype": "Select", 
   "hidden": 0, 
   "in_filter": 1, 
   "in_list_view": 1, 
-  "label": "Purpose", 
+  "label": "Stock Purpose", 
   "no_copy": 0, 
   "oldfieldname": "purpose", 
   "oldfieldtype": "Select", 
   "options": "Material Issue\nMaterial Receipt\nMaterial Transfer\nManufacture/Repack\nSubcontract\nSales Return\nPurchase Return", 
   "print_hide": 0, 
+  "read_only": 0, 
+  "report_hide": 0, 
+  "reqd": 1, 
+  "search_index": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "requisition_purpose", 
+  "fieldtype": "Select", 
+  "label": "Purpose", 
+  "options": "\nInstallation\nDemonstration\nReplacement\nStock\nOther"
+ }, 
+ {
+  "allow_on_submit": 0, 
+  "default": "Today", 
+  "doctype": "DocField", 
+  "fieldname": "posting_date", 
+  "fieldtype": "Date", 
+  "hidden": 0, 
+  "in_filter": 1, 
+  "in_list_view": 0, 
+  "label": "Date", 
+  "no_copy": 1, 
+  "oldfieldname": "posting_date", 
+  "oldfieldtype": "Date", 
+  "print_hide": 1, 
+  "read_only": 0, 
+  "report_hide": 0, 
+  "reqd": 1, 
+  "search_index": 1
+ }, 
+ {
+  "allow_on_submit": 0, 
+  "doctype": "DocField", 
+  "fieldname": "posting_time", 
+  "fieldtype": "Time", 
+  "hidden": 0, 
+  "in_filter": 0, 
+  "label": "Time", 
+  "no_copy": 1, 
+  "oldfieldname": "posting_time", 
+  "oldfieldtype": "Time", 
+  "print_hide": 1, 
   "read_only": 0, 
   "report_hide": 0, 
   "reqd": 1, 
@@ -163,40 +207,35 @@
   "width": "50%"
  }, 
  {
-  "allow_on_submit": 0, 
-  "default": "Today", 
   "doctype": "DocField", 
-  "fieldname": "posting_date", 
-  "fieldtype": "Date", 
-  "hidden": 0, 
-  "in_filter": 1, 
-  "in_list_view": 0, 
-  "label": "Posting Date", 
-  "no_copy": 1, 
-  "oldfieldname": "posting_date", 
-  "oldfieldtype": "Date", 
-  "print_hide": 1, 
-  "read_only": 0, 
-  "report_hide": 0, 
-  "reqd": 1, 
-  "search_index": 1
+  "fieldname": "address_display", 
+  "fieldtype": "Small Text", 
+  "label": "Client Address", 
+  "read_only": 1
  }, 
  {
-  "allow_on_submit": 0, 
   "doctype": "DocField", 
-  "fieldname": "posting_time", 
-  "fieldtype": "Time", 
-  "hidden": 0, 
-  "in_filter": 0, 
-  "label": "Posting Time", 
-  "no_copy": 1, 
-  "oldfieldname": "posting_time", 
-  "oldfieldtype": "Time", 
-  "print_hide": 1, 
-  "read_only": 0, 
-  "report_hide": 0, 
-  "reqd": 1, 
-  "search_index": 0
+  "fieldname": "status", 
+  "fieldtype": "Select", 
+  "label": "Status", 
+  "options": "\nReturn\nRequired\nRegional Stock"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "hidden": 1, 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "Territory", 
+  "read_only": 1
  }, 
  {
   "doctype": "DocField", 
@@ -233,6 +272,7 @@
  }, 
  {
   "allow_on_submit": 0, 
+  "default": "Head Office - MS", 
   "doctype": "DocField", 
   "fieldname": "to_warehouse", 
   "fieldtype": "Link", 
@@ -291,6 +331,7 @@
   "doctype": "DocField", 
   "fieldname": "sb1", 
   "fieldtype": "Section Break", 
+  "hidden": 1, 
   "label": "From Bill of Materials", 
   "read_only": 0
  }, 
@@ -379,6 +420,7 @@
   "doctype": "DocField", 
   "fieldname": "contact_section", 
   "fieldtype": "Section Break", 
+  "hidden": 1, 
   "label": "Contact Info", 
   "read_only": 0
  }, 
@@ -520,6 +562,7 @@
   "doctype": "DocField", 
   "fieldname": "project_name", 
   "fieldtype": "Link", 
+  "hidden": 1, 
   "in_filter": 1, 
   "label": "Project Name", 
   "oldfieldname": "project_name", 
@@ -532,7 +575,7 @@
   "doctype": "DocField", 
   "fieldname": "select_print_heading", 
   "fieldtype": "Link", 
-  "hidden": 0, 
+  "hidden": 1, 
   "in_filter": 0, 
   "label": "Print Heading", 
   "no_copy": 0, 
@@ -605,7 +648,7 @@
   "doctype": "DocField", 
   "fieldname": "remarks", 
   "fieldtype": "Text", 
-  "hidden": 0, 
+  "hidden": 1, 
   "in_filter": 0, 
   "label": "Remarks", 
   "no_copy": 1, 
@@ -618,19 +661,86 @@
   "search_index": 0
  }, 
  {
+  "amend": 1, 
+  "cancel": 1, 
+  "create": 1, 
   "doctype": "DocPerm", 
-  "role": "Material User"
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "Material User", 
+  "submit": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "Manufacturing User", 
+  "submit": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "Manufacturing Manager", 
+  "submit": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "Material Manager", 
+  "submit": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "permlevel": 0, 
+  "role": "Employee"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "permlevel": 0, 
+  "role": "Regional Manager"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Admin"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Administrator"
+ }, 
+ {
+  "create": 0, 
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Administrator"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Super Admin"
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Manufacturing User"
- }, 
- {
-  "doctype": "DocPerm", 
-  "role": "Manufacturing Manager"
- }, 
- {
-  "doctype": "DocPerm", 
-  "role": "Material Manager"
+  "permlevel": 1, 
+  "role": "Super Admin"
  }
 ]

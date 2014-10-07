@@ -2,7 +2,7 @@
  {
   "creation": "2013-05-24 19:29:08", 
   "docstatus": 0, 
-  "modified": "2013-12-14 17:25:46", 
+  "modified": "2014-08-09 00:50:47", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -37,8 +37,7 @@
   "parentfield": "permissions", 
   "parenttype": "DocType", 
   "permlevel": 0, 
-  "read": 1, 
-  "report": 1
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -322,6 +321,13 @@
   "search_index": 0
  }, 
  {
+  "doctype": "DocField", 
+  "fieldname": "accessories_details", 
+  "fieldtype": "Table", 
+  "label": "Product Details", 
+  "options": "Accessories Details"
+ }, 
+ {
   "allow_on_submit": 1, 
   "doctype": "DocField", 
   "fieldname": "quotation_details", 
@@ -598,17 +604,23 @@
   "read_only": 0
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
   "doctype": "DocField", 
   "fieldname": "territory", 
-  "fieldtype": "Link", 
+  "fieldtype": "Data", 
   "hidden": 0, 
   "in_filter": 1, 
   "label": "Territory", 
-  "options": "Territory", 
   "print_hide": 1, 
-  "read_only": 0, 
-  "reqd": 1, 
+  "read_only": 1, 
+  "reqd": 0, 
   "search_index": 0
  }, 
  {
@@ -711,7 +723,7 @@
   "no_copy": 0, 
   "oldfieldname": "source", 
   "oldfieldtype": "Select", 
-  "options": "\nExisting Customer\nReference\nAdvertisement\nCold Calling\nExhibition\nSupplier Reference\nMass Mailing\nCustomer's Vendor\nCampaign", 
+  "options": "\nAdvertisement\nBlog Post\nCold Calling\nCampaign\nCustomer's Vendor\nExhibition\nExisting Customer\nReference\nSupplier Reference\nMass Mailing\nWalk In\nWebsite", 
   "print_hide": 1, 
   "read_only": 0, 
   "report_hide": 0
@@ -845,6 +857,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales Manager", 
   "submit": 1, 
   "write": 1
@@ -854,6 +867,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales User", 
   "submit": 1, 
   "write": 1
@@ -864,6 +878,7 @@
   "create": 0, 
   "doctype": "DocPerm", 
   "match": "customer", 
+  "report": 1, 
   "role": "Customer", 
   "submit": 0, 
   "write": 0
@@ -873,6 +888,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Maintenance Manager", 
   "submit": 1, 
   "write": 1
@@ -882,8 +898,29 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Maintenance User", 
   "submit": 1, 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "role": "Employee", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Admin", 
   "write": 1
  }
 ]

@@ -7,6 +7,8 @@ cur_frm.cscript.fname = "delivery_note_details";
 cur_frm.cscript.other_fname = "other_charges";
 cur_frm.cscript.sales_team_fname = "sales_team";
 
+//cur_frm.add_fetch('employee', 'region', 'territory');
+
 wn.require('app/accounts/doctype/sales_taxes_and_charges_master/sales_taxes_and_charges_master.js');
 wn.require('app/utilities/doctype/sms_control/sms_control.js');
 wn.require('app/selling/sales_common.js');

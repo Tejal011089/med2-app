@@ -2,7 +2,7 @@
  {
   "creation": "2013-02-22 01:27:51", 
   "docstatus": 0, 
-  "modified": "2013-10-10 17:02:31", 
+  "modified": "2014-04-01 12:23:47", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -30,7 +30,7 @@
   "fieldname": "item_code", 
   "fieldtype": "Link", 
   "in_list_view": 1, 
-  "label": "Item Code", 
+  "label": "Product/Accessories", 
   "oldfieldname": "item_code", 
   "oldfieldtype": "Link", 
   "options": "Item", 

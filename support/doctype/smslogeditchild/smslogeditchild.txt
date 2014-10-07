@@ -1,0 +1,57 @@
+[
+ {
+  "creation": "2014-05-05 00:49:42", 
+  "docstatus": 0, 
+  "modified": "2014-05-05 03:37:14", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "sme.######", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Support", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "in_list_view": 1, 
+  "name": "__common__", 
+  "parent": "smslogeditchild", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "smslogeditchild", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "smslogeditchild"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sms_id", 
+  "fieldtype": "Int", 
+  "hidden": 1, 
+  "label": "sms id", 
+  "width": "10px"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "message_edit", 
+  "fieldtype": "Small Text", 
+  "label": "message edit"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

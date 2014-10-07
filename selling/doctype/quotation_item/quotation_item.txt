@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 11:42:57", 
   "docstatus": 0, 
-  "modified": "2013-11-02 19:41:32", 
+  "modified": "2014-04-04 18:10:43", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -18,8 +18,7 @@
   "name": "__common__", 
   "parent": "Quotation Item", 
   "parentfield": "fields", 
-  "parenttype": "DocType", 
-  "permlevel": 0
+  "parenttype": "DocType"
  }, 
  {
   "doctype": "DocType", 
@@ -32,10 +31,11 @@
   "hidden": 0, 
   "in_filter": 1, 
   "in_list_view": 1, 
-  "label": "Item Code", 
+  "label": "Product/Accessories", 
   "oldfieldname": "item_code", 
   "oldfieldtype": "Link", 
   "options": "Item", 
+  "permlevel": 0, 
   "print_hide": 0, 
   "print_width": "150px", 
   "read_only": 0, 
@@ -45,11 +45,19 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "barcode", 
+  "fieldtype": "Data", 
+  "label": "Barcode", 
+  "permlevel": 2
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "customer_item_code", 
   "fieldtype": "Data", 
   "hidden": 1, 
   "in_list_view": 0, 
   "label": "Customer's Item Code", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "read_only": 1
  }, 
@@ -62,6 +70,7 @@
   "label": "Item Name", 
   "oldfieldname": "item_name", 
   "oldfieldtype": "Data", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "150px", 
   "read_only": 0, 
@@ -77,6 +86,7 @@
   "label": "Description", 
   "oldfieldname": "description", 
   "oldfieldtype": "Small Text", 
+  "permlevel": 0, 
   "print_hide": 0, 
   "print_width": "300px", 
   "read_only": 0, 
@@ -88,7 +98,8 @@
   "fieldname": "quantity_and_rate", 
   "fieldtype": "Section Break", 
   "in_list_view": 0, 
-  "label": "Quantity and Rate"
+  "label": "Quantity and Rate", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
@@ -99,6 +110,7 @@
   "label": "Quantity", 
   "oldfieldname": "qty", 
   "oldfieldtype": "Currency", 
+  "permlevel": 0, 
   "print_hide": 0, 
   "print_width": "100px", 
   "read_only": 0, 
@@ -115,6 +127,7 @@
   "oldfieldname": "stock_uom", 
   "oldfieldtype": "Data", 
   "options": "UOM", 
+  "permlevel": 0, 
   "print_hide": 0, 
   "print_width": "100px", 
   "read_only": 1, 
@@ -130,6 +143,7 @@
   "oldfieldname": "ref_rate", 
   "oldfieldtype": "Currency", 
   "options": "currency", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "100px", 
   "read_only": 1, 
@@ -144,6 +158,7 @@
   "label": "Discount (%)", 
   "oldfieldname": "adj_rate", 
   "oldfieldtype": "Float", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "100px", 
   "read_only": 0, 
@@ -159,6 +174,7 @@
   "oldfieldname": "export_rate", 
   "oldfieldtype": "Currency", 
   "options": "currency", 
+  "permlevel": 0, 
   "print_hide": 0, 
   "print_width": "100px", 
   "read_only": 0, 
@@ -176,6 +192,7 @@
   "oldfieldname": "export_amount", 
   "oldfieldtype": "Currency", 
   "options": "currency", 
+  "permlevel": 0, 
   "print_hide": 0, 
   "print_width": "100px", 
   "read_only": 1, 
@@ -192,6 +209,7 @@
   "oldfieldname": "base_ref_rate", 
   "oldfieldtype": "Currency", 
   "options": "Company:company:default_currency", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "100px", 
   "read_only": 1, 
@@ -207,6 +225,7 @@
   "oldfieldname": "basic_rate", 
   "oldfieldtype": "Currency", 
   "options": "Company:company:default_currency", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "100px", 
   "read_only": 1, 
@@ -224,6 +243,7 @@
   "oldfieldname": "amount", 
   "oldfieldtype": "Currency", 
   "options": "Company:company:default_currency", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "100px", 
   "read_only": 1, 
@@ -236,7 +256,8 @@
   "fieldname": "reference", 
   "fieldtype": "Section Break", 
   "in_list_view": 0, 
-  "label": "Reference"
+  "label": "Reference", 
+  "permlevel": 0
  }, 
  {
   "description": "<a href=\"#Sales Browser/Item Group\">Add / Edit</a>", 
@@ -250,6 +271,7 @@
   "oldfieldname": "item_group", 
   "oldfieldtype": "Link", 
   "options": "Item Group", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "read_only": 1, 
   "search_index": 1
@@ -265,6 +287,7 @@
   "oldfieldname": "brand", 
   "oldfieldtype": "Link", 
   "options": "Brand", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "150px", 
   "read_only": 1, 
@@ -280,6 +303,7 @@
   "label": "Item Tax Rate", 
   "oldfieldname": "item_tax_rate", 
   "oldfieldtype": "Small Text", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "read_only": 1, 
   "report_hide": 1
@@ -293,6 +317,7 @@
   "no_copy": 1, 
   "oldfieldname": "prevdoc_docname", 
   "oldfieldtype": "Data", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "150px", 
   "read_only": 1, 
@@ -309,6 +334,7 @@
   "no_copy": 1, 
   "oldfieldname": "prevdoc_doctype", 
   "oldfieldtype": "Data", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "print_width": "150px", 
   "read_only": 1, 
@@ -326,6 +352,7 @@
   "no_copy": 1, 
   "oldfieldname": "page_break", 
   "oldfieldtype": "Check", 
+  "permlevel": 0, 
   "print_hide": 1, 
   "read_only": 0, 
   "report_hide": 1

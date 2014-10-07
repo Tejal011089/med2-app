@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:14", 
   "docstatus": 0, 
-  "modified": "2013-07-05 14:40:02", 
+  "modified": "2014-04-26 22:54:53", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -81,7 +81,7 @@
   "fieldtype": "Select", 
   "label": "Weekly Off", 
   "no_copy": 1, 
-  "options": "\nSunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday", 
+  "options": "\nSunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\n3rd Saturday", 
   "print_hide": 1, 
   "report_hide": 1
  }, 

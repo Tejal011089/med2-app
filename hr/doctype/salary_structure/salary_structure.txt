@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 18:50:29", 
   "docstatus": 0, 
-  "modified": "2014-03-14 19:46:09", 
+  "modified": "2014-04-23 19:50:16", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -48,7 +48,7 @@
   "fieldname": "employee", 
   "fieldtype": "Link", 
   "in_filter": 1, 
-  "label": "Employee", 
+  "label": "Employee Id", 
   "oldfieldname": "employee", 
   "oldfieldtype": "Link", 
   "options": "Employee", 
@@ -64,6 +64,12 @@
   "oldfieldname": "employee_name", 
   "oldfieldtype": "Data", 
   "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ctc", 
+  "fieldtype": "Currency", 
+  "label": "CTC"
  }, 
  {
   "doctype": "DocField", 

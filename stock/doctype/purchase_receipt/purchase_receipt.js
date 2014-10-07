@@ -4,6 +4,7 @@
 cur_frm.cscript.tname = "Purchase Receipt Item";
 cur_frm.cscript.fname = "purchase_receipt_details";
 cur_frm.cscript.other_fname = "purchase_tax_details";
+//cur_frm.add_fetch('employee', 'region', 'territory');
 
 wn.require('app/accounts/doctype/purchase_taxes_and_charges_master/purchase_taxes_and_charges_master.js');
 wn.require('app/utilities/doctype/sms_control/sms_control.js');
@@ -101,6 +102,13 @@ erpnext.stock.PurchaseReceiptController = erpnext.buying.BuyingController.extend
 	},
 		
 });
+
+cur_frm.cscript.challan_date = function(doc, cdt, cdn) {
+	
+	get_server_fields('shipment_date','','',doc, cdt, cdn, 1); 
+	
+	refresh_field('challan_date');
+};
 
 // for backward compatibility: combine new and previous states
 $.extend(cur_frm.cscript, new erpnext.stock.PurchaseReceiptController({frm: cur_frm}));

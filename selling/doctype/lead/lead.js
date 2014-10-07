@@ -4,6 +4,8 @@
 wn.require('app/utilities/doctype/sms_control/sms_control.js');
 wn.require('app/setup/doctype/contact_control/contact_control.js');
 
+cur_frm.add_fetch('employee', 'region', 'territory');
+
 wn.provide("erpnext");
 erpnext.LeadController = wn.ui.form.Controller.extend({
 	setup: function() {

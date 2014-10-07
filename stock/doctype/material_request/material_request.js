@@ -4,6 +4,8 @@
 cur_frm.cscript.tname = "Material Request Item";
 cur_frm.cscript.fname = "indent_details";
 
+//cur_frm.add_fetch('employee', 'region', 'territory');
+
 wn.require('app/utilities/doctype/sms_control/sms_control.js');
 wn.require('app/buying/doctype/purchase_common/purchase_common.js');
 

@@ -2,7 +2,7 @@
  {
   "creation": "2013-04-19 13:30:51", 
   "docstatus": 0, 
-  "modified": "2014-02-25 10:57:45", 
+  "modified": "2014-04-28 11:48:42", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -111,5 +111,23 @@
   "oldfieldname": "incentives", 
   "oldfieldtype": "Currency", 
   "options": "Company:company:default_currency"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "eligible", 
+  "fieldtype": "Data", 
+  "label": "Eligible"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "fiscal_year", 
+  "fieldtype": "Data", 
+  "label": "Fiscal Year"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "quater", 
+  "fieldtype": "Data", 
+  "label": "Quater"
  }
 ]

@@ -1,0 +1,49 @@
+[
+ {
+  "creation": "2014-05-28 17:09:28", 
+  "docstatus": 0, 
+  "modified": "2014-05-28 17:13:15", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Stock", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "AMC Details", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "AMC Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amc_details", 
+  "fieldtype": "Data", 
+  "label": "AMC Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "expiry_date", 
+  "fieldtype": "Date", 
+  "in_list_view": 1, 
+  "label": "expiry_date", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "start_date", 
+  "fieldtype": "Date", 
+  "in_list_view": 1, 
+  "label": "Start Date", 
+  "reqd": 1
+ }
+]

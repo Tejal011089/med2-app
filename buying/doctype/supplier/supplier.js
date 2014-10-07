@@ -1,6 +1,7 @@
 // Copyright (c) 2013, Web Notes Technologies Pvt. Ltd. and Contributors
 // License: GNU General Public License v3. See license.txt
 
+cur_frm.add_fetch('employee', 'region', 'territory');
 wn.require('app/setup/doctype/contact_control/contact_control.js');
 
 cur_frm.cscript.refresh = function(doc,dt,dn) {

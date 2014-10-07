@@ -1,0 +1,108 @@
+[
+ {
+  "creation": "2014-03-28 12:26:16", 
+  "docstatus": 0, 
+  "modified": "2014-03-28 12:37:51", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "IOD/.#####", 
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Selling", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Internal Order Item", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Internal Order Item"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item_code", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Item Code", 
+  "options": "Item"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "customers_item_code", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "in_list_view": 1, 
+  "label": "Customers Item Code"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item_name", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Item Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "description", 
+  "fieldtype": "Small Text", 
+  "label": "Description"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "quantity_and_rate", 
+  "fieldtype": "Section Break", 
+  "label": "Quantity And Rate"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "qty", 
+  "fieldtype": "Float", 
+  "in_list_view": 1, 
+  "label": "Quantity"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "stock_uom", 
+  "fieldtype": "Link", 
+  "label": "UOM ", 
+  "options": "UOM"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ref_rate", 
+  "fieldtype": "Currency", 
+  "label": "Price List Rate", 
+  "print_width": "100px", 
+  "width": "100px"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "adj_rate", 
+  "fieldtype": "Float", 
+  "label": "Discount (%)", 
+  "width": "100px"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "export_rate", 
+  "fieldtype": "Currency", 
+  "label": "Rate", 
+  "options": "currency", 
+  "width": "100px"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "export_amount", 
+  "fieldtype": "Currency", 
+  "label": "Amount", 
+  "options": "currency", 
+  "width": "100px"
+ }
+]

@@ -81,7 +81,7 @@ erpnext.stock.StockReconciliation = erpnext.stock.StockController.extend({
 				[wn._("You can update either Quantity or Valuation Rate or both.")],
 				[wn._("If no change in either Quantity or Valuation Rate, leave the cell blank.")],
 				["----"],
-				["Item Code", "Warehouse", "Quantity", "Valuation Rate"]], null, this);
+				["Item Code", "Warehouse", "Quantity"]], null, this);
 			return false;
 		}, "icon-download");
 	},

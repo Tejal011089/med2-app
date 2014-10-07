@@ -2,7 +2,7 @@
  {
   "creation": "2014-03-11 13:35:49", 
   "docstatus": 0, 
-  "modified": "2014-03-11 13:41:24", 
+  "modified": "2014-08-28 16:43:28", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -23,16 +23,12 @@
   "permlevel": 0
  }, 
  {
-  "cancel": 1, 
-  "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
   "parent": "Requisition Form", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
-  "permlevel": 0, 
   "read": 1, 
-  "role": "Administrator", 
   "write": 1
  }, 
  {
@@ -58,9 +54,10 @@
   "fieldname": "client_name", 
   "fieldtype": "Data", 
   "label": "Client Name", 
-  "reqd": 1
+  "reqd": 0
  }, 
  {
+  "default": "Today", 
   "doctype": "DocField", 
   "fieldname": "date", 
   "fieldtype": "Date", 
@@ -78,7 +75,7 @@
   "fieldname": "status", 
   "fieldtype": "Select", 
   "label": "Status", 
-  "options": "\nRequired\nReturn"
+  "options": "\nRequired\nReturn\nRegional Stock"
  }, 
  {
   "doctype": "DocField", 
@@ -112,6 +109,33 @@
   "options": "Requisition Material"
  }, 
  {
-  "doctype": "DocPerm"
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "report": 1, 
+  "role": "Administrator"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Employee"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Administrator"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Super Admin"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Super Admin"
  }
 ]

@@ -14,7 +14,9 @@ cur_frm.cscript.item= function(doc,cdt,cdn)
 }
 cur_frm.cscript.special_type_project= function(doc,cdt,cdn){
                 //console.log("hhh")
-        get_server_fields('get_item_details','','',doc,cdt,cdn,1,function(r,rt){refresh_field('item_details_table')},function(r,rt){refresh_field('employee_details_table')});
+        //get_server_fields('get_item_details','','',doc,cdt,cdn,1,function(r,rt){refresh_field('item_details_table')},function(r,rt){refresh_field('employee_details_table')});
+	get_server_fields('get_item_details','','',doc,cdt,cdn,1,function(r,rt)
+               {refresh_field('item_details_table');refresh_field('employee_details_table')});
 		//refresh_field('item_details_table');
 		//refresh_field('employee_details_table');
 }
@@ -28,8 +30,9 @@ cur_frm.cscript.refresh=function(doc,cdt,cdn){
 
 cur_frm.cscript.contact_no = function(doc){
         phone=doc.contact_no;
+	//console.log(contact_no)
         phone = phone.replace(/[^0-9]/g, '');
-        if(phone.length != 10)0
+        if(phone.length != 10)
 	{
                alert("Not 10 digits");
         } 

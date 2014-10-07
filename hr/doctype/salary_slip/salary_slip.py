@@ -3,13 +3,12 @@
 
 from __future__ import unicode_literals
 import webnotes
-import calendar
+
 from webnotes.utils import add_days, cint, cstr, flt, getdate, nowdate, _round
 from webnotes.model.doc import make_autoname
 from webnotes.model.bean import getlist
 from webnotes.model.code import get_obj
 from webnotes import msgprint, _
-from webnotes.model.doc import addchild
 from setup.utils import get_company_currency
 import calendar
 	
@@ -52,6 +51,18 @@ class DocType(TransactionBase):
 			self.doc.esic_no = emp.esic_card_no
 			self.doc.pf_no = emp.pf_number
 
+	def on_update(self):
+		sp=webnotes.conn.get_value('Sales Person',{'employee':self.doc.employee},'name')
+		if sp:
+			sp_vp=webnotes.conn.sql("select name,variable_pay from `tabSales Person Variable Pay` where sales_person='%s' and fiscal_year='%s' and month='%s' and status='False'"%(sp,self.doc.fiscal_year,self.doc.month),as_list=1)
+			if sp_vp:
+				self.doc.gross_pay=cstr(cint(self.doc.gross_pay)+cint(sp_vp[0][1]))
+				self.doc.net_pay=cstr(cint(self.doc.net_pay)+cint(sp_vp[0][1]))
+				self.doc.variable_pay=cstr(sp_vp[0][1])
+				self.doc.save()
+				webnotes.conn.sql("update `tabSalary Slip Earning` set e_amount='%s',e_modified_amount='%s' where e_type='Variable Pay' and parent='%s'"%(self.doc.variable_pay,self.doc.variable_pay,self.doc.name))
+				webnotes.conn.sql("Update `tabSales Person Variable Pay` set status='True' where name ='%s'"%(sp_vp[0][0]))
+
 	def get_leave_details(self, lwp=None):
 		if not self.doc.fiscal_year:
 			self.doc.fiscal_year = webnotes.get_default("fiscal_year")
@@ -74,6 +85,18 @@ class DocType(TransactionBase):
 		self.doc.leave_without_pay = lwp
 		payment_days = flt(self.get_payment_days(m)) - flt(lwp)
 		self.doc.payment_days = payment_days > 0 and payment_days or 0
+		
+		ss="select DATEDIFF(NOW(),(select date_of_joining from tabEmployee where name='"+self.doc.employee+"'))/365 from tabEmployee where name='"+self.doc.employee+"' and status='Left' and DATEDIFF(CURDATE(), (select relieving_date from tabEmployee where name='"+self.doc.employee+"')) <=31  and DATEDIFF(NOW(),(select date_of_joining from tabEmployee where name='"+self.doc.employee+"'))/365 >5"
+		# webnotes.errprint(ss)
+		res=webnotes.conn.sql(ss)
+		# webnotes.errprint(res)
+		if res:
+                    lst_sal_qry="select net_pay from `tabSalary Slip` where employee='"+self.doc.employee+"' order by creation desc limit 1"
+		    # webnotes.errprint(lst_sal_qry)
+		    lst_sal=webnotes.conn.sql(lst_sal_qry)
+		    grp_amt=(cint(lst_sal[0][0])* cint(res[0][0]))/27
+		    # webnotes.errprint(grp_amt)
+		    self.doc.grauity_amount=grp_amt		
 		
 
 	def get_payment_days(self, m):
@@ -161,99 +184,7 @@ class DocType(TransactionBase):
 		self.doc.total_in_words = money_in_words(self.doc.rounded_total, company_currency)
 
 	def calculate_earning_total(self):
-	        self.doc.gross_pay = flt(self.doc.arrear_amount) + flt(self.doc.leave_encashment_amount)
-		s_date = e_date = ''
-		        #webnotes.errprint("in sales target")
-		if cint(self.doc.month)%3 == 0:
-                	s_date, e_date = self.get_dates(cint(self.doc.month))
-                #m=cint(self.doc.month)
-              		#webnotes.errprint(m)
-	        m_name=calendar.month_name[cint(self.doc.month)]
-                webnotes.errprint(m_name)
-                
-		# if m==3 or m==6 or m==9 or m==12:
-
-	 #                if  m==3:
-	 #                        s_date, e_date = self.get_dates(m)
-	 #                        # webnotes.errprint("in first")
-  #       	                # s_date='2014-01-01'
-  #               	        # e_date='2014-03-31'
-  #                       	# webnotes.errprint(s_date)
-	 #                        # webnotes.errprint(e_date)
-  #       	        elif  m==6:
-  #       	        	    s_date, e_date = self.get_dates(m)
-  #               	        # webnotes.errprint("in second")
-  #                       	# s_date='2014-04-01'
-	 #                        # e_date='2014-06-30'
-		# 		# webnotes.errprint(s_date)
-  #               	        # webnotes.errprint(e_date)
-
-	 #                elif  m==9:
-	 #                	    s_date, e_date = self.get_dates(m)
-  #       	                # webnotes.errprint("in third")
-  #               	        # s_date='2014-07-01'
-  #                       	# e_date='2014-09-30'
-	 #                elif m==12:
-	 #                	    s_date, e_date = self.get_dates(m)
-        	                # webnotes.errprint("in forth")
-                	        # s_date='2014-07-01'
-                        	# e_date='2014-12-31'
-			 #webnotes.errprint([select parent,target_amount ,variable_pay from `tabTarget Detail` where parent in  (select sales_person from `tabSales Team` where parent in 
-                         #               (select name from `tabSales Order` where transaction_date between %s and %s  
-                         #             group by sales_person)) ,(s_date,e_date)])
-		if s_date and e_date:
-			qry1=webnotes.conn.sql("""select parent,target_amount ,variable_pay from `tabTarget Detail` where parent in  (select sales_person from `tabSales Team` where parent in 
-                                        (select name from `tabSales Order` where transaction_date between %s and %s
-                                       group by sales_person)) """,(s_date,e_date) ,debug=1)
-			webnotes.errprint(qry1)
-                #list1=[]
-               		for i in qry1:
-				webnotes.errprint("in for loop")
-				name=webnotes.conn.sql("""select employee from `tabSales Person` where name=%s """,i[0],as_list=1)
-				webnotes.errprint(name)
-		                if name[0][0] == self.doc.employee:
-					webnotes.errprint(name[0][0])
-
-                        #webnotes.errprint(i[0])                
-		                       	qr=webnotes.conn.sql("""select distribution_id  from `tabSales Person` where name=%s""",i[0],as_list=1)
-       	                #webnotes.errprint(qr)
-               		        	if m_name=='January' or m_name=='February' or m_name=='March':
-                       		        	month='January-March'
-                        		elif m_name=='April' or m_name=='May' or m_name=='June':
-       	                        		month='April-June'
-					
-	               	        	elif m_name=='July' or m_name=='August' or m_name=='September':
-        	               	        	month='July-September'
-                	        	else:
-       	                	        	month='October-December'
-              	        		webnotes.errprint(month)
-					if qr:
-						webnotes.errprint("percentage allocation")
-		                       		qt=webnotes.conn.sql(""" select percentage_allocation/100 from `tabBudget Distribution Detail` where 
-        	                               	        month=%s and parent=%s""",(month,qr[0][0]))
-        		               		webnotes.errprint(qt[0][0])
-                       #webnotes.errprint(qt[0][0]*i[1])
-                		       		amt=qt[0][0]*i[1]
-                       				webnotes.errprint(amt)
-                       				qry=webnotes.conn.sql(""" select sum(allocated_amount) as amount from `tabSales Team` where parent in 
-                               		       		(select name from `tabSales Order` where transaction_date between %s and %s and docstatus=1) 
-                                    			and  sales_person=%s """,(s_date,e_date,i[0]))
-	                       			webnotes.errprint(qry)
-			#name=webnotes.conn.sql("""select employee from `tabSales Person` where name=%s """,i[0],as_list=1)
-                        #webnotes.errprint(name[0][0])
-                        #webnotes.errprint(["pay",i[2]])
-						if qry:
-
-	                	       			t= ((flt(qry[0][0])/amt)*100)/(100)
-        		               			webnotes.errprint(t)
-					#webnotes.msgprint(i[2])
-                	       				pay= (i[2]/4)*t
-					#webnotes.msgprint(pay)
-							self.doc.variable_pay=pay
-        	               				webnotes.errprint(self.doc.variable_pay)
-	
-	
-
+		self.doc.gross_pay = flt(self.doc.arrear_amount) + flt(self.doc.leave_encashment_amount)
 		for d in self.doclist.get({"parentfield": "earning_details"}):
 			if cint(d.e_depends_on_lwp) == 1:
 				d.e_modified_amount = _round(flt(d.e_amount) * flt(self.doc.payment_days)
@@ -263,59 +194,22 @@ class DocType(TransactionBase):
 			else:
 				d.e_modified_amount = d.e_amount
 			self.doc.gross_pay += flt(d.e_modified_amount)
-		self.doc.gross_pay +=flt(self.doc.variable_pay)
-
-	def get_dates(self, month):
-		from dateutil.relativedelta import relativedelta
-		year_start_date, year_end_date = webnotes.conn.get_value("Fiscal Year", 
-			self.doc.fiscal_year, ["year_start_date", "year_end_date"])
-		
-		increment = {
-			3: 12,
-			6: 3,
-			9: 6,
-			12: 9
-		}.get(month)
-		period_start_date = getdate(year_start_date) + relativedelta(months=(increment-3))
-		period_end_date = getdate(year_start_date) + relativedelta(months=increment, days=-1)
-
-		return period_start_date, period_end_date
-
-
+	
 	def calculate_ded_total(self):
 		self.doc.total_deduction = 0
-		qry=webnotes.conn.sql(" select name from `tabEmployee Loan` where employee_name=%s", self.doc.employee ,as_list=1)
+		qry=webnotes.conn.sql(" select name from `tabEmployee Loan` where employee_id=%s", self.doc.employee ,as_list=1)
 		#webnotes.errprint(qry)
+		r=0
 		if len(qry)!=0:
 			qr=webnotes.conn.sql("select date_of_installment from `tabLoan Installment Details` where parent=%s",qry[0][0],as_list=1)
-			#webnotes.errprint(qr)
-			r=0
 			for i in qr:
 				t=getdate(i[0]).month
-				#webnotes.errprint(t)
-				#webnotes.errprint(self.doc.month)
-				webnotes.errprint(t == cint(self.doc.month))
 				if t == cint(self.doc.month):
-					webnotes.errprint("in if loop")
-					#webnotes.errprint(getdate(i[0]))
 					q=webnotes.conn.sql("select amount_to_be_paid from `tabLoan Installment Details` where date_of_installment=%s and parent=%s",(getdate(i[0]),qry[0][0]),as_list=1)
 					w=webnotes.conn.sql("Update `tabLoan Installment Details` set status='Paid' where date_of_installment=%s",getdate(i[0]))
 					#webnotes.errprint(q)
 					r=q[0][0]
-					#ch = addchild(self.doc, 'deduction_details', 
-					#'Salary Slip Deduction', self.doclist)
-					#ch.d_type='Loan'
-					#ch.d_amount=r
-					#ch.d_modified_amount=r
-					#ch.save(new=1)						
 					self.doc.loan_amount=r
-					#webnotes.errprint(ch) 
-					#return{
-					#	'd_type':ch.d_type
-						#'ch.d_amount':r
-						#'ch.d_modified_amount':r
-					#}
-					#webnotes.errprint(self.doc.loan_amount)
 		m=0.0
 		for d in getlist(self.doclist, 'deduction_details'):
 			if cint(d.d_depends_on_lwp) == 1:
@@ -325,17 +219,10 @@ class DocType(TransactionBase):
 				d.d_modified_amount = 0
 			else:
 				d.d_modified_amount = d.d_amount
-			m+=flt(d.d_modified_amount)
-		if self.doc.loan_amount:
-			ch = addchild(self.doc, 'deduction_details', 'Salary Slip Deduction', self.doclist)
-               		ch.d_type='Loan'
-                	ch.d_amount=cstr(self.doc.loan_amount)
-                	ch.d_modified_amount=cstr(self.doc.loan_amount)
-			ch.parent=self.doc.name
-			ch.parentfield='deduction_details'
-			ch.parenttype='Salary Slip'
-		self.doc.total_deduction= m+flt(self.doc.loan_amount)
-		
+			m+=flt(d.d_modified_amount)	
+		#m+=flt(d.d_modified_amount)
+		self.doc.total_deduction= m+flt(r)
+		#w=webnotes.conn.sql("update `tabLoan Installment Details` set status='Paid' where date_of_installment=%s",getdate(i[0]),as_list=1)
 	def calculate_net_pay(self):
 		self.calculate_earning_total()
 		self.calculate_ded_total()

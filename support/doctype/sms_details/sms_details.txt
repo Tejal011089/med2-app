@@ -1,0 +1,47 @@
+[
+ {
+  "creation": "2014-04-08 22:11:50", 
+  "docstatus": 0, 
+  "modified": "2014-04-08 22:11:50", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "SMSD/.#############", 
+  "doctype": "DocType", 
+  "document_type": "Transaction", 
+  "module": "Support", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Sms Details", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Sms Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sender_no", 
+  "fieldtype": "Data", 
+  "label": "sender no"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "message_body", 
+  "fieldtype": "Text", 
+  "label": "message body"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "flag", 
+  "fieldtype": "Select", 
+  "label": "flag", 
+  "options": "\nTrue\nFalse"
+ }
+]

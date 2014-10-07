@@ -29,6 +29,7 @@ class DocType(DocListController):
 		self.show_block_day_warning()
 		self.validate_block_days()
 		self.validate_leave_approver()
+		self.validate_compoff()
 		
 	def on_update(self):
 		if (not self.previous_doc and self.doc.leave_approver) or (self.previous_doc and \
@@ -41,9 +42,9 @@ class DocType(DocListController):
 			self.notify_employee(self.doc.status)
 	
 	def on_submit(self):
-		if self.doc.status != "Approved":
-			webnotes.msgprint("""Only Leave Applications with status 'Approved' can be Submitted.""",
-				raise_exception=True)
+		#if self.doc.status != "Approved":
+		#	webnotes.msgprint("""Only Leave Applications with status 'Approved' can be Submitted.""",
+		#		raise_exception=True)
 
 		# notify leave applier about approval
 		self.notify_employee(self.doc.status)
@@ -73,6 +74,35 @@ class DocType(DocListController):
 			if self.doc.status == "Approved":
 				webnotes.msgprint(_("Cannot approve leave as you are not authorized to approve leaves on Block Dates."))
 				raise LeaveDayBlockedError
+        def validate_compoff(self):
+    		if self.doc.leave_type=='Compensatory Off':
+    			if not self.doc.worked_day:
+    						webnotes.msgprint( (" Please enter worked day for applying 'Compensatory Off'"),raise_exception=1)
+    			#webnotes.errprint("co")
+    			ss=self.get_total_leave_days()
+    			#webnotes.msgprint(ss['total_leave_days'])
+    			if ss['total_leave_days']==1.0:
+    				if len(self.doc.worked_day)!=10:
+    					webnotes.msgprint( ("Sorry...! Entered worked day is invalid.."),raise_exception=1)	
+    				else:
+    					dd=date_diff(self.doc.to_date, self.doc.worked_day)
+                        		if dd>30:
+                    				webnotes.msgprint( ("Sorry...! 'Compensatory Off' is valid only for 30 days."),raise_exception=1)
+                	elif ss['total_leave_days']>=1.0:
+                     		#webnotes.errprint(self.doc.worked_day)
+                     		yy=self.doc.worked_day.split(',')
+                     		#webnotes.msgprint(yy)
+                     		webnotes.errprint(cint(ss['total_leave_days']))
+                     		if len(yy)< cint(ss['total_leave_days']):
+                    			webnotes.msgprint( ("Sorry...! Worked Days entered are ("+cstr(len(yy))+") less than total applied leave days ("+cstr(ss['total_leave_days'])+")."),raise_exception=1)
+                     		for y in yy:
+                     			#webnotes.msgprint(y)
+                     			dd=date_diff(self.doc.to_date,y)
+                     			if dd>30:
+						webnotes.msgprint( ("Sorry...! 'Compensatory Off' is valid only for 30 days."),raise_exception=1)            
+				webnotes.errprint(len(yy))
+
+
 			
 	def get_holidays(self):
 		tot_hol = webnotes.conn.sql("""select count(*) from `tabHoliday` h1, `tabHoliday List` h2, `tabEmployee` e1 
@@ -115,7 +145,7 @@ class DocType(DocListController):
 				self.doc.leave_balance = get_leave_balance(self.doc.employee,
 					self.doc.leave_type, self.doc.fiscal_year)["leave_balance"]
 
-				if self.doc.status != "Rejected" \
+				if self.doc.status != "Rejected" and self.doc.leave_type!='Compensatory Off' \
 						and self.doc.leave_balance - self.doc.total_leave_days < 0:
 					#check if this leave type allow the remaining balance to be in negative. If yes then warn the user and continue to save else warn the user and don't save.
 					msgprint("There is not enough leave balance for Leave Type: %s" % \

@@ -42,13 +42,17 @@ class DocType(StockController):
 		self.validate_warehouse(pro_obj)
 		self.validate_production_order(pro_obj)
 		self.get_stock_and_rate()
-		self.validate_incoming_rate()
+		#self.validate_incoming_rate()
 		self.validate_bom()
 		self.validate_finished_goods()
 		self.validate_return_reference_doc()
 		self.validate_with_material_request()
 		self.validate_fiscal_year()
 		self.set_total_amount()
+		if self.doc.purpose!="Material Transfer":
+			self.validate_incoming_rate()
+		elif self.doc.purpose=="Material Transfer":
+			webnotes.errprint("hello")
 		
 	def on_submit(self):
 		self.update_stock_ledger()
@@ -62,7 +66,7 @@ class DocType(StockController):
 		self.update_stock_ledger()
 		self.update_production_order()
 		self.make_cancel_gl_entries()
-		
+
 	def validate_fiscal_year(self):
 		import accounts.utils
 		accounts.utils.validate_fiscal_year(self.doc.posting_date, self.doc.fiscal_year,
@@ -609,14 +613,14 @@ class DocType(StockController):
 		
 	def get_cust_addr(self):
 		from utilities.transaction_base import get_default_address, get_address_display
-		res = webnotes.conn.sql("select customer_name from `tabCustomer` where name = '%s'"%self.doc.customer)
+		res = webnotes.conn.sql("select customer_name from `tabCustomer` where name = '%s'"%self.doc.client_name)
 		address_display = None
-		customer_address = get_default_address("customer", self.doc.customer)
+		customer_address = get_default_address("customer", self.doc.client_name)
 		if customer_address:
 			address_display = get_address_display(customer_address)
 		ret = { 
 			'customer_name'		: res and res[0][0] or '',
-			'customer_address' : address_display}
+			'address_display' : address_display}
 
 		return ret
 

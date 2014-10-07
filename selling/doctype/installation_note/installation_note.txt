@@ -2,7 +2,7 @@
  {
   "creation": "2013-04-30 13:13:06", 
   "docstatus": 0, 
-  "modified": "2014-03-14 11:01:51", 
+  "modified": "2014-09-12 11:05:38", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -65,6 +65,7 @@
   "doctype": "DocField", 
   "fieldname": "customer", 
   "fieldtype": "Link", 
+  "in_list_view": 1, 
   "label": "Customer", 
   "oldfieldname": "customer", 
   "oldfieldtype": "Link", 
@@ -92,10 +93,36 @@
  {
   "doctype": "DocField", 
   "fieldname": "employee_id", 
-  "fieldtype": "Link", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
   "label": "Employee Id", 
-  "options": "Employee", 
+  "read_only": 1, 
   "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee_name", 
+  "fieldtype": "Data", 
+  "label": "employee name", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "in_filter": 1, 
+  "label": "Territory", 
+  "print_hide": 1, 
+  "read_only": 1, 
+  "reqd": 0, 
+  "search_index": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "internal_order_no", 
+  "fieldtype": "Link", 
+  "label": "Internal Order No", 
+  "options": "Internal Order Form"
  }, 
  {
   "doctype": "DocField", 
@@ -131,32 +158,129 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "contact_email", 
-  "fieldtype": "Text", 
-  "label": "Contact Email", 
-  "print_hide": 1, 
-  "read_only": 1
+  "fieldname": "doctor_name", 
+  "fieldtype": "Data", 
+  "label": "Doctor Name"
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
   "doctype": "DocField", 
-  "fieldname": "territory", 
-  "fieldtype": "Link", 
-  "in_filter": 1, 
-  "label": "Territory", 
-  "options": "Territory", 
-  "print_hide": 1, 
-  "reqd": 1, 
-  "search_index": 1
+  "fieldname": "reg_no_doctor", 
+  "fieldtype": "Data", 
+  "label": "Reg no. Doctor"
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Customer Group\">Add / Edit</a>", 
   "doctype": "DocField", 
-  "fieldname": "customer_group", 
-  "fieldtype": "Link", 
-  "label": "Customer Group", 
-  "options": "Customer Group", 
-  "print_hide": 1
+  "fieldname": "city", 
+  "fieldtype": "Data", 
+  "label": "City"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "director_name", 
+  "fieldtype": "Data", 
+  "label": "Director Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "pincode", 
+  "fieldtype": "Data", 
+  "label": "Pin Code"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "state", 
+  "fieldtype": "Data", 
+  "label": "State"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "reg_no_clinic", 
+  "fieldtype": "Data", 
+  "label": "Reg no. Clinic"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "website", 
+  "fieldtype": "Data", 
+  "label": "Website"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "palce", 
+  "fieldtype": "Data", 
+  "label": "Place"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "inst_reprot_no", 
+  "fieldtype": "Data", 
+  "label": "Installation Report no."
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "user_name", 
+  "fieldtype": "Data", 
+  "label": "User Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "dept", 
+  "fieldtype": "Data", 
+  "label": "Department"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "customer_remark", 
+  "fieldtype": "Data", 
+  "label": "Customer Remark"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "engineers_remark", 
+  "fieldtype": "Data", 
+  "label": "Engineers Remark"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status1", 
+  "fieldtype": "Data", 
+  "label": "Status1"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_no", 
+  "fieldtype": "Data", 
+  "label": "Contact no."
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "dept1", 
+  "fieldtype": "Data", 
+  "label": "Dept1"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_no1", 
+  "fieldtype": "Data", 
+  "label": "Contact no.1"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "product_barcode", 
+  "fieldtype": "Data", 
+  "label": "Product Barcode"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "version", 
+  "fieldtype": "Data", 
+  "label": "Version"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "material_supplied", 
+  "fieldtype": "Data", 
+  "label": "Material Supplied"
  }, 
  {
   "doctype": "DocField", 
@@ -238,6 +362,125 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "inst_start_time", 
+  "fieldtype": "Data", 
+  "label": "Inst. start time"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "inst_end_time", 
+  "fieldtype": "Data", 
+  "label": "Inst end time"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "inst_end_date", 
+  "fieldtype": "Data", 
+  "label": "Inst end date"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "proc", 
+  "fieldtype": "Data", 
+  "label": "proc"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "ram", 
+  "fieldtype": "Data", 
+  "label": "ram"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "hdd", 
+  "fieldtype": "Data", 
+  "label": "hdd"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "me", 
+  "fieldtype": "Data", 
+  "label": "me"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "other", 
+  "fieldtype": "Data", 
+  "label": "other"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "model_no", 
+  "fieldtype": "Data", 
+  "label": "model no"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "serial_no", 
+  "fieldtype": "Data", 
+  "label": "serial no"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "os", 
+  "fieldtype": "Data", 
+  "label": "os"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "no_in_case", 
+  "fieldtype": "Data", 
+  "label": "no in case"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "training", 
+  "fieldtype": "Data", 
+  "label": "training"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "inst_type", 
+  "fieldtype": "Data", 
+  "label": "inst type"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sign_seal", 
+  "fieldtype": "Data", 
+  "label": "sign seal"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "signature", 
+  "fieldtype": "Data", 
+  "label": "signature"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "clinic_name", 
+  "fieldtype": "Data", 
+  "label": "Clinic name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_email", 
+  "fieldtype": "Text", 
+  "label": "Contact Email", 
+  "print_hide": 1, 
+  "read_only": 1
+ }, 
+ {
+  "description": "<a href=\"#Sales Browser/Customer Group\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "customer_group", 
+  "fieldtype": "Link", 
+  "label": "Customer Group", 
+  "options": "Customer Group", 
+  "print_hide": 1
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "remarks", 
   "fieldtype": "Small Text", 
   "label": "Remarks", 
@@ -286,8 +529,24 @@
  {
   "create": 1, 
   "doctype": "DocPerm", 
+  "match": "employee_id", 
   "permlevel": 0, 
   "role": "Employee", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "permlevel": 0, 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Admin", 
   "write": 1
  }
 ]

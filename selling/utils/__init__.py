@@ -202,8 +202,7 @@ def send_sms(msg,sender_no):
                sms_url=webnotes.conn.get_value('SMS Settings', None, 'sms_gateway_url')
                msg_parameter=webnotes.conn.get_value('SMS Settings', None, 'message_parameter')
                receiver_parameter=webnotes.conn.get_value('SMS Settings', None, 'receiver_parameter')
-               url = sms_url +"?user="+ args["user"] +"&senderID="+ args["sender ID"] +"&receipientno="+ sender_no +"\
-                               &dcs="+ args["dcs"]+ "&msgtxt=" + msg +"&state=" +args["state"]
+               url = sms_url +"?username="+ args["username"] +"&password="+args["password"]+"&sendername="+ args["sendername"] +"&mobileno="+ sender_no +"&message=" + msg 
                webnotes.errprint(url)
                import requests
                r = requests.get(url)
@@ -268,7 +267,7 @@ def get_installation_note(customer,emp_id,_type='POST'):
 		d.inst_time=time.strftime("%H:%M:%S")
 		d.inst_date=today
 		d.employee_id=emp_id[1:-1]
-		return d.employee_id
+		#return d.employee_id
 		d.fiscal_year=res1[0][0]
 		d.company='medsynaptic'
 		d.territory='India'
@@ -309,7 +308,8 @@ def get_customer_issue(installationname,sender_no,message,_type='POST'):
 		x="select customer_name from `tabCustomer` where customer_no='"+sender_no[1:-1]+"' "
 		y=webnotes.conn.sql(x)
 		#return x
-		if y == None:
+		m= None
+		if not y :
 		
 			z="select user_id from `tabEmployee` where cell_number="+sender_no[1:-1]+""	
 			m=webnotes.conn.sql(z)
@@ -325,7 +325,7 @@ def get_customer_issue(installationname,sender_no,message,_type='POST'):
 		q=" select territory from `tabCustomer` where name='%s'"%(res[0][0]);
 
 		r=webnotes.conn.sql(q)	
-	 	w=" select parent from `tabDefaultValue` where  defkey = '%s' and defvalue = '%s'"%('territory',r[0][0])
+	 	w="select y.parent from `tabDefaultValue` y,`tabProfile` p, `tabUserRole` r where  defkey = '%s' and defvalue = '%s' and r.role='Manager'"%('territory',r[0][0])
 		a=webnotes.conn.sql(w)
 		#return a
 		from webnotes.model.doc import Document
@@ -336,10 +336,10 @@ def get_customer_issue(installationname,sender_no,message,_type='POST'):
 		d.opening_time=time.strftime("%H:%M:%S")
 		if y:
 			d.raised_by=y[0][0]
-		elif z:
+		elif m:
 			d.raised_by=z[0][0]
 		else:
-			d.raised_by=sender_no1[-11:]
+			d.raised_by=sender_no[-11:]
         	d.subject=installationname[1:-1]
 		d.customer_name=res[0][0]
 		d.customer=res[0][0]
@@ -398,7 +398,7 @@ def get_support_ticket(code,sender_no,message,_type='POST'):
 	today = nowdate()
         from webnotes.model.doc import Document
 	import time
-	#return sender_no[-11:]
+	#return sender_no[1:-1]
 	if code[1:-1] =="CRT":
 		#return "hello"
 		#return sender_no[1:-1]
@@ -412,7 +412,7 @@ def get_support_ticket(code,sender_no,message,_type='POST'):
 		d.status='Open'
         	d.save()
         	webnotes.conn.commit()
-		#p=send_sms(message[1:-1],sender_no1[1:-1])
+		p=send_sms(msg,sender_no[1:-1])
         	return d.name
 
 	elif code[1:-1]=="CLS":
@@ -427,7 +427,9 @@ def get_support_ticket(code,sender_no,message,_type='POST'):
 
 			g="update `tabSupport Ticket` set status='Closed' where name='%s'"%(x[0][0])
 			h=webnotes.conn.sql(g)
-			#e=send_sms(message[1:-1],sender_no1[1:-1])
+			webnotes.conn.sql("commit")
+			e=send_sms(msg,sender_no[1:-1])
+			#webnotes.er
 			return "Updated" 
 			 
 
@@ -552,97 +554,150 @@ def get_activity_data(code,emp_id,client_name,place,deal_amount,product_sold=Non
 		"Last"
 
 
-def get_escalation_for_supportticket():
-
-	       #webnotes.errprint("in update")
-               from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
-               #from datetime import datetime
-               #now = datetime.datetime.now().strftime("%Y-%m-%d")
-               #webnotes.errprint(now)
-               #yesterday = now - datetime.timedelta(days=1)
-               #earlier = today - DD
-               #earlier_str = earlier.strftime("%Y%m%d")
-               #webnotes.errprint(now)
-               #webnotes.errprint(yesterday)
-               #webnotes.errprint(earlier)
-               #webnotes.errprint(earlier_str)
-               
-               #today=nowdate()
-               #i = datetime.now()
-               #webnotes.errprint(i)
-               #p=i.strftime('%Y-%m-%d %H:%M:%S')
-               #webnotes.errprint(p)
-               #day=p-timedelta(hours=24)
-               #webnotes.errprint(day)
-               qry=webnotes.conn.sql("select name from `tabSupport Ticket` t where t.status='Open' and t.creation < DATE_SUB(NOW(), INTERVAL 24 HOUR) AND          t.creation > DATE_SUB(NOW(), INTERVAL 48 HOUR)",as_list=1);
-
-               webnotes.errprint(qry)
+@webnotes.whitelist(allow_guest=True)
+def get_escalation_for_supportticket(_type='Post'):
+	#print "get esc"
+	#val = ''
+        from webnotes.utils import cstr
+        aa="select distinct(subdate(CURDATE(), 1)) from `tabHoliday` where subdate(CURDATE(), 1) not in (select holiday_date from `tabHoliday` where parent='2014-2015/Maharashtra/001')"
+        res=webnotes.conn.sql(aa)
+	s=Document('Support Ticket')
+        j=0
+        #print res
+        if res:
+               #print "in res "
+               for i in range (2,15):
+			#print "i"
+			bb="select distinct(subdate(CURDATE(), "+cstr(i)+")) from `tabHoliday`"
+                        #print bb
+			res1=webnotes.conn.sql(bb)
+			if res1:
+			  cc="select distinct(subdate(CURDATE(), 1)) from `tabHoliday` where '"+cstr(res1[0][0])+"' in (select holiday_date from `tabHoliday` where parent='2014-2015/Maharashtra/001')"
+			  #print cc
+			  res2=webnotes.conn.sql(cc)
+			  if res2:
+			      #print "old j"
+			      #print j
+      			      j=j+24
+		              #print "new j"
+           		      #print j
+			  else:
+                             print "breaning "
+			     break
+	       
+	       from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
+	       qry1="select name from `tabSupport Ticket` t where t.status='Open' and t.creation < DATE_SUB(NOW(), INTERVAL 24+"+cstr(j)+" HOUR) AND  t.creation > DATE_SUB(NOW(), INTERVAL 48+"+cstr(j)+" HOUR)"
+	       #print qry1	       
+               qry=webnotes.conn.sql(qry1,as_list=1);
+               webnotes.errprint("in 24 "+cstr(qry))
                if qry:
-                       for [i] in qry:
-                               webnotes.errprint(i)
-                               p=webnotes.conn.sql("select territory from `tabSupport Ticket` where name='"+i+"'")
-                               webnotes.errprint(p)
-                               w=webnotes.conn.sql("select parent from `tabDefaultValue` where  defkey = '%s' and defvalue = '%s'"%('territory',p[0][0]))
-                               webnotes.errprint(w)
-                               webnotes.conn.sql("update `tabSupport Ticket` set assigned_to=' ',assigned_to_higher_level='"+w[0][0]+"' where name='"+i+"'")
-                               webnotes.errprint("Updated")
-               qr=webnotes.conn.sql("select name from `tabSupport Ticket` t where t.status='Open' and  t.creation < DATE_SUB(NOW(), INTERVAL 48 HOUR) AND creation > DATE_SUB(NOW(), INTERVAL 72 HOUR)",as_list=1);
-
-               webnotes.errprint(qr)
-               if qr:
-                       for [j] in qr:
-                               webnotes.errprint(j)
-                               q=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='National Manager' and r.parent=p.name")
-                               qt=webnotes.conn.sql("update `tabSupport Ticket` set assigned_to_higher_level='%s' where name='%s'"%(q[0][0],j))
-                               webnotes.errprint(q)
-
-               q=webnotes.conn.sql("select name from `tabSupport Ticket` t where t.status='Open' and t.creation < DATE_SUB(NOW(), INTERVAL 72 HOUR)",as_list=1);
-               webnotes.errprint(q)
-               if q:
-                       for [k] in q:
+                       for [k] in qry:
+ 			       s=Document('Support Ticket')
                                webnotes.errprint(k)
-                               q=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='COO' and r.parent=p.name")
+                               p=webnotes.conn.sql("select territory from `tabSupport Ticket` where name='"+k+"'")
+                               #webnotes.errprint(p)
+                               w=webnotes.conn.sql("select y.parent from `tabDefaultValue` y,`tabProfile` p, `tabUserRole` r where  defkey = '%s' and defvalue = '%s' and r.role='Manager' and y.parent=p.name and r.parent=p.name"%('territory',p[0][0]))
+                               #webnotes.errprint(w[0][0])
+			       ee="update `tabSupport Ticket` set assigned_to='',assigned_to_higher_level='"+cstr(w[0][0])+"' where name='"+cstr(k)+"'"
+			       #print ee
+                               webnotes.conn.sql(ee)
+			       webnotes.conn.commit()
+			       #msg1 = ""
+                               webnotes.errprint("Updated")
+                               flg = webnotes.conn.sql("select flag from `tabSupport Ticket` where name ='"+cstr(k)+"'")
+			       if flg[0][0]=="not":
+				       em=w[0][0]
+				       msg9="Support Ticket '"+k+"' assigned to you...Please check it."
+	                       	       sendmail(em, subject='Support Ticket Alert', msg = msg9)
+			       	       ss="update `tabSupport Ticket` set flag='fst' where name ='"+cstr(k)+"'"
+				       webnotes.conn.sql(ss)
+				       webnotes.conn.commit()
+				
+               qr=webnotes.conn.sql("select name from `tabSupport Ticket` t where t.status='Open' and  t.creation < DATE_SUB(NOW(), INTERVAL 48+"+cstr(j)+" HOUR) AND t.creation > DATE_SUB(NOW(), INTERVAL 72+"+cstr(j)+" HOUR)",as_list=1)
+               webnotes.errprint("in 48 "+cstr(qr))
+               if qr:
+                       for [l] in qr:
+                               webnotes.errprint(l)
+                               q=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='National Manager' and r.parent=p.name")
+	                       #print q
+	                       ff="update `tabSupport Ticket` set assigned_to='',assigned_to_higher_level='"+cstr(q[0][0])+"' where name='"+cstr(l)+"'"
+			       #print ff
+                               webnotes.conn.sql(ff)
+                               webnotes.conn.commit()
+                               webnotes.errprint("Updated")
+			       flg = webnotes.conn.sql("select flag from `tabSupport Ticket` where name ='"+cstr(l)+"'")
+			       if flg[0][0]=="fst":
+				       msg10="Support Ticket '"+l+"' assigned to you...Please check it."
+                                       em=q[0][0]
+				       sendmail(em, subject='Support Ticket Alert', msg = msg10)
+			               ss="update `tabSupport Ticket` set flag='snd' where name ='"+cstr(l)+"'"
+                                       webnotes.conn.sql(ss)
+                                       webnotes.conn.commit()
+
+               qs=webnotes.conn.sql("select name from `tabSupport Ticket` t where t.status='Open' and t.creation < DATE_SUB(NOW(), INTERVAL 72+"+cstr(j)+" HOUR) AND t.creation > DATE_SUB(NOW(), INTERVAL 100+"+cstr(j)+" HOUR)",as_list=1);
+               webnotes.errprint("in 72 "+cstr(qs))
+               if qs:
+                       for [m] in qs:
+			       s=Document('Support Ticket')
+                               webnotes.errprint(m)
+                               qa=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='COO' and r.parent=p.name")
                                qd=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='CEO' and r.parent=p.name")
 
-                               qt=webnotes.conn.sql("update `tabSupport Ticket` set assigned_to='"+q[0][0]+"',assigned_to_higher_level=        '"+qd[0][0]+"' where name='"+k+"'")
+                               qtt=webnotes.conn.sql("update `tabSupport Ticket` set assigned_to='"+qa[0][0]+"',assigned_to_higher_level=        '"+qd[0][0]+"' where name='"+m+"'")
+			       webnotes.conn.commit()
                                webnotes.errprint("Updated")
+			       flg = webnotes.conn.sql("select flag from `tabSupport Ticket` where name ='"+cstr(m)+"'")
+			       if flg[0][0]=="snd":
+				       msg11="Hello, Support Ticket '"+m+"' assigned to you...Please check it."
+                                       em=qa[0][0]+","+qd[0][0]
+				       sendmail(em, subject='Support Ticket Alert', msg = msg11)
+			       	       ss="update `tabSupport Ticket` set flag='thrd' where name ='"+cstr(m)+"'"
+                                       webnotes.conn.sql(ss)
+				       webnotes.conn.commit()
 
+
+@webnotes.whitelist(allow_guest=True)
 def get_payment_followup():
-#	 	from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
-#         	from import datetime,date,timedelta
+	 	#from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
+         	#from import datetime,date,timedelta
                 i = datetime.now()
                 p=i.strftime('%Y-%m-%d')
-#
-#
                 webnotes.errprint(p)
                 qry=webnotes.conn.sql("select name from `tabSales Invoice` where outstanding_amount>0",as_list=1)
-                webnotes.errprint(qry)
-#                #x=webnotes.conn.sql("select grand_total_export from `tabSales Invoice` where outstanding_amount>0",as_list=1)
-#                #wevbnotes.conn.sql(x)
-#
+                
                 for [i] in qry:
                         qr=webnotes.conn.sql("select installation from `tabSales Invoice` where name='"+i+"'",as_list=1)
-                        webnotes.errprint(qr)
+                        # webnotes.errprint(qr)
                         if qr:
 
                                 q=webnotes.conn.sql("select inst_date,employee_id  from `tabInstallation Note` where name='"+qr[0][0]+"'")
                                 #webnotes.errprint([q,"qqqq"])
-                                webnotes.errprint(q[0][1])
+                                # webnotes.errprint(q[0][1])
 
                                 y=webnotes.conn.sql("select grand_total_export from `tabSales Invoice` where name='"+qry[0][0]+"'",as_list=1)
-                                webnotes.errprint(y)
-                                v=webnotes.conn.sql("select outstanding_amount from `tabSales Invoice` where name='"+qry[0][0]+"'",as_list=1)
-                                webnotes.errprint(v)
+                                # webnotes.errprint(y)
+                                v=webnotes.conn.sql("select outstanding_amount,customer from `tabSales Invoice` where name='"+qry[0][0]+"'",as_list=1)
+                                # webnotes.errprint(v)
                                 paid=flt(y[0][0]-v[0][0])
-                                webnotes.errprint(paid)
+                                if v:
+                                	customer_type=webnotes.conn.get_value('Customer',v[0][1],'customer_type')
+                                	if customer_type=='OEM':
+                                		credit_days=webnotes.conn.get_value('Customer',v[0][1],'credit_days')                  
+                                	elif customer_type:
+                                		credit_days=webnotes.conn.get_value('Global Defaults',None,'customer_credit_days')
+
+                                if not credit_days:
+                                	credit_days=0
+                                	
+                                #webnotes.errprint(["credit_days is here",credit_days])
                                 if q:
 
                                         webnotes.errprint(q)
                                         s=q[0][0].strftime('%Y-%m-%d')
                                         a=getdate(p)
-                                        e=cint((getdate(p) - getdate(s)).days)
-                                        webnotes.errprint(e)
-		                if e== 8:
+                                        e=cint((getdate(p) - getdate(s)).days)                                   
+                                     
+		                if e== cint(credit_days):
                                         webnotes.errprint("in e")
                                         z=webnotes.conn.sql("select cell_number,user_id from `tabEmployee` where name='"+q[0][1]+"'")
                                         webnotes.errprint(z)
@@ -669,7 +724,7 @@ def get_payment_followup():
                                         #x=self.send_email(z[0][1],msg)
                                         #webnotes.errprint(qry[0][0])
 
-				elif e== 30:
+				elif e== 22+cint(credit_days):
                                         ss=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='National Manager' and r.parent=p.name")
                                         webnotes.errprint(ss)
                                         if ss:
@@ -690,7 +745,7 @@ def get_payment_followup():
                                         p=send_sms(qq[0][0],msg)
 					q=send_email(ss[0][0],msg)
 				
-			        elif e== 60:
+			        elif e>= 52+cint(credit_days):
 
                                         ss=webnotes.conn.sql("Select p.name from `tabProfile` p, `tabUserRole` r where r.role='CEO' and r.parent=p.name")
                                         webnotes.errprint(ss)
@@ -723,4 +778,652 @@ def get_payment_followup():
                                 else:
                                         webnotes.errprint("in last")
 
-			
+
+@webnotes.whitelist(allow_guest=True)
+def fetch_sms(_type='POST'):
+	aa="select id,creation,message_body,sender_no from smslog where flag=0 and sender_no is not null and message_body like '#%#'"
+	bb=webnotes.conn.sql(aa)
+	from webnotes.model.doc import Document
+	import datetime,time
+	from webnotes.utils import now,get_first_day, get_last_day, add_to_date, nowdate, getdate
+	#print bb
+	for r in bb:
+		cc=r[2].split(',')
+		dd=cc[0].upper().replace(' ','')
+		#print cc
+		#print len(cc)
+		if dd=='#INNO' or dd=='#INND' or dd=='#INU':
+			if len(cc)==7:
+				#print "creation "+cstr( r)+"IN"
+				d=Document('Activity Data')
+                		#d.activity_id=d.name
+                		d.activity_type=dd[1:]
+                		d.emp_id=cc[2]
+                		d.client_name=cc[4]
+                		d.place=cc[5]
+                		d.activity_date=now()
+                		d.ir_no=cc[1]
+                		d.barcode=cc[3]
+				e=now().split(' ')
+                		#d.activity_time=e[1]
+                		d.amount=cc[6].replace('#','').replace(' ','')
+				d.sender_phone_no=r[3]
+                		d.save(new=1)
+				webnotes.conn.commit()
+				f=Document('Activity Data',d.name)
+				f.activity_id=d.name
+				f.save()
+				if d.name:
+					ee="update smslog set flag=1 where id='"+cstr(r[0])+"' and flag=0"
+					g=webnotes.conn.sql(ee)
+					#print d.name
+					webnotes.conn.commit()
+		elif dd=='#CRT' or dd=='#CLS':
+			from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
+			today = nowdate()
+			import time
+			if dd=='#CRT' and len(cc)==3:
+				print "crt "+cstr(r) +"CRT CLD"
+				qr="select customer,employee_id from `tabInstallation Note` where product_barcode='"+cc[1]+"' "
+				print qr
+        			res=webnotes.conn.sql(qr)
+				print res
+				g=t=a=''
+				if res:
+					print "in if"
+					gg="select name,customer_name,territory from tabCustomer where name='"+res[0][0]+"'"
+					print gg
+					g=webnotes.conn.sql(gg)
+					print g
+				        w="select status,user_id from `tabEmployee` where name='%s'"%(res[0][1]);
+					print w
+					t=webnotes.conn.sql(w)
+					print t
+					print "for employe"
+					w="select y.parent from `tabDefaultValue` y,`tabProfile` p, `tabUserRole` r where  defkey = 'territory' and defvalue = '"+g[0][2]+"' and r.role='Manager' and y.parent=p.name and r.parent=p.name"
+					print w
+		                	a=webnotes.conn.sql(w)
+					d=Document('Support Ticket')
+					d.subject=cc[1]
+					d.status='Open'
+					#if res:
+					if g:
+						d.territory=g and g[0][2] or ''
+						d.customer_name=g and g[0][1] or ''
+						d.customer=g and g[0][0] or ''
+					d.raised_by=r[3]
+					d.opening_date=nowdate()
+ 					#e=now().split(' ')
+					if t:
+				    		if t[0][0] =='Left':
+							d.assigned_to=a[0][0]
+							d.assigned_to_higher_level=a[0][0]
+							#return t[0][1]
+				    		else:
+			                    		d.assigned_to=t[0][1]
+							d.assigned_to_higher_level=a[0][0]
+					#e=now().split(' ')
+					#d.sender_phone_no=r[3]
+                        		#d.activity_time='01:01:01'
+					d.save(new=1)
+					webnotes.conn.commit()
+					print d.name
+					flg=webnotes.conn.sql("select flag from `tabSupport Ticket` where name = '"+d.name+"'")
+					#print flg
+					if flg[0][0]=="nott":
+						msg8="Hello, Support Ticket '"+d.name+"' assigned to you...Please check it."
+						print msg8
+                                                em=t[0][1]+","+a[0][0]
+						print em
+                                                sendmail(em, subject='Support Ticket Alert', msg = msg8)
+                                                ss="update `tabSupport Ticket` set flag='not' where name = '"+d.name+"'"
+                                                webnotes.conn.sql(ss)
+                                                webnotes.conn.commit()
+	
+					if d.name:
+						p=Document('Communication')
+                                                p.parent=d.name
+                                                p.parentfield='Communications'
+                                                p.parenttype='Support Ticket'
+                                                p.content=cc[2].replace('#','')
+						p.subject=cc[1]
+						p.sender = d.raised_by
+						p.save(new=1)
+                               			ee="update smslog set flag=1 where id='"+cstr(r[0])+"' and flag=0"
+                                		g=webnotes.conn.sql(ee)
+                                		webnotes.conn.commit()
+			elif dd=='#CLS' and len(cc)==2:
+			    if len(cc)==2:
+				d=cc[1]
+				#print d[:-1]
+				#print "cls "+cstr(r)
+				msgg="Dear Customer,according to your request respective ticket is closed."
+				ee="update `tabSupport Ticket` set status='Closed' where name='"+cstr(d[:-1])+"'"
+				print ee
+				e="update smslog set flag=1 where id='"+cstr(r[0])+"' and flag=0"
+				print e
+				print r
+                                webnotes.conn.sql(ee)
+				webnotes.conn.sql(e)
+                                webnotes.conn.commit()
+				no1=r[3]
+				no = no1.replace("+", "")
+				webnotes.errprint(no)
+				print "END SMS..."
+				pp=send_sms(msgg,no)
+		elif dd=='#SLD' or dd=='#SLO':
+				#print len(cc)
+				if len(cc)==6 :
+					print cc
+					d=Document('Activity Data')
+        	        		#d.activity_id=d.name
+                			d.activity_type=dd[1:]
+               	 			d.emp_id=cc[1]
+                			d.client_name=cc[2]
+              				d.place=cc[3]
+					d.sender_phone_no=r[3]
+                			d.activity_date=now()
+               				d.product_name=cc[4]
+                			#d.activity_time=time.strftime("%H:%M:%S")
+               				d.amount=cc[5].replace('#','')
+                			d.save(new=1)
+                			webnotes.conn.commit()
+					#print d.name
+					f=Document('Activity Data',d.name)
+        	                	f.activity_id=d.name
+                	        	f.save()
+	               			if d.name:
+						ee="update smslog set flag=1 where id='"+cstr(r[0])+"' and flag=0"
+                                        	g=webnotes.conn.sql(ee)
+                                        	webnotes.conn.commit()
+		elif dd=='#AMCD' or dd=='#AMCO' :
+		   if len(cc)==6:
+	                d=Document('Activity Data')
+        	        #d.activity_id=d.name
+          	   	d.activity_type=dd[1:]
+                	d.emp_id=cc[1]
+                	d.client_name=cc[3]
+                	d.place=cc[4]
+                	d.activity_date=now()
+                	#d.ir_no=IR_NO[1:-1]
+                	d.barcode=cc[2]
+                	#d.activity_time=time.strftime("%H:%M:%S")
+                	d.amount=cc[5]
+			d.sender_phone_no=r[3]
+                	d.save(new=1)
+                	webnotes.conn.commit()
+			f=Document('Activity Data',d.name)
+                        f.activity_id=d.name
+                        f.save()
+                	if d.name :
+				ee="update smslog set flag=1 where id='"+cstr(r[0])+"' and flag=0"
+                                g=webnotes.conn.sql(ee)
+                                webnotes.conn.commit()
+
+	        elif dd=="#SED" or dd=="#SEO" :
+		   if len(cc)==6 :
+      	  	        d=Document('Activity Data')
+        	        #d.activity_id=d.name
+        	        d.activity_type=dd[1:]
+  	    	        d.emp_id=cc[1]
+	       	        d.client_name=cc[3]
+        	        d.place=cc[4]
+                	d.activity_date=now()
+	                d.service_call_type=cc[5].replace('#','')
+        	        d.barcode=cc[2]
+			d.sender_phone_no=r[3]
+                        d.save(new=1)
+                        webnotes.conn.commit()
+                        f=Document('Activity Data',d.name)
+                        f.activity_id=d.name
+                        f.save()
+                        if d.name:
+                                ee="update smslog set flag=1 where id='"+cstr(r[0])+"' and flag=0"
+                                g=webnotes.conn.sql(ee)
+                                print d.name
+                                webnotes.conn.commit()
+
+	        elif dd=="#PR":
+		   if len(cc)== 11:
+	                d=Document('Activity Data')
+        	        #d.activity_id=d.name
+                	d.activity_type=dd[1:]
+                	d.emp_id=cc[1]
+                	d.client_name=cc[3]
+                	d.place=cc[4]
+                	d.activity_date=now()
+                	#d.service_call_type=service_call_type[1:-1]
+                	d.payment_type=cc[5]
+                	d.payment_mode=cc[7]
+                	d.cheque_no=cc[8]
+                	d.cheque_bank=cc[9]
+                	d.cheque_status=cc[10].replace('#','')
+                	d.barcode=cc[2]
+                	#d.activity_time=time.strftime("%H:%M:%S")
+                	d.amount=cc[6]
+			d.sender_phone_no=r[3]
+                	d.save(new=1)
+                	webnotes.conn.commit()
+                        f=Document('Activity Data',d.name)
+                        f.activity_id=d.name
+                        f.save()
+                        if d.name:
+                                ee="update smslog set flag=1 where id='"+cstr(r[0])+"' and flag=0"
+                                g=webnotes.conn.sql(ee)
+                                print d.name
+                                webnotes.conn.commit()
+
+	        elif dd=="#DC":
+		  #print "creation for dc need 6 fields "+cstr(cc)
+		  if len(cc)==6:
+   	                #return phone_no[-11:]
+        	        d=Document('Activity Data')
+    	  	        #d.activity_id=d.name
+        	        d.activity_type=dd[1:]
+                	d.emp_id=cc[1]
+                	d.client_name=cc[2]
+                	d.place=cc[4]
+                	d.activity_date=now()
+			d.sender_phone_no=r[3]
+                	#d.service_call_type=service_call_type[1:-1]
+                	d.product_name=cc[5].replace('#','')
+                	#d.activity_time=time.strftime("%H:%M:%S")
+                	#d.amount=deal_amount[1:-1]
+                	d.phone_no=cc[3]
+                	d.save(new=1)
+                	webnotes.conn.commit()
+                        f=Document('Activity Data',d.name)
+                        f.activity_id=d.name
+                        f.save()
+                        if d.name:
+                                ee="update smslog set flag=1 where id='"+cstr(r[0])+"' and flag=0"
+                                g=webnotes.conn.sql(ee)
+                                print d.name
+                                webnotes.conn.commit()
+
+@webnotes.whitelist(allow_guest=True)
+def posting():
+	from werkzeug.wrappers import Request, Response
+	return request.form['username']
+	#return "hi"
+
+
+
+@webnotes.whitelist(allow_guest=True)
+def get_post(data,_type='POST'):
+		from webnotes.utils import get_first_day, get_last_day, add_to_date, nowdate, getdate
+		from webnotes.model.doc import Document
+		import time
+		abc=json.loads(data)
+		aa=Document('Installation Note')
+		aa.customer=abc['customer_id']
+		aa.customer_address=abc['address']
+		aa.address_display=abc['address']
+		aa.contact_person=abc['contact_person']
+		aa.employee_id=abc['employee_no']
+		aa.internal_order_no=abc['iof_no']
+		aa.contact_email=abc['email']
+		aa.contact_mobile=abc['phone']
+		aa.clinic_name=abc['clinic_name']
+		aa.doctor_name=abc['doctor_name']
+		aa.city=abc['city']
+		aa.pincode=abc['pincode']
+		aa.director_name=abc['director_name']
+		aa.state=abc['state']
+		aa.reg_no_clinic=abc['reg_no_clinic']
+		aa.reg_no_doctor=abc['reg_no_doctor']
+		aa.website=abc['website']
+		aa.palce=abc['palce']
+		#aa.inst_date=abc['date_of_installation'].strftime('%Y-%m-%d')
+		aa.employee_name=abc['employee_name']
+		aa.inst_reprot_no=abc['inst_reprot_no']
+		aa.user_name=abc['user_name']
+		aa.dept=abc['dept']
+		aa.contact_mobile=abc['contact_no']
+		aa.dept1=abc['dept1']
+		aa.contact_no1=abc['contact_no1']
+		aa.product_barcode=abc['product_barcode']
+		aa.version=abc['version']
+		aa.material_supplied=abc['material_supplied']
+		aa.inst_start_time=abc['inst_start_time']
+		aa.inst_date=abc['inst_date']
+		aa.inst_end_time=abc['inst_end_time']
+		aa.inst_end_date=abc['inst_end_date']
+		aa.proc=abc['proc']
+		aa.ram=abc['ram']
+		aa.hdd=abc['hdd']
+		aa.me=abc['me']
+		aa.other=abc['other']
+		aa.model_no=abc['model_no']
+		aa.serial_no=abc['serial_no']
+		aa.os=abc['os']
+		aa.inst_type=abc['inst_type']
+		aa.no_in_case=abc['no_in_case']
+		aa.training=abc['training']
+		aa.customer_remark=abc['customer_remark']
+		aa.engineers_remark=abc['engineers_remark']
+		aa.status1=abc['status']
+		aa.signature=abc['signature']
+		aa.sign_seal=abc['sign_seal']
+		aa.save(new=1)
+		webnotes.conn.commit()
+		return aa.name
+
+@webnotes.whitelist(allow_guest=True)
+def get_customer_detail(customer_id):
+	qr="select customer_no,email from tabCustomer where name="+customer_id
+	res=webnotes.conn.sql(qr)
+	customerobj= {}
+	for r in res:
+		customerobj['phone'] = r[0]
+		customerobj['email'] = r[1]
+		customerobj['clinic_name'] = ''
+		customerobj['address'] = ''
+		customerobj['doctor_name'] = ''
+		customerobj['city'] = ''
+		customerobj['pincode'] = ''
+		customerobj['director_name'] = ''
+		customerobj['state'] = ''
+		customerobj['email'] = ''
+		customerobj['reg_no_clinic'] = ''
+		customerobj['reg_no_doctor'] = ''
+		customerobj['website'] = ''                    
+    	return customerobj
+
+
+@webnotes.whitelist(allow_guest=True)
+def get_item_detail(barcode):
+	qr="select name,item_code,description from `tabSerial No` limit 5"
+	res=webnotes.conn.sql(qr)
+	itemsobj= {}
+	itemlist = []
+	for r in res:
+		itemobj={}
+		itemobj['barcode'] = r[0]
+		itemobj['description'] = r[1]                    
+		itemobj['details'] = r[2]
+		itemlist.append(itemobj)
+    	return itemlist
+
+@webnotes.whitelist(allow_guest=True)
+def send_sales_details():
+	print "sales details"
+	from webnotes.utils.email_lib import sendmail
+        qr="select a.territory,b.item_code,sum(b.qty) as qty,sum(b.export_amount) as amt from `tabSales Order Item` b,`tabSales Order` a  where a.name=b.parent group by b.item_code"
+        res=webnotes.conn.sql(qr)
+        start="""<html><head><style>table,th,td{border:1px solid black;border-collapse:collapse;}</style></head><table  style="width:100%";><tbody><tr style="background-color:Lime;color:white;"><td >Region</td><td>Product</td> <td>Quantity</td><td>Total Amount</td></tr>"""
+	end="""</table></body></html>"""
+	aa="""select distinct territory from `tabSales Order` where territory is not null order by territory"""
+        res=webnotes.conn.sql(aa)
+	msg=''
+	for rr in res:
+		msg1=''
+        	bb="select ifnull(a.territory,''),ifnull(b.item_code,''),ifnull(sum(b.qty),''),ifnull(sum(b.export_amount),'') from `tabSales Order Item` b,`tabSales Order` a  where DATE(a.creation)=CURDATE() and a.name=b.parent and a.territory='"+rr[0]+"' group by b.item_code "
+		#print bb
+        	res1=webnotes.conn.sql(bb)
+               	for rs in res1:
+        	        #print rs
+			#print msg
+        	        msg=msg+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td></tr>"
+			msg1=msg1+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td></tr>"
+			#print msg
+		msg2=start+""+cstr(msg1)+" "+end
+		#print "------------------- region"
+		#print msg2
+		cc="SELECT p.name,y.defkey,y.defValue from `tabProfile` p, `tabUserRole` r, `tabDefaultValue` y where r.role='Regional Manager' and y.defkey='territory' and y.defvalue='"+rr[0]+"' and r.parent=p.name and p.name=y.parent"
+		#print cc
+		res3=webnotes.conn.sql(cc)
+		for r in res3:
+                   if res1:
+		      	sendmail('gangadhar.k@indictranstech.com', subject='Regional Sales Alert', msg = msg2)
+	msg3=start+""+cstr(msg)+" "+end
+	if res1:
+           sendmail('gangadhar.k@indictranstech.com', subject="sales alert", msg = msg3)
+        return "done"
+
+
+@webnotes.whitelist(allow_guest=True)
+def send_ticket_details():
+	print "ticket"
+	from webnotes.utils.email_lib import sendmail
+        start="""<html><head><style>table,th,td{border:1px solid black;border-collapse:collapse;}</style></head><table  style="width:100%";><tbody><tr style="background-color:Lime;color:white;"><td >Region</td><td>Total Tickets Created</td> <td>Total Tickets Closed</td><td>Total Open Tickets</td><td>Total Paid Tickets</td><td>Total Paid Tickets Amount</td></tr>"""
+	end="""</table></body></html>"""
+	aa="""select distinct territory from `tabSupport Ticket` where territory is not null order by territory"""
+        res=webnotes.conn.sql(aa)
+	msg=''
+	#print res
+	for rr in res:
+		msg1=''
+        	bb="SELECT ifnull(a.territory,''),count(a.name),(select count(a.name) FROM `tabSupport Ticket` a WHERE DATE(a.creation)=CURDATE() and a.territory='"+cstr(rr[0])+"' and a.status='Closed' group by a.territory),(select count(a.name) FROM `tabSupport Ticket` a WHERE a.territory='"+cstr(rr[0])+"' and a.status<>'Closed' group by a.territory),(select count(a.name) FROM `tabSupport Ticket` a WHERE a.territory='"+cstr(rr[0])+"' and a.is_paid='Yes' group by a.territory),(select sum(amount) FROM `tabSupport Ticket` a WHERE a.territory='"+cstr(rr[0])+"' and a.is_paid='Yes' group by a.territory) FROM `tabSupport Ticket` a WHERE a.territory='"+cstr(rr[0])+"' group by a.territory "
+		#print bb
+        	res1=webnotes.conn.sql(bb)
+               	for rs in res1:
+        	        print rs
+			#print msg
+        	        msg=msg+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td><td>"+cstr(rs[4])+"</td><td>"+cstr(rs[5])+"</td></tr>"
+			msg1=msg1+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td><td>"+cstr(rs[4])+"</td><td>"+cstr(rs[5])+"</td></tr>"
+			#print msg
+		msg2=start+""+cstr(msg1)+" "+end
+		#print "------------------- region"
+		#print msg2
+		cc="SELECT p.name,y.defkey,y.defValue from `tabProfile` p, `tabUserRole` r, `tabDefaultValue` y where r.role='Regional Manager' and y.defkey='territory' and y.defvalue='"+rr[0]+"' and r.parent=p.name and p.name=y.parent"
+		#print cc
+		res3=webnotes.conn.sql(cc)
+		for r in res3:
+                   if res1:
+		      	sendmail('gangadhar.k@indictranstech.com', subject='Regional Support Ticket Alert', msg = msg2)
+	msg3=start+""+cstr(msg)+" "+end
+	if res1:
+           sendmail('gangadhar.k@indictranstech.com', subject="Support Ticket Alert", msg = msg3)
+        return "done"
+
+
+@webnotes.whitelist(allow_guest=True)
+def send_isbpl_details():
+	print "item sold below pricelist"
+	from webnotes.utils.email_lib import sendmail
+        start="""<html><head><style>table,th,td{border:1px solid black;border-collapse:collapse;}</style></head><table  style="width:100%";><tbody><tr style="background-color:Lime;color:white;"><td >Region</td><td>Sales Order</td><td>Customer</td><td>Product</td><td>Price List Rate</td><td>Sold Rate</td></tr>"""
+	end="""</table></body></html>"""
+	aa="""select distinct territory from `tabSales Order` where territory is not null order by territory"""
+        res=webnotes.conn.sql(aa)
+	msg=''
+	#print res
+	for rr in res:
+		msg1=''
+        	bb="select a.territory,a.name,a.customer,b.item_code,b.ref_rate,b.export_rate from `tabSales Order Item` b,`tabSales Order` a  where DATE(a.creation)=CURDATE() and a.name=b.parent and b.ref_rate <> b.export_rate and b.ref_rate != 0 and a.territory='"+cstr(rr[0])+"' order by a.name "
+		#print bb
+        	res1=webnotes.conn.sql(bb)
+               	for rs in res1:
+        	        #print rs
+			#print msg
+        	        msg=msg+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td><td>"+cstr(rs[4])+"</td><td>"+cstr(rs[5])+"</td></tr>"
+			msg1=msg1+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td><td>"+cstr(rs[4])+"</td><td>"+cstr(rs[5])+"</td></tr>"
+			#print msg
+		msg2=start+""+cstr(msg1)+" "+end
+		print "------------------- region"
+		print msg2
+		cc="SELECT p.name,y.defkey,y.defValue from `tabProfile` p, `tabUserRole` r, `tabDefaultValue` y where r.role='Regional Manager' and y.defkey='territory' and y.defvalue='"+rr[0]+"' and r.parent=p.name and p.name=y.parent"
+		#print cc
+		res3=webnotes.conn.sql(cc)
+		for r in res3:
+			if res1:
+				print "res in send mail"
+		      		sendmail('gangadhar.k@indictranstech.com', subject='Regional Items Sold Below Price List Rate Alert', msg = msg2)
+	msg3=start+""+cstr(msg)+" "+end
+	print msg1
+	if res1:	
+           sendmail('gangadhar.k@indictranstech.com', subject="Items Sold Below Price List Rate Alert", msg = msg3)
+        return "done"
+
+
+@webnotes.whitelist(allow_guest=True)
+def send_oppt_details():
+	print "old oppts"
+	from webnotes.utils.email_lib import sendmail
+        start="""<html><head><style>table,th,td{border:1px solid black;border-collapse:collapse;}</style></head><table  style="width:100%";><tbody><tr style="background-color:Lime;color:white;"><td >Region</td><td>Employee</td><td>Opportunity</td><td>LEAD/Customer</td><td>Created Before days</td></tr>"""
+	end="""</table></body></html>"""
+	aa="""select distinct territory from `tabOpportunity` where territory is not null order by territory"""
+        res=webnotes.conn.sql(aa)
+	msg=''
+	#print res
+	for rr in res:
+		msg1=''
+        	bb="select a.territory,a.owner,a.name,CASE a.enquiry_from  WHEN 'Customer' THEN a.customer ELSE a.lead END,DATEDIFF(CURDATE(),DATE(a.creation)) from `tabOpportunity` a where DATEDIFF(CURDATE(),DATE(a.creation))>=25 and status<> 'Quotation' and a.territory='"+rr[0]+"'order by a.owner,a.territory  "
+		#print bb
+        	res1=webnotes.conn.sql(bb)
+               	for rs in res1:
+        	        #print rs
+			#print msg
+        	        msg=msg+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td><td>"+cstr(rs[4])+"</td></tr>"
+			msg1=msg1+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td><td>"+cstr(rs[4])+"</td></tr>"
+			#print msg
+		msg2=start+""+cstr(msg1)+" "+end
+		print "------------------- region"
+		print msg2
+		cc="SELECT p.name,y.defkey,y.defValue from `tabProfile` p, `tabUserRole` r, `tabDefaultValue` y where r.role='Regional Manager' and y.defkey='territory' and y.defvalue='"+rr[0]+"' and r.parent=p.name and p.name=y.parent"
+		#print cc
+		res3=webnotes.conn.sql(cc)
+		for r in res3:
+			if res1:
+				print "res in send mail"
+		      		sendmail('gangadhar.k@indictranstech.com', subject='Regional Not Converted Opportunities Alert', msg = msg2)
+	msg3=start+""+cstr(msg)+" "+end
+	print msg1
+	if res1:	
+           sendmail('gangadhar.k@indictranstech.com', subject="Not Converted Opportunities Alert", msg = msg3)
+        return "done"
+
+@webnotes.whitelist(allow_guest=True)
+def send_invoice_details():
+	print "invoice not created"
+	from webnotes.utils.email_lib import sendmail
+        start="""<html><head><style>table,th,td{border:1px solid black;border-collapse:collapse;}</style></head><table  style="width:100%";><tbody><tr style="background-color:Lime;color:white;"><td >Region</td><td>Employee</td><td>Sales Oder</td><td>Customer ID</td><td>Customer Name</td></tr>"""
+	end="""</table></body></html>"""
+	aa="""select distinct territory from `tabSales Order` where territory is not null order by territory"""
+        res=webnotes.conn.sql(aa)
+	msg=''
+	#print res
+	for rr in res:
+		msg1=''
+        	bb="select territory,owner,name,customer,customer_name from `tabSales Order` where territory='"+rr[0]+"' and name not in (select distinct(sales_order) from `tabSales Invoice Item` where sales_order is not null) order by territory,owner"
+		#print bb
+        	res1=webnotes.conn.sql(bb)
+               	for rs in res1:
+        	        #print rs
+			#print msg
+        	        msg=msg+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td><td>"+cstr(rs[4])+"</td></tr>"
+			msg1=msg1+"<tr><td>"+cstr(rs[0])+"</td><td>"+cstr(rs[1])+"</td><td>"+cstr(rs[2])+"</td><td>"+cstr(rs[3])+"</td><td>"+cstr(rs[4])+"</td></tr>"
+			#print msg
+		msg2=start+""+cstr(msg1)+" "+end
+		print "------------------- region"
+		print msg2
+		cc="SELECT p.name,y.defkey,y.defValue from `tabProfile` p, `tabUserRole` r, `tabDefaultValue` y where r.role='Regional Manager' and y.defkey='territory' and y.defvalue='"+rr[0]+"' and r.parent=p.name and p.name=y.parent"
+		#print cc
+		res3=webnotes.conn.sql(cc)
+		for r in res3:
+			if res1:
+				print "res in send mail"
+		      		sendmail('gangadhar.k@indictranstech.com', subject='Regional Invoices Not Created Alert', msg = msg2)
+	msg3=start+""+cstr(msg)+" "+end
+	print msg1	
+        if res1:
+           sendmail('gangadhar.k@indictranstech.com', subject="Invoices Not Created Alert", msg = msg3)
+        return "done"
+
+@webnotes.whitelist(allow_guest=True)
+def send_amccmc_details():
+	print "amc cmc"
+	from webnotes.utils.email_lib import sendmail
+        start="""<html><head><style>table,th,td{border:1px solid black;border-collapse:collapse;}</style></head><table  style="width:100%";><tbody><tr style="background-color:Lime;color:white;"><td >AMC/CMC Details</td><td>Asset Name </td><td>AMC/CMC Expiring Date</td></tr>"""
+	end="""</table></body></html>"""
+	aa="""select b.amc_details,a.item_code,datediff(date(b.expiry_date),CURDATE()), b.start_date,b.expiry_date  from `tabAMC Details` b,`tabItem` a where a.name=b.parent and expiry_date in(select max(expiry_date) from `tabAMC Details` where parent=b.parent) and datediff(date(b.expiry_date),CURDATE())<=15"""
+        res=webnotes.conn.sql(aa)
+	msg=''
+	print res
+	for rr in res:
+		print rr
+		print msg
+        	msg=msg+"<tr><td>"+cstr(rr[0])+"</td><td>"+cstr(rr[1])+"</td><td>"+cstr(rr[4])+"</td></tr>"
+		print msg
+	msg1=start+""+cstr(msg)+" "+end
+	print msg1
+        if res:	
+           sendmail('gangadhar.k@indictranstech.com', subject="AMC/CMC Expiring Alert", msg = msg1)
+        return "done"
+
+@webnotes.whitelist(allow_guest=True)
+def send_todays_material_details():
+	#print "todays_material_"
+	from webnotes.utils.email_lib import sendmail
+        start="""<html><head><style>table,th,td{border:1px solid black;border-collapse:collapse;}</style></head><table  style="width:100%";><tbody><tr style="background-color:Lime;color:white;"><td >Purchase Order</td><td>Product </td><td>Quantity</td></tr>"""
+	end="""</table></body></html>"""
+	aa="""select a.name,b.item_code,b.schedule_date,b.qty from `tabPurchase Order`a,`tabPurchase Order Item`b where a.name not in(select d.prevdoc_docname from `tabPurchase Receipt`c,`tabPurchase Receipt Item`d where d.schedule_date=CURDATE() and d.parent=c.name) and b.schedule_date=CURDATE() and b.parent=a.name"""
+        res=webnotes.conn.sql(aa)
+	msg=''
+	#print res
+	for rr in res:
+		#print rr
+		#print msg
+        	msg=msg+"<tr><td>"+cstr(rr[0])+"</td><td>"+cstr(rr[1])+"</td><td>"+cstr(rr[3])+"</td></tr>"
+		#print msg
+	msg1=start+""+cstr(msg)+" "+end
+	if res:	
+            sendmail('gangadhar.k@indictranstech.com', subject="Todays Expected Material Not Received Alert", msg = msg1)
+        return "done"
+
+
+@webnotes.whitelist(allow_guest=True)
+def send_low_stock_details():
+	print "low stock"
+	from webnotes.utils.email_lib import sendmail
+        start="""<html><head><style>table,th,td{border:1px solid black;border-collapse:collapse;}</style></head><table  style="width:100%";><tbody><tr style="background-color:Lime;color:white;"><td >Product</td><td>Warehouse </td><td>Actual Quantity in Warehouse</td><td>Minimum Quantity level</td></tr>"""
+	end="""</table></body></html>"""
+	aa="""select distinct a.item_code,a.warehouse,a.actual_qty,b.re_order_level from `tabBin`a,`tabItem`b where a.actual_qty<=b.re_order_level and b.re_order_level!=0"""
+        res=webnotes.conn.sql(aa)
+	msg=''
+	#print res
+	for rr in res:
+		#print rr
+		#print msg
+        	msg=msg+"<tr><td>"+cstr(rr[0])+"</td><td>"+cstr(rr[1])+"</td><td>"+cstr(rr[2])+"</td><td>"+cstr(rr[3])+"</td></tr>"
+		#print msg
+	msg1=start+""+cstr(msg)+" "+end
+	if res:	
+       		 sendmail('gangadhar.k@indictranstech.com', subject="Minimum Stock Level Reached Alert", msg = msg1)
+        return "done"
+
+
+
+@webnotes.whitelist(allow_guest=True)
+def GetVerify(verificationCode):
+	return '0^232322422'
+
+@webnotes.whitelist(allow_guest=True)
+def GetEmployee(sessionCode,empID):
+	aa="select employee_name from tabEmployee where name="+empID
+	res=webnotes.conn.sql(aa)
+	if res:
+	    return '0^'+res[0][0]
+	else:
+		return "Employee not found for employee ID "+empID
+
+@webnotes.whitelist(allow_guest=True)
+def GetProducts(sessionCode,instType,customerID):
+	if sessionCode:
+	    return '0^53424423423'
+	else:
+		return "1^invalid session code"
+
+@webnotes.whitelist(allow_guest=True)
+def GetInstDetails(sessionCode,instType,prodBarCode):
+	if sessionCode:
+	    return '0^shree clinic^deccan pune^Dr.Metgud^pune^411004^Dr. Sanjay Joshi^Maharashtra^sanjayjoshi@gmail.com^9822012345^www.sanjayjoshi.com^MH/REG/CL/21232^MH/REG/DR/212323^IN00004^ScanDoc^IOF-00003^2242423~3423424545~553534434~353r445345~3434434'
+	else:
+		return "1^invalid session code"
+
+@webnotes.whitelist(allow_guest=True)
+def SetRegister(sessionCode,instType,customerID,prodBarCode,empID,prodName,prodVersion,iofNumber,instReportNumber,contactPersonsOnSite,mateBarCode):
+	if sessionCode:
+	    return '0^IN00004'
+	else:
+		return "1^invalid session code"

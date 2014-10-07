@@ -2,7 +2,7 @@
  {
   "creation": "2013-05-21 16:16:39", 
   "docstatus": 0, 
-  "modified": "2013-11-22 17:20:58", 
+  "modified": "2014-09-13 12:54:20", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -34,8 +34,7 @@
   "parentfield": "permissions", 
   "parenttype": "DocType", 
   "permlevel": 0, 
-  "read": 1, 
-  "report": 1
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -52,13 +51,14 @@
   "doctype": "DocField", 
   "fieldname": "naming_series", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "label": "Series", 
   "no_copy": 1, 
   "oldfieldname": "naming_series", 
   "oldfieldtype": "Select", 
-  "options": "\nPO", 
+  "options": "PO", 
   "print_hide": 1, 
-  "reqd": 1
+  "reqd": 0
  }, 
  {
   "description": "Supplier (vendor) name as entered in supplier master", 
@@ -118,6 +118,24 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "po_number", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "PO Number", 
+  "read_only": 1, 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "hidden": 1, 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "column_break1", 
   "fieldtype": "Column Break", 
   "oldfieldtype": "Column Break", 
@@ -163,6 +181,14 @@
   "print_hide": 1, 
   "reqd": 1, 
   "search_index": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "Territory", 
+  "read_only": 1
  }, 
  {
   "doctype": "DocField", 
@@ -670,6 +696,7 @@
   "cancel": 0, 
   "create": 0, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Material User", 
   "submit": 0, 
   "write": 0
@@ -679,6 +706,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Purchase Manager", 
   "submit": 1, 
   "write": 1
@@ -688,6 +716,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Purchase User", 
   "submit": 1, 
   "write": 1
@@ -695,6 +724,27 @@
  {
   "doctype": "DocPerm", 
   "match": "supplier", 
+  "report": 1, 
   "role": "Supplier"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "role": "Employee", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Admin", 
+  "write": 1
  }
 ]

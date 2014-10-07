@@ -2,7 +2,7 @@
  {
   "creation": "2014-03-11 13:33:31", 
   "docstatus": 0, 
-  "modified": "2014-03-13 10:29:03", 
+  "modified": "2014-08-28 16:39:46", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -18,8 +18,15 @@
   "name": "__common__", 
   "parent": "Requisition Material", 
   "parentfield": "fields", 
+  "parenttype": "DocType"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Requisition Material", 
+  "parentfield": "permissions", 
   "parenttype": "DocType", 
-  "permlevel": 0
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -31,19 +38,22 @@
   "fieldtype": "Link", 
   "label": "Item", 
   "options": "Item", 
+  "permlevel": 0, 
   "reqd": 1
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "particulars", 
   "fieldtype": "Data", 
-  "label": "particulars"
+  "label": "particulars", 
+  "permlevel": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "quantity", 
   "fieldtype": "Int", 
   "label": "Quantity", 
+  "permlevel": 0, 
   "reqd": 1
  }, 
  {
@@ -51,6 +61,51 @@
   "fieldname": "barcode", 
   "fieldtype": "Data", 
   "label": "Barcode", 
-  "reqd": 1
+  "permlevel": 1, 
+  "reqd": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "All", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Sales Master Manager", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Sales Master Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Super Admin", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Super Admin"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "permlevel": 1, 
+  "role": "Administrator"
  }
 ]

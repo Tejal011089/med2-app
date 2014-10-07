@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 11:42:58", 
   "docstatus": 0, 
-  "modified": "2013-11-03 14:14:17", 
+  "modified": "2014-07-21 14:28:52", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -31,7 +31,7 @@
   "fieldtype": "Link", 
   "in_filter": 1, 
   "in_list_view": 1, 
-  "label": "Item Code", 
+  "label": "Product/Accessories", 
   "oldfieldname": "item_code", 
   "oldfieldtype": "Link", 
   "options": "Item", 
@@ -79,6 +79,14 @@
   "reqd": 1, 
   "search_index": 1, 
   "width": "300px"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "barcode", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "in_list_view": 1, 
+  "label": "Barcode"
  }, 
  {
   "doctype": "DocField", 

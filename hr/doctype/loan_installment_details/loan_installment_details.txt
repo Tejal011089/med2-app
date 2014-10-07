@@ -2,7 +2,7 @@
  {
   "creation": "2014-02-21 16:00:41", 
   "docstatus": 0, 
-  "modified": "2014-02-22 13:54:16", 
+  "modified": "2014-04-25 18:03:17", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -53,5 +53,14 @@
   "label": "Status", 
   "options": "\nPaid \nUnpaid", 
   "read_only": 1
+ }, 
+ {
+  "depends_on": "eval:doc.status=='Unpaid'", 
+  "description": "Employee can request HR not to deduct the loan for current month and same need to be adjusted in subsequent m", 
+  "doctype": "DocField", 
+  "fieldname": "request_hr_not_to_deduct", 
+  "fieldtype": "Check", 
+  "in_list_view": 1, 
+  "label": "Request For HR"
  }
 ]

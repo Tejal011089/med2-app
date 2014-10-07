@@ -1,0 +1,115 @@
+[
+ {
+  "creation": "2014-07-21 14:55:07", 
+  "docstatus": 0, 
+  "modified": "2014-07-21 16:27:29", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "document_type": "Master", 
+  "module": "Selling", 
+  "name": "__common__", 
+  "search_fields": "city,pin_code,state_name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Pin Codes", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Pin Codes", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "report": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Pin Codes"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "city", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "City", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "pin_code", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Pin Code", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "division_name", 
+  "fieldtype": "Data", 
+  "label": "Division name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "region_name", 
+  "fieldtype": "Data", 
+  "label": "Region name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "circle_name", 
+  "fieldtype": "Data", 
+  "label": "Circle name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_6", 
+  "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "taluka", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Taluka"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "district_name", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "District name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "state_name", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "State name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "country", 
+  "fieldtype": "Data", 
+  "label": "Country"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "System Manager", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "All"
+ }
+]

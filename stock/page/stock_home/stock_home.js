@@ -163,6 +163,11 @@ wn.module_page["Stock"] = [
 				doctype: "Item",
 				route: "query-report/Stock Ageing"
 			},
+			{
+                                "label":wn._("Monthly Product Transfer to Region Report"),
+                                doctype: "Stock Entry",
+                                route: "query-report/Monthly Product Transfer to Region Report"
+                        },
 		]
 	},
 	{

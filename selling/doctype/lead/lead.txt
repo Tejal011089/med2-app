@@ -2,7 +2,7 @@
  {
   "creation": "2013-04-10 11:45:37", 
   "docstatus": 0, 
-  "modified": "2014-03-10 14:04:33", 
+  "modified": "2014-08-11 22:26:38", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -85,7 +85,7 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "email_id", 
+  "fieldname": "email", 
   "fieldtype": "Data", 
   "label": "Email Id", 
   "oldfieldname": "email_id", 
@@ -123,7 +123,7 @@
   "no_copy": 1, 
   "oldfieldname": "source", 
   "oldfieldtype": "Select", 
-  "options": "\nAdvertisement\nBlog Post\nCampaign\nCall\nCustomer\nExhibition\nSupplier\nWebsite\nEmail", 
+  "options": "\nAdvertisement\nBlog Post\nCold Calling\nCampaign\nCustomer's Vendor\nExhibition\nExisting Customer\nReference\nSupplier Reference\nMass Mailing\nWalk In\nWebsite", 
   "reqd": 0, 
   "search_index": 0
  }, 
@@ -193,24 +193,16 @@
   "label": "Next Contact By", 
   "oldfieldname": "contact_by", 
   "oldfieldtype": "Link", 
-  "options": "Employee", 
+  "options": "Profile", 
   "print_hide": 0, 
   "reqd": 1, 
   "width": "100px"
  }, 
  {
-  "allow_on_submit": 0, 
-  "description": "Add to calendar on this date", 
   "doctype": "DocField", 
   "fieldname": "contact_date", 
   "fieldtype": "Date", 
-  "in_filter": 1, 
-  "label": "Next Contact Date", 
-  "no_copy": 1, 
-  "oldfieldname": "contact_date", 
-  "oldfieldtype": "Date", 
-  "reqd": 0, 
-  "width": "100px"
+  "label": "Next Contact Date"
  }, 
  {
   "doctype": "DocField", 
@@ -246,6 +238,7 @@
   "print_hide": 1
  }, 
  {
+  "depends_on": "eval:!doc.__islocal", 
   "doctype": "DocField", 
   "fieldname": "address_html", 
   "fieldtype": "HTML", 
@@ -270,7 +263,7 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "mobile_no", 
+  "fieldname": "customer_no", 
   "fieldtype": "Data", 
   "label": "Mobile No.", 
   "oldfieldname": "mobile_no", 
@@ -293,15 +286,22 @@
   "oldfieldtype": "Data"
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
   "doctype": "DocField", 
   "fieldname": "territory", 
-  "fieldtype": "Link", 
+  "fieldtype": "Data", 
   "label": "Territory", 
   "oldfieldname": "territory", 
   "oldfieldtype": "Link", 
-  "options": "Territory", 
-  "print_hide": 1
+  "print_hide": 1, 
+  "read_only": 1
  }, 
  {
   "doctype": "DocField", 
@@ -419,6 +419,16 @@
  }, 
  {
   "doctype": "DocPerm", 
+  "match": "employee", 
   "role": "Employee"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Admin"
  }
 ]

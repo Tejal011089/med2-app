@@ -3,6 +3,8 @@
 
 wn.require('app/utilities/doctype/sms_control/sms_control.js');
 
+cur_frm.add_fetch('employee', 'region', 'territory');
+
 wn.provide("erpnext.selling");
 // TODO commonify this code
 erpnext.selling.Opportunity = wn.ui.form.Controller.extend({

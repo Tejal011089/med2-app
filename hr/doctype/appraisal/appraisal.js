@@ -71,5 +71,16 @@ cur_frm.cscript.calculate_total = function(doc,cdt,cdn){
 }
 
 cur_frm.fields_dict.employee.get_query = function(doc,cdt,cdn) {
-	return{	query:"controllers.queries.employee_query" }	
+	//return{	query:"controllers.queries.employee_query" }	
 }
+
+
+cur_frm.get_field("leave_approver").get_query=function(doc,cdt,cdn)
+{
+   return "Select p.name from `tabProfile` p, `tabUserRole` r where r.role='Manager' and r.parent=p.name"
+}
+
+//cur_frm.get_field("employee").get_query=function(doc,cdt,cdn)
+//{	
+//  return "Select employee from `tabEmployee` where reporting_person='"+user+"'"
+//}

@@ -26,6 +26,14 @@ class DocType(TransactionBase):
 	def get_sender(self, comm):
 		return webnotes.conn.get_value('Email Settings',None,'support_email')
 
+	def get_st_count(self):
+                cnt=webnotes.conn.sql("select count(name) from `tabSupport Ticket` where status='Open' and assigned_to='"+self.doc.assigned_to+"'",as_list=1)
+                #webnotes.errprint(cnt)
+                ret={
+                 'count':cnt and cnt[0][0] or 0
+                }
+                return ret
+
 	def get_subject(self, comm):
 		return '[' + self.doc.name + '] ' + (comm.subject or 'No Subject Specified')
 	
@@ -61,8 +69,8 @@ class DocType(TransactionBase):
 					webnotes.conn.get_default("company")
 
 	def on_trash(self):
-		webnotes.conn.sql("""update `tabCommunication` set support_ticket=NULL 
-			where support_ticket=%s""", (self.doc.name,))
+		webnotes.conn.sql("""update `tabCommunication` set parent=NULL 
+			where parent=%s""", (self.doc.name,))
 
 	def update_status(self):
 		status = webnotes.conn.get_value("Support Ticket", self.doc.name, "status")

@@ -2,7 +2,7 @@
  {
   "creation": "2014-03-08 11:56:17", 
   "docstatus": 0, 
-  "modified": "2014-03-14 10:54:30", 
+  "modified": "2014-04-26 20:47:29", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -50,16 +50,15 @@
   "fieldname": "insurance_name", 
   "fieldtype": "Data", 
   "in_list_view": 1, 
-  "label": "Insurance Name", 
+  "label": "Investment Name", 
   "reqd": 1
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "insurance_type", 
-  "fieldtype": "Link", 
+  "fieldname": "yearly_premium", 
+  "fieldtype": "Data", 
   "in_list_view": 1, 
-  "label": "Insurance Type", 
-  "options": "Insurance Type", 
+  "label": "Investment Yearly Premium", 
   "reqd": 1
  }, 
  {
@@ -82,28 +81,32 @@
   "doctype": "DocField", 
   "fieldname": "amount", 
   "fieldtype": "Currency", 
+  "hidden": 1, 
   "in_list_view": 1, 
   "label": "Installment Amount", 
   "options": "Currency", 
-  "reqd": 1
+  "reqd": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "installment_date", 
   "fieldtype": "Date", 
+  "hidden": 1, 
   "label": "Installment Date", 
-  "reqd": 1
+  "reqd": 0
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "end_date", 
   "fieldtype": "Date", 
+  "hidden": 1, 
   "label": "End Date"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "amount_paid_type", 
   "fieldtype": "Select", 
+  "hidden": 1, 
   "label": "Amount Paid Type", 
   "options": "\nEmployee Paid\nCompany Paid\nPartial Paid"
  }, 
@@ -111,6 +114,7 @@
   "doctype": "DocField", 
   "fieldname": "policy_number", 
   "fieldtype": "Data", 
+  "hidden": 1, 
   "in_list_view": 1, 
   "label": "Policy Number"
  }, 
@@ -118,30 +122,35 @@
   "doctype": "DocField", 
   "fieldname": "policy_name", 
   "fieldtype": "Data", 
+  "hidden": 1, 
   "label": "Policy Name"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "company_name", 
   "fieldtype": "Data", 
+  "hidden": 1, 
   "label": "Insurance Company"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "telephone", 
   "fieldtype": "Data", 
+  "hidden": 1, 
   "label": "Telephone"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "plan_type", 
   "fieldtype": "Data", 
+  "hidden": 1, 
   "label": "Plan Type"
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "lump_sum_amount", 
   "fieldtype": "Currency", 
+  "hidden": 1, 
   "label": "Lump Sum Amount", 
   "options": "Currency"
  }, 

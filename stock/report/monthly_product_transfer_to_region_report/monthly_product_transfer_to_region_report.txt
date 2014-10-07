@@ -1,0 +1,21 @@
+[
+ {
+  "creation": "2014-05-28 16:52:50", 
+  "docstatus": 0, 
+  "modified": "2014-05-28 16:52:50", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "name": "__common__", 
+  "ref_doctype": "Stock Entry", 
+  "report_name": "Monthly Product Transfer to Region Report", 
+  "report_type": "Script Report"
+ }, 
+ {
+  "doctype": "Report", 
+  "name": "Monthly Product Transfer to Region Report"
+ }
+]

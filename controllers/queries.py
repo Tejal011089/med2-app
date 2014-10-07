@@ -60,7 +60,7 @@ def customer_query(doctype, txt, searchfield, start, page_len, filters):
 	cust_master_name = webnotes.defaults.get_user_default("cust_master_name")
 
 	if cust_master_name == "Customer Name":
-		fields = ["name", "customer_group", "territory"]
+		fields = ["name","customer_name", "customer_group", "territory","pin_code"]
 	else:
 		fields = ["name", "customer_name", "customer_group", "territory"]
 

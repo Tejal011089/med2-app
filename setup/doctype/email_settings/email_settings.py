@@ -53,9 +53,9 @@ class DocType:
 			except AttributeError, e:
 				webnotes.msgprint(err_msg)
 				raise
-
+			webnotes.errprint("entrng pop3mailbox")
 			pop_mb = POP3Mailbox(inc_email)
-			
+			webnotes.errprint(pop_mb)
 			try:
 				pop_mb.connect()
 			except _socket.error, e:

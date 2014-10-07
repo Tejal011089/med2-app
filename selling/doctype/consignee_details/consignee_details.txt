@@ -1,0 +1,55 @@
+[
+ {
+  "creation": "2014-04-04 18:20:08", 
+  "docstatus": 0, 
+  "modified": "2014-04-04 18:25:08", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Selling", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Consignee Details", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Consignee Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "consignee_name", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Consignee Name "
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_person", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Contact Person", 
+  "options": "Contact"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "contact_no", 
+  "fieldtype": "Data", 
+  "in_list_view": 1, 
+  "label": "Contact No"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "consignee_address", 
+  "fieldtype": "Small Text", 
+  "label": "Consignee Address"
+ }
+]

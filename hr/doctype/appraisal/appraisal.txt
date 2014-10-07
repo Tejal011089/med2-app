@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:12", 
   "docstatus": 0, 
-  "modified": "2013-07-05 14:24:59", 
+  "modified": "2014-09-02 13:26:47", 
   "modified_by": "Administrator", 
   "owner": "ashwini@webnotestech.com"
  }, 
@@ -47,6 +47,13 @@
   "oldfieldtype": "Section Break"
  }, 
  {
+  "doctype": "DocField", 
+  "fieldname": "workflow_status", 
+  "fieldtype": "Select", 
+  "label": "Status", 
+  "options": "Open\nApproved\nRejected"
+ }, 
+ {
   "description": "Select template from which you want to get the Goals", 
   "doctype": "DocField", 
   "fieldname": "kra_template", 
@@ -56,6 +63,15 @@
   "oldfieldtype": "Link", 
   "options": "Appraisal Template", 
   "reqd": 1
+ }, 
+ {
+  "depends_on": "kra_template", 
+  "description": "Select the person to whom your forwarding this appraisal for approval i.e Person with role Manager", 
+  "doctype": "DocField", 
+  "fieldname": "leave_approver", 
+  "fieldtype": "Link", 
+  "label": "Appraisal Approver", 
+  "options": "Profile"
  }, 
  {
   "depends_on": "kra_template", 

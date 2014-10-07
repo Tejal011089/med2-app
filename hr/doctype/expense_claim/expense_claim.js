@@ -3,6 +3,8 @@
 
 wn.provide("erpnext.hr");
 
+cur_frm.add_fetch('employee', 'region', 'territory');
+
 erpnext.hr.ExpenseClaimController = wn.ui.form.Controller.extend({
 	make_bank_voucher: function() {
 		var me = this;
@@ -54,9 +56,9 @@ cur_frm.cscript.onload = function(doc,cdt,cdn) {
 	}
 	
 	cur_frm.fields_dict.employee.get_query = function(doc,cdt,cdn) {
-		return{
-			query:"controllers.queries.employee_query"
-		}	
+		// return{
+		// 	query:"controllers.queries.employee_query"
+		// }	
 	}
 	var exp_approver = doc.exp_approver;
 	return cur_frm.call({

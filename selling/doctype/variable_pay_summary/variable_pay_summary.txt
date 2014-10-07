@@ -1,0 +1,74 @@
+[
+ {
+  "creation": "2014-04-27 17:17:23", 
+  "docstatus": 0, 
+  "modified": "2014-04-27 17:23:10", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "vpb/.#########", 
+  "doctype": "DocType", 
+  "document_type": "Master", 
+  "istable": 1, 
+  "module": "Selling", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldtype": "Data", 
+  "name": "__common__", 
+  "parent": "Variable Pay Summary", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Variable Pay Summary", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Variable Pay Summary"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sales_person", 
+  "label": "Sales Person"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "quater", 
+  "label": "Quater"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "fiscal_year", 
+  "label": "Fiscal Year"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "percent", 
+  "label": "Percent"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "amount", 
+  "label": "Amount"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status", 
+  "label": "Status"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

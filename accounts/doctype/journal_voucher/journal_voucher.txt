@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-25 10:53:52", 
   "docstatus": 0, 
-  "modified": "2013-11-03 14:11:33", 
+  "modified": "2014-04-27 17:24:51", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -466,6 +466,22 @@
   "options": "Journal Voucher", 
   "print_hide": 1, 
   "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "jv_variable_pay", 
+  "fieldtype": "Table", 
+  "hidden": 1, 
+  "label": "JV Variable Pay", 
+  "options": "Variable Pay Summary"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status", 
+  "fieldtype": "Select", 
+  "hidden": 1, 
+  "label": "Status", 
+  "options": "\nTrue\nFalse"
  }, 
  {
   "amend": 1, 

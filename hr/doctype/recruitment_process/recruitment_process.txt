@@ -2,7 +2,7 @@
  {
   "creation": "2014-02-24 10:48:32", 
   "docstatus": 0, 
-  "modified": "2014-03-20 12:09:12", 
+  "modified": "2014-04-11 18:30:44", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -31,6 +31,7 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
+  "report": 1, 
   "write": 1
  }, 
  {
@@ -141,7 +142,7 @@
   "fieldname": "educational_qualification_details", 
   "fieldtype": "Table", 
   "label": "Educational Qualification Details", 
-  "options": "Employee Education"
+  "options": "Recruiter Education"
  }, 
  {
   "doctype": "DocField", 
@@ -154,7 +155,7 @@
   "fieldname": "work_details", 
   "fieldtype": "Table", 
   "label": "Employee External Work History", 
-  "options": "Employee External Work History"
+  "options": "Recruiter External Work History"
  }, 
  {
   "doctype": "DocField", 
@@ -164,10 +165,10 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "employee_internal_work_historys", 
+  "fieldname": "recruiter_internal_work_historys", 
   "fieldtype": "Table", 
   "label": "Employee Internal Work Historys", 
-  "options": "Employee Internal Work History"
+  "options": "Recruiter Internal Work History"
  }, 
  {
   "doctype": "DocField", 

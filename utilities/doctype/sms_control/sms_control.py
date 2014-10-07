@@ -68,7 +68,7 @@ class DocType:
 
 		if webnotes.conn.get_value('SMS Settings', None, 'sms_gateway_url'):
 			ret = self.send_via_gateway(arg)
-			msgprint(ret)
+			#msgprint(ret)
 
 	def send_via_gateway(self, arg):
 		ss = get_obj('SMS Settings', 'SMS Settings', with_children=1)
@@ -91,6 +91,7 @@ class DocType:
 		conn = httplib.HTTPConnection(server)  # open connection
 		headers = {}
 		headers['Accept'] = "text/plain, text/html, */*"
+		#webnotes.errprint(api_url)
 		conn.request('GET', api_url + urllib.urlencode(args), headers = headers)    # send request
 		resp = conn.getresponse()     # get response
 		resp = resp.read()

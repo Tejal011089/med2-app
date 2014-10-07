@@ -2,7 +2,7 @@
  {
   "creation": "2014-02-21 16:02:10", 
   "docstatus": 0, 
-  "modified": "2014-03-18 15:53:21", 
+  "modified": "2014-08-09 00:53:58", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -116,20 +116,30 @@
   "doctype": "DocField", 
   "fieldname": "account_no", 
   "fieldtype": "Int", 
-  "label": "Account No"
+  "label": "Account No", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "account_name", 
-  "fieldtype": "Currency", 
-  "label": "Account Name"
+  "fieldtype": "Data", 
+  "label": "Account Name", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "bank_name", 
   "fieldtype": "Select", 
   "label": "Bank Name", 
-  "options": "\nAxis Bank\nIDBI Bank\nICICI Bank\nMaharashtra Bank\nPDCC Bank\nSBI Bank"
+  "options": "\nAxis Bank\nIDBI Bank\nICICI Bank\nMaharashtra Bank\nPDCC Bank\nSBI Bank", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "account_type", 
+  "fieldtype": "Data", 
+  "label": "Account Type", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -140,13 +150,22 @@
   "doctype": "DocField", 
   "fieldname": "ifsc_code", 
   "fieldtype": "Data", 
-  "label": "IFSC Code"
+  "label": "IFSC Code", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "branch_name", 
   "fieldtype": "Data", 
-  "label": "Branch Name"
+  "label": "Branch Name", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "bank_address", 
+  "fieldtype": "Small Text", 
+  "label": "Bank Address", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -217,12 +236,19 @@
   "label": "Website"
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
   "doctype": "DocField", 
   "fieldname": "territory", 
-  "fieldtype": "Link", 
+  "fieldtype": "Data", 
   "label": "Territory", 
-  "options": "Territory"
+  "read_only": 1
  }, 
  {
   "cancel": 1, 
@@ -232,10 +258,22 @@
  }, 
  {
   "doctype": "DocPerm", 
+  "match": "employee", 
+  "report": 1, 
   "role": "Employee"
  }, 
  {
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Sales Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Admin"
  }
 ]

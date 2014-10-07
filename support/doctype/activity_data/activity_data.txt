@@ -2,7 +2,7 @@
  {
   "creation": "2014-03-10 11:44:18", 
   "docstatus": 0, 
-  "modified": "2014-03-18 18:32:17", 
+  "modified": "2014-08-09 00:44:17", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -24,18 +24,13 @@
   "permlevel": 0
  }, 
  {
-  "cancel": 1, 
-  "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
   "parent": "Activity Data", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
   "permlevel": 0, 
-  "read": 1, 
-  "report": 1, 
-  "role": "Administrator", 
-  "write": 1
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -57,6 +52,7 @@
   "doctype": "DocField", 
   "fieldname": "activity_type", 
   "fieldtype": "Data", 
+  "in_list_view": 1, 
   "label": "Activity Type"
  }, 
  {
@@ -69,8 +65,15 @@
   "doctype": "DocField", 
   "fieldname": "emp_id", 
   "fieldtype": "Data", 
+  "in_list_view": 1, 
   "label": "Emp ID", 
   "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "label": "Territory"
  }, 
  {
   "doctype": "DocField", 
@@ -93,6 +96,7 @@
   "doctype": "DocField", 
   "fieldname": "sender_phone_no", 
   "fieldtype": "Data", 
+  "in_list_view": 1, 
   "label": "Sender Phone No", 
   "reqd": 0
  }, 
@@ -106,6 +110,7 @@
   "doctype": "DocField", 
   "fieldname": "client_name", 
   "fieldtype": "Data", 
+  "in_list_view": 1, 
   "label": "Client Name", 
   "reqd": 1
  }, 
@@ -113,6 +118,7 @@
   "doctype": "DocField", 
   "fieldname": "place", 
   "fieldtype": "Data", 
+  "in_list_view": 1, 
   "label": "Place", 
   "reqd": 1
  }, 
@@ -120,6 +126,7 @@
   "doctype": "DocField", 
   "fieldname": "product_name", 
   "fieldtype": "Data", 
+  "in_list_view": 1, 
   "label": "Product Name"
  }, 
  {
@@ -132,8 +139,8 @@
   "doctype": "DocField", 
   "fieldname": "amount", 
   "fieldtype": "Currency", 
+  "in_list_view": 1, 
   "label": "Amount", 
-  "options": "Company:company:default_currency", 
   "reqd": 1
  }, 
  {
@@ -227,6 +234,24 @@
   "label": "Entry Type"
  }, 
  {
-  "doctype": "DocPerm"
+  "cancel": 1, 
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "report": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Employee", 
+  "write": 0
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Regional Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Admin"
  }
 ]

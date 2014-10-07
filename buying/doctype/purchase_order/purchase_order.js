@@ -6,6 +6,7 @@ wn.provide("erpnext.buying");
 cur_frm.cscript.tname = "Purchase Order Item";
 cur_frm.cscript.fname = "po_details";
 cur_frm.cscript.other_fname = "purchase_tax_details";
+//cur_frm.add_fetch('employee', 'region', 'territory');
 
 wn.require('app/accounts/doctype/purchase_taxes_and_charges_master/purchase_taxes_and_charges_master.js');
 wn.require('app/utilities/doctype/sms_control/sms_control.js');
@@ -106,6 +107,13 @@ erpnext.buying.PurchaseOrderController = erpnext.buying.BuyingController.extend(
 
 // for backward compatibility: combine new and previous states
 $.extend(cur_frm.cscript, new erpnext.buying.PurchaseOrderController({frm: cur_frm}));
+
+cur_frm.cscript.schedule_date = function(doc, cdt, cdn) {
+	
+	get_server_fields('p_date','','',doc, cdt, cdn, 1); 
+	
+	refresh_field('schedule_date');
+};
 
 cur_frm.fields_dict['supplier_address'].get_query = function(doc, cdt, cdn) {
 	return {

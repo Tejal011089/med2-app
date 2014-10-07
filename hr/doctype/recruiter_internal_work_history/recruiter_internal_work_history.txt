@@ -1,0 +1,80 @@
+[
+ {
+  "creation": "2014-04-11 18:30:21", 
+  "docstatus": 0, 
+  "modified": "2014-04-11 18:30:21", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "HR", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "in_list_view": 1, 
+  "name": "__common__", 
+  "parent": "Recruiter Internal Work History", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Recruiter Internal Work History"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "branch", 
+  "fieldtype": "Link", 
+  "label": "Branch", 
+  "oldfieldname": "branch", 
+  "oldfieldtype": "Select", 
+  "options": "Branch"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "department", 
+  "fieldtype": "Link", 
+  "label": "Department", 
+  "oldfieldname": "department", 
+  "oldfieldtype": "Select", 
+  "options": "Department"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "designation", 
+  "fieldtype": "Link", 
+  "label": "Designation", 
+  "oldfieldname": "designation", 
+  "oldfieldtype": "Select", 
+  "options": "Designation"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "grade", 
+  "fieldtype": "Link", 
+  "label": "Grade", 
+  "oldfieldname": "grade", 
+  "oldfieldtype": "Select", 
+  "options": "Grade"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "from_date", 
+  "fieldtype": "Date", 
+  "label": "From Date", 
+  "oldfieldname": "from_date", 
+  "oldfieldtype": "Date"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "to_date", 
+  "fieldtype": "Date", 
+  "label": "To Date", 
+  "oldfieldname": "to_date", 
+  "oldfieldtype": "Date"
+ }
+]

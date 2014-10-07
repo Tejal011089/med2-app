@@ -1,0 +1,22 @@
+[
+ {
+  "creation": "2014-05-28 02:34:57", 
+  "docstatus": 0, 
+  "modified": "2014-05-28 02:35:56", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "add_total_row": 1, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "name": "__common__", 
+  "ref_doctype": "Salary Slip", 
+  "report_name": "Salary Process", 
+  "report_type": "Script Report"
+ }, 
+ {
+  "doctype": "Report", 
+  "name": "Salary Process"
+ }
+]

@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 14:48:38", 
   "docstatus": 0, 
-  "modified": "2014-03-05 18:19:08", 
+  "modified": "2014-09-13 12:51:18", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -28,8 +28,6 @@
   "permlevel": 0
  }, 
  {
-  "amend": 1, 
-  "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
@@ -38,8 +36,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 1, 
   "write": 1
  }, 
  {
@@ -66,6 +62,23 @@
   "doctype": "DocField", 
   "fieldname": "column_break_2", 
   "fieldtype": "Column Break"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "hidden": 1, 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "Territory", 
+  "read_only": 1
  }, 
  {
   "doctype": "DocField", 
@@ -266,19 +279,49 @@
   "oldfieldtype": "Text Editor"
  }, 
  {
+  "amend": 1, 
+  "cancel": 1, 
   "doctype": "DocPerm", 
-  "role": "Purchase Manager"
+  "report": 1, 
+  "role": "Purchase Manager", 
+  "submit": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "report": 1, 
+  "role": "Material Manager", 
+  "submit": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "report": 1, 
+  "role": "Material User", 
+  "submit": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "report": 1, 
+  "role": "Purchase User", 
+  "submit": 1
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Material Manager"
+  "match": "employee", 
+  "role": "Employee"
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Material User"
+  "match": "territory", 
+  "role": "Regional Manager"
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Purchase User"
+  "role": "Admin"
  }
 ]

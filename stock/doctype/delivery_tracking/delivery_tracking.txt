@@ -2,7 +2,7 @@
  {
   "creation": "2014-02-24 14:48:17", 
   "docstatus": 0, 
-  "modified": "2014-03-06 14:38:48", 
+  "modified": "2014-06-28 16:40:03", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -10,6 +10,7 @@
   "autoname": "DT.##", 
   "custom": 0, 
   "doctype": "DocType", 
+  "document_type": "Master", 
   "istable": 1, 
   "module": "Stock", 
   "name": "__common__"
@@ -28,8 +29,7 @@
   "parent": "Delivery Tracking", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
-  "read": 1, 
-  "role": "All"
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -63,10 +63,19 @@
   "create": 1, 
   "doctype": "DocPerm", 
   "permlevel": 0, 
+  "role": "All", 
   "write": 1
  }, 
  {
   "doctype": "DocPerm", 
-  "permlevel": 1
+  "permlevel": 1, 
+  "role": "All"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Administrator", 
+  "write": 1
  }
 ]

@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:32", 
   "docstatus": 0, 
-  "modified": "2014-03-10 17:20:46", 
+  "modified": "2014-06-15 00:09:46", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -91,7 +91,7 @@
   "fieldtype": "Select", 
   "in_filter": 1, 
   "label": "State", 
-  "options": "\nAndra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChhattisgarh\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nMadya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOrissa\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTripura\nUttaranchal\nUttar Pradesh\nWest Bengal", 
+  "options": "\nAndra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChhattisgarh\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nMadya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOrissa\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTripura\nUttaranchal\nUttar Pradesh\nWest Bengal", 
   "search_index": 0
  }, 
  {

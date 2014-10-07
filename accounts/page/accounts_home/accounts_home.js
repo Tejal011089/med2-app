@@ -161,6 +161,12 @@ wn.module_page["Accounts"] = [
 				route: "query-report/General Ledger"
 			},
 			{
+                                "label":wn._("Employee Investment details"),
+                                //doctype: "Insurance Details",
+                                route: "query-report/Employee Investment Details"
+                        },
+
+			{
 				"label":wn._("Trial Balance"),
 				page: "trial-balance"
 			},

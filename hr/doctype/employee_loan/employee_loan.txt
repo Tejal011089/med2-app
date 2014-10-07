@@ -2,7 +2,7 @@
  {
   "creation": "2014-02-21 16:05:14", 
   "docstatus": 0, 
-  "modified": "2014-03-19 17:26:27", 
+  "modified": "2014-09-06 13:42:34", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -62,12 +62,45 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "employee_name", 
+  "fieldname": "employee_id", 
   "fieldtype": "Link", 
   "label": "Employee Name", 
   "options": "Employee", 
   "permlevel": 0, 
   "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_5", 
+  "fieldtype": "Column Break", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "label": "Territory", 
+  "permlevel": 0, 
+  "read_only": 1
+ }, 
+ {
+  "description": "Employee can request HR not to deduct the loan for current month and same need to be adjusted in subsequent m", 
+  "doctype": "DocField", 
+  "fieldname": "request_hr_not_to_deduct", 
+  "fieldtype": "Check", 
+  "hidden": 1, 
+  "label": "Request For HR", 
+  "permlevel": 0
+ }, 
+ {
+  "depends_on": "eval:doc.request_hr_not_to_deduct=='1'", 
+  "doctype": "DocField", 
+  "fieldname": "request_status", 
+  "fieldtype": "Select", 
+  "hidden": 1, 
+  "label": "Request Status", 
+  "options": "\nApproved\nRejected", 
+  "permlevel": 1
  }, 
  {
   "doctype": "DocField", 
@@ -100,14 +133,15 @@
   "fieldname": "loan_sanction_date", 
   "fieldtype": "Date", 
   "label": "Loan Sanction Date", 
-  "permlevel": 1
+  "permlevel": 0, 
+  "read_only": 1
  }, 
  {
   "doctype": "DocField", 
   "fieldname": "doi_start", 
   "fieldtype": "Date", 
   "label": "DOI Start", 
-  "permlevel": 1, 
+  "permlevel": 0, 
   "reqd": 0
  }, 
  {
@@ -115,7 +149,7 @@
   "fieldname": "number_of_installments", 
   "fieldtype": "Int", 
   "label": "Number Of Installments", 
-  "permlevel": 1, 
+  "permlevel": 0, 
   "reqd": 0
  }, 
  {
@@ -129,8 +163,8 @@
   "fieldname": "doi_closing", 
   "fieldtype": "Date", 
   "label": "DOI Closing", 
-  "permlevel": 1, 
-  "read_only": 0
+  "permlevel": 0, 
+  "read_only": 1
  }, 
  {
   "default": "0", 
@@ -148,7 +182,8 @@
   "fieldtype": "Currency", 
   "label": "Total Amount Paid Per Month", 
   "options": "currency", 
-  "permlevel": 1
+  "permlevel": 0, 
+  "read_only": 1
  }, 
  {
   "depends_on": "eval:doc.amount_as_intrest!=null", 
@@ -176,6 +211,7 @@
  {
   "create": 1, 
   "doctype": "DocPerm", 
+  "match": "employee_id", 
   "permlevel": 0, 
   "role": "Employee"
  }, 
@@ -184,6 +220,7 @@
   "create": 1, 
   "doctype": "DocPerm", 
   "permlevel": 0, 
+  "report": 1, 
   "role": "HR", 
   "submit": 1
  }, 
@@ -192,6 +229,7 @@
   "create": 0, 
   "doctype": "DocPerm", 
   "permlevel": 0, 
+  "report": 1, 
   "role": "HR Manager", 
   "submit": 1
  }, 
@@ -203,6 +241,20 @@
  {
   "doctype": "DocPerm", 
   "permlevel": 1, 
+  "report": 1, 
   "role": "HR Manager"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "permlevel": 0, 
+  "role": "Regional Manager"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "permlevel": 0, 
+  "role": "Admin"
  }
 ]

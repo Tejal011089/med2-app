@@ -1,0 +1,86 @@
+[
+ {
+  "creation": "2014-04-27 17:11:32", 
+  "docstatus": 0, 
+  "modified": "2014-04-27 17:11:32", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "Sales_Variable/.#############", 
+  "doctype": "DocType", 
+  "document_type": "Master", 
+  "module": "Selling", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "Sales Person Variable Pay", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "Sales Person Variable Pay", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Sales Person Variable Pay"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sales_person", 
+  "fieldtype": "Data", 
+  "label": "Sales Person"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "posting_date", 
+  "fieldtype": "Data", 
+  "label": "Posting Date"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "fiscal_year", 
+  "fieldtype": "Data", 
+  "label": "Fiscal Year"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "variable_pay", 
+  "fieldtype": "Data", 
+  "label": "Variable Pay"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "month", 
+  "fieldtype": "Data", 
+  "label": "Month"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "jv_number", 
+  "fieldtype": "Data", 
+  "label": "JV Number"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "status", 
+  "fieldtype": "Select", 
+  "label": "Status", 
+  "options": "\nTrue\nFalse"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

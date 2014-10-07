@@ -7,6 +7,7 @@ import webnotes
 from webnotes.utils import getdate, validate_email_add, cstr, cint
 from webnotes.model.doc import make_autoname
 from webnotes import msgprint, _
+from webnotes.model.doc import Document
 
 
 class DocType:
@@ -28,7 +29,7 @@ class DocType:
 
 	def validate(self):
 		import utilities
-		utilities.validate_status(self.doc.status, ["Active", "Left"])
+		utilities.validate_status(self.doc.status, ["Evaluation","Probation","Permanant","Left"])
 
 		self.doc.employee = self.doc.name
 		self.validate_date()
@@ -41,6 +42,22 @@ class DocType:
 		if self.doc.user_id:
 			self.update_user_default()
 			self.update_profile()
+			if self.doc.flag=='0':
+
+				self.role_match_cond()
+				self.doc.flag=1
+		self.doc.save()
+
+
+	def role_match_cond(self):
+		#webnotes.errprint("in role_match_cond")
+		dv=Document('DefaultValue')
+		dv.parent=self.doc.user_id
+		dv.parentfield='system_defaults'
+		dv.parenttype='Control Panel'
+		dv.defkey='region'
+		dv.defvalue=self.doc.region
+		dv.save(new=1)
 				
 	def update_user_default(self):
 		webnotes.conn.set_default("employee", self.doc.name, self.doc.user_id)

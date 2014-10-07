@@ -1,3 +1,6 @@
+
+cur_frm.add_fetch('employee', 'region', 'territory');
+
 cur_frm.cscript.email = function(doc){
 
         var x=doc.email;

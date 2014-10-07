@@ -4,6 +4,12 @@
 cur_frm.cscript.tname = "Installation Note Item";
 cur_frm.cscript.fname = "installed_item_details";
 
+//cur_frm.add_fetch('employee_id', 'region', 'territory');
+//cur_frm.add_fetch('employee_id', 'employee_name', 'employee_name');
+cur_frm.add_fetch('customer', 'territory', 'territory');
+cur_frm.add_fetch('customer', 'employee', 'employee_id');
+cur_frm.add_fetch('customer', 'employee_name', 'employee_name');
+
 wn.provide("erpnext.selling");
 // TODO commonify this code
 erpnext.selling.InstallationNote = wn.ui.form.Controller.extend({

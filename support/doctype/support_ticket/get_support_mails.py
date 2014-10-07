@@ -10,6 +10,7 @@ from core.doctype.communication.communication import make
 
 class SupportMailbox(POP3Mailbox):	
 	def setup(self, args=None):
+		print "in setup fun"
 		self.email_settings = webnotes.doc("Email Settings", "Email Settings")
 		self.settings = args or webnotes._dict({
 			"use_ssl": self.email_settings.support_use_ssl,
@@ -19,6 +20,7 @@ class SupportMailbox(POP3Mailbox):
 		})
 		
 	def process_message(self, mail):
+		print "process messages"
 		if mail.from_email == self.email_settings.fields.get('support_email'):
 			return
 		thread_id = mail.get_thread_id()
@@ -53,54 +55,82 @@ Original Query:
 			msg = cstr(response))
 		
 def get_support_mails():
+	print "in get supoo fun"
 	if cint(webnotes.conn.get_value('Email Settings', None, 'sync_support_mails')):
 		SupportMailbox()
 		
 def add_support_communication(subject, content, sender, docname=None, mail=None):
-
-	qr="select customer,employee_id from `tabInstallation Note` where name="+subject+" "
+	print "get suport com fun 2"
+	qr="select customer,employee_id from `tabInstallation Note` where product_barcode='"+subject+"'"
+	print qr
         res=webnotes.conn.sql(qr)
-        
+        print res
+	'''
         w="select status,user_id from `tabEmployee` where name='%s'"%(res[0][1]);
+	print w
         t=webnotes.conn.sql(w)
-
+	print t
 	q=" select territory from `tabCustomer` where name='%s'"%(res[0][0]);
-
+ 	print q
         r=webnotes.conn.sql(q)
+	print r
        	w=" select parent from `tabDefaultValue` where  defkey = '%s' and defvalue = '%s'"%('territory',r[0][0])
-        a=webnotes.conn.sql(w)
-	if t[0][0] == 'Active':
+        print w
+	a=webnotes.conn.sql(w)
+	print a
+	if t[0][0] != 'Left':
 		assigned_to=t[0][1]
 		assigned_to_higher_level=a[0][0]
 	else:
 		assigned_to=a[0][0]
 		assigned_to_higher_level=a[0][0]
 		
-
+	print "if else end"
+	'''
 	if docname:
+		print "if"
 		ticket = webnotes.bean("Support Ticket", docname)
 		ticket.doc.status = 'Open'
 		ticket.ignore_permissions = True
 		ticket.doc.save()
+		webnotes.conn.commit()
 	else:
-		ticket = webnotes.bean([decode_dict({
-			"doctype":"Support Ticket",
-			"description": content,
-			"subject": subject,
-			"raised_by": sender,
-			"content_type": mail.content_type if mail else None,
-			"status": "Open"
-			#"assigned_to":assigned_to,
-			#"assigned_to_higher_level":assigned_to_higher_level
-		})])
-		ticket.ignore_permissions = True
-		ticket.insert()
-	
-	make(content=content, sender=sender, subject = subject,
-		doctype="Support Ticket", name=ticket.doc.name,
-		date=mail.date if mail else today(), sent_or_received="Received")
-
-	if mail:
-		mail.save_attachments_in_doc(ticket.doc)
-		
-	return ticket
+		print "else"
+		assigned_to= None
+		assigned_to_higher_level= None
+		#print subject
+		qr="select customer,employee_id from `tabInstallation Note` where product_barcode='%s'"%(subject);
+        	res=webnotes.conn.sql(qr)
+        	#print res
+        	if res:
+        		w="select status,user_id from `tabEmployee` where name='%s'"%(res[0][1]);
+        		t=webnotes.conn.sql(w)
+        		#print t
+        		q=" select territory,customer_name from `tabCustomer` where name='%s'"%(res[0][0]);
+        		r=webnotes.conn.sql(q)
+        		#print r
+        		if r:
+        				w=" select parent from `tabDefaultValue` where  defkey = '%s' and defvalue = '%s'"%('territory',r[0][0])
+       					a=webnotes.conn.sql(w)
+       					#print a
+       			if t[0][0] == 'Left':
+				assigned_to=a[0][0]
+                                assigned_to_higher_level=a[0][0]
+				
+			else:
+                                assigned_to=t[0][1]
+                                assigned_to_higher_level=a[0][0]
+                from webnotes.model.doc import Document
+        	a= Document('Support Ticket')
+        	a.subject=subject
+        	a.raised_by=sender
+        	a.description=content
+		a.territory=r[0][0]
+        	a.customer=res[0][0]
+		a.customer_name=r[0][1]
+        	a.assigned_to_higher_level=assigned_to_higher_level
+        	a.assigned_to=assigned_to
+        	a.status='Open'
+        	a.save(new=1)
+		webnotes.conn.commit()
+    	return a		

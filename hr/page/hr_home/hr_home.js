@@ -68,12 +68,18 @@ wn.module_page["HR"] = [
 		title: wn._("Leave Setup"),
 		icon: "icon-cog",
 		items: [
-			{
+		/*	{
 				"route":"Form/Upload Attendance/Upload Attendance",
 				"label":wn._("Upload Attendance"),
 				"description":wn._("Upload attendance from a .csv file"),
 				doctype: "Upload Attendance"
-			},
+			},*/
+				
+			{	
+                                "label":wn._("Employee Attendance Upload"),
+                                //doctype: "Insurance Details",
+                                route: "attendance-upload"
+                        },
 			{
 				"route":"Form/Leave Control Panel/Leave Control Panel",
 				"label": wn._("Leave Allocation Tool"),
@@ -216,6 +222,11 @@ wn.module_page["HR"] = [
 				"label":wn._("Monthly Attendance Sheet"),
 				route: "query-report/Monthly Attendance Sheet",
 				doctype: "Attendance"
+			},
+			{
+				"label":wn._("Salary Process"),
+				route: "query-report/Salary Process",
+				doctype: "Salary Slip"
 			},
 		]
 	}

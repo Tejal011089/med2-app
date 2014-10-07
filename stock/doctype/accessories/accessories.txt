@@ -1,0 +1,35 @@
+[
+ {
+  "creation": "2014-10-07 16:06:19", 
+  "docstatus": 0, 
+  "modified": "2014-10-07 16:06:19", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "istable": 1, 
+  "module": "Stock", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "item_code", 
+  "fieldtype": "Link", 
+  "in_list_view": 1, 
+  "label": "Accessories", 
+  "name": "__common__", 
+  "options": "Item", 
+  "parent": "Accessories", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Accessories"
+ }, 
+ {
+  "doctype": "DocField"
+ }
+]

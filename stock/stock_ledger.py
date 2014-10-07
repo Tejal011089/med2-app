@@ -36,14 +36,14 @@ def make_sl_entries(sl_entries, is_amended=None):
 				sle_id = make_entry(sle)
 			
 			args = sle.copy()
-			webnotes.errprint(['in_ copy',args])
+			#webnotes.errprint(['in_ copy',args])
 			args.update({
 				"sle_id": sle_id,
 				"is_amended": is_amended
 			})
-			webnotes.errprint(args)
+			#webnotes.errprint(args)
 			update_bin(args)
-			webnotes.errprint(['in sl_entries ',args])
+			#webnotes.errprint(['in sl_entries ',args])
 		
 		if cancel:
 			delete_cancelled_entry(sl_entries[0].get('voucher_type'), 
@@ -56,7 +56,7 @@ def set_as_cancel(voucher_type, voucher_no):
 		(now(), webnotes.session.user, voucher_type, voucher_no))
 		
 def make_entry(args):
-	webnotes.errprint("in make entry")
+	#webnotes.errprint("in make entry")
 	args.update({"doctype": "Stock Ledger Entry"})
 	sle = webnotes.bean([args])
 	sle.ignore_permissions = 1

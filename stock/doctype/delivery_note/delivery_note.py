@@ -33,11 +33,12 @@ class DocType(SellingController):
 			'keyword': 'Delivered'
 		}]
 	def on_update(self):
-		webnotes.errprint("hiee")
+		#webnotes.errprint("hiee")
+		#webnotes.errprint(self.doc.status_d)
 		qry=webnotes.conn.sql("select priority from `tabDelivery Tracking` where status=%s",self.doc.status_d,as_list=1)
-		# webnotes.errprint(qry[0][0])
+		#webnotes.errprint(qry[0][0])
 		qr=webnotes.conn.sql("select count(priority) from `tabDelivery Tracking`",as_list=1)
-		# webnotes.errprint(qr[0][0])	
+		#webnotes.errprint(qr[0][0])	
 		if qry:
 			p3= flt(qry[0][0])/flt(qr[0][0])
 			p4=p3*100.00
@@ -55,7 +56,7 @@ class DocType(SellingController):
                 	e=a+" "+b+" "+c+f
 			self.doc.progress_bar=e
 		self.doc.save()
-		webnotes.errprint(self.doc.progress_bar)
+		#webnotes.errprint(self.doc.progress_bar)
 	def onload(self):
 		billed_qty = webnotes.conn.sql("""select sum(ifnull(qty, 0)) from `tabSales Invoice Item`
 			where docstatus=1 and delivery_note=%s""", self.doc.name)

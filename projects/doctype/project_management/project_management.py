@@ -142,9 +142,13 @@ class DocType:
 					#webnotes.errprint(a)
 					#webnotes.errprint(a[0][0])
 					#webnotes.errprint(a[0][1])
-					actual_qty=cstr(cint(a[0][0])-cint(p.quantity))
-					projected_qty=cstr(cint(a[0][0])-cint(p.quantity))
-					q=webnotes.conn.sql("update `tabBin` set actual_qty=%s,Projected_qty=%s where item_code='"+p.item+"' and warehouse='"+p.warehouse+"'",(actual_qty,projected_qty),debug=1)
+					if a:
+
+						actual_qty=cstr(cint(a[0][0])-cint(p.quantity))
+						projected_qty=cstr(cint(a[0][0])-cint(p.quantity))
+						q=webnotes.conn.sql("update `tabBin` set actual_qty=%s,Projected_qty=%s where item_code='"+p.item+"' and warehouse='"+p.warehouse+"'",(actual_qty,projected_qty),debug=1)
+					else:
+						pass	
 					#webnotes.errprint("Updated")
 					#make_bin.append({
 					#	"doctype": 'pm',

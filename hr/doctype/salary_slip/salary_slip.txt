@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:15", 
   "docstatus": 0, 
-  "modified": "2014-02-27 10:43:34", 
+  "modified": "2014-09-01 14:51:58", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -30,8 +30,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 1, 
   "write": 1
  }, 
  {
@@ -54,7 +52,7 @@
   "label": "Month", 
   "oldfieldname": "month", 
   "oldfieldtype": "Select", 
-  "options": "\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12", 
+  "options": "\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12", 
   "reqd": 1, 
   "search_index": 1, 
   "width": "37%"
@@ -163,6 +161,13 @@
   "options": "Employee", 
   "reqd": 1, 
   "search_index": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "label": "Territory", 
+  "read_only": 1
  }, 
  {
   "doctype": "DocField", 
@@ -330,6 +335,13 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "grauity_amount", 
+  "fieldtype": "Currency", 
+  "label": "Gratuity Amount", 
+  "options": "Company:company:default_currency"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "leave_encashment_amount", 
   "fieldtype": "Currency", 
   "label": "Leave Encashment Amount", 
@@ -404,12 +416,30 @@
  {
   "amend": 0, 
   "doctype": "DocPerm", 
-  "role": "HR User"
+  "report": 1, 
+  "role": "HR User", 
+  "submit": 1
  }, 
  {
   "amend": 1, 
   "cancel": 1, 
   "doctype": "DocPerm", 
-  "role": "HR Manager"
+  "report": 1, 
+  "role": "HR Manager", 
+  "submit": 1
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "role": "Employee"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Admin"
  }
 ]

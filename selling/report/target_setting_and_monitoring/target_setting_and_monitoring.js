@@ -8,6 +8,15 @@ wn.query_reports["Target Setting and Monitoring"] = {
 			//"options":"Querterly",
 			"default": "Querterly"
 		},
+		{
+                        "fieldname":"month",
+                        "label": "Month",
+                        "fieldtype": "Select",
+                        "options":"\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12",
+                        "width": "80",
+                        //"default": wn.datetime.get_today()
+                },
+
 
 		{
 			"fieldname":"from_date",
@@ -23,5 +32,7 @@ wn.query_reports["Target Setting and Monitoring"] = {
 			"width": "80",
 			//"default": wn.datetime.get_today()
 		}
+
+
 	]
 }

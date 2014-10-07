@@ -110,6 +110,46 @@ cur_frm.cscript.cell_number = function(doc){
 }
 
 
+cur_frm.cscript.status = function(doc){
+	    if (doc.date_of_joining){
+        var x=doc.date_of_joining;
+        console.log(x);
+        y=x.split('-');
+        year=y[0];
+        month=y[1];
+        day=y[2];
+        console.log(day);
+        var d = new Date(year, month, day);
+        if (doc.status=='Probation'){
+        	d.setMonth(d.getMonth() + 6);
+        	console.log(d);
+            var combineDatestr = d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear();
+            console.log(combineDatestr);
+            doc.evaluationprobation_end_date=combineDatestr;
+            console.log(doc.evaluationprobation_end_date);
+            refresh_field("evaluationprobation_end_date");
+        }
+        else if (doc.status=='Evaluation'){
+	        d.setMonth(d.getMonth() + 3);
+	        console.log(d);
+	        var combineDatestr = d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear();
+	        console.log(combineDatestr);
+	        doc.evaluationprobation_end_date=combineDatestr;
+	        console.log(doc.evaluationprobation_end_date);
+	        refresh_field("evaluationprobation_end_date");
+        }
+
+	else {
+        	doc.evaluationprobation_end_date='';
+	        console.log(doc.evaluationprobation_end_date);
+	        refresh_field("evaluationprobation_end_date");
+        }
+
+    }
+        
+}
+
+
 cur_frm.cscript.company_email = function(doc){
 
         var x=doc.company_email;
@@ -123,4 +163,9 @@ cur_frm.cscript.company_email = function(doc){
         }
                 //else
                 //console.log("bbbb")
+
+}
+cur_frm.get_field("reporting_person").get_query=function(doc,cdt,cdn)
+{
+   return "Select p.name from `tabProfile` p, `tabUserRole` r where r.role='Leave Approver' and r.parent=p.name"
 }

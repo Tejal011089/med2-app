@@ -2,14 +2,14 @@
  {
   "creation": "2013-03-07 09:04:18", 
   "docstatus": 0, 
-  "modified": "2014-03-14 11:05:15", 
+  "modified": "2014-10-07 16:00:06", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
  {
   "allow_attach": 1, 
   "allow_rename": 1, 
-  "autoname": "naming_series:", 
+  "autoname": ".#######", 
   "doctype": "DocType", 
   "document_type": "Master", 
   "icon": "icon-user", 
@@ -26,7 +26,6 @@
   "permlevel": 0
  }, 
  {
-  "amend": 0, 
   "doctype": "DocPerm", 
   "name": "__common__", 
   "parent": "Employee", 
@@ -34,8 +33,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 0, 
   "write": 1
  }, 
  {
@@ -120,9 +117,32 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "column_break1", 
-  "fieldtype": "Column Break", 
-  "width": "50%"
+  "fieldname": "emp_id", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "label": "Employee ID"
+ }, 
+ {
+  "description": "Reporting person is users with Role, \"Leave Approver\"", 
+  "doctype": "DocField", 
+  "fieldname": "reporting_person", 
+  "fieldtype": "Link", 
+  "label": "Reporting Person", 
+  "options": "Profile"
+ }, 
+ {
+  "default": "0", 
+  "doctype": "DocField", 
+  "fieldname": "flag", 
+  "fieldtype": "Data", 
+  "label": "Flag", 
+  "read_only": 1, 
+  "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "column_break_12", 
+  "fieldtype": "Column Break"
  }, 
  {
   "description": "System User (login) ID. If set, it will become default for all HR forms.", 
@@ -192,7 +212,8 @@
   "fieldname": "region", 
   "fieldtype": "Link", 
   "label": "Region", 
-  "options": "Territory"
+  "options": "Territory", 
+  "reqd": 1
  }, 
  {
   "doctype": "DocField", 
@@ -206,6 +227,12 @@
   "fieldtype": "Column Break"
  }, 
  {
+  "doctype": "DocField", 
+  "fieldname": "evaluationprobation_end_date", 
+  "fieldtype": "Date", 
+  "label": "Evaluation/Probation End Date"
+ }, 
+ {
   "default": "Active", 
   "doctype": "DocField", 
   "fieldname": "status", 
@@ -215,7 +242,7 @@
   "label": "Status", 
   "oldfieldname": "status", 
   "oldfieldtype": "Select", 
-  "options": "\nActive\nLeft", 
+  "options": "Evaluation\nProbation\nPermanant\nLeft", 
   "reqd": 1, 
   "search_index": 1
  }, 
@@ -777,23 +804,48 @@
   "read_only": 1
  }, 
  {
+  "amend": 0, 
   "cancel": 0, 
   "create": 0, 
   "doctype": "DocPerm", 
-  "match": "employee", 
-  "role": "Employee"
+  "match": "employee_id", 
+  "report": 1, 
+  "role": "Employee", 
+  "submit": 0
  }, 
  {
+  "amend": 0, 
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
   "match": "company", 
-  "role": "HR User"
+  "report": 1, 
+  "role": "HR User", 
+  "submit": 0
  }, 
  {
+  "amend": 0, 
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
-  "role": "HR Manager"
+  "report": 1, 
+  "role": "HR Manager", 
+  "submit": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Administrator"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "region", 
+  "role": "Regional Manager"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Admin"
  }
 ]

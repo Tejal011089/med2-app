@@ -2,7 +2,7 @@
  {
   "creation": "2013-01-10 16:34:11", 
   "docstatus": 0, 
-  "modified": "2013-11-19 11:31:28", 
+  "modified": "2014-08-09 00:22:25", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -26,16 +26,13 @@
   "permlevel": 0
  }, 
  {
-  "amend": 0, 
   "doctype": "DocPerm", 
   "name": "__common__", 
   "parent": "Supplier", 
   "parentfield": "permissions", 
   "parenttype": "DocType", 
   "permlevel": 0, 
-  "read": 1, 
-  "report": 1, 
-  "submit": 0
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -72,6 +69,14 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "column_break0", 
   "fieldtype": "Column Break", 
   "width": "50%"
@@ -86,6 +91,13 @@
   "oldfieldtype": "Link", 
   "options": "Supplier Type", 
   "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "label": "Territory", 
+  "read_only": 1
  }, 
  {
   "depends_on": "eval:!doc.__islocal", 
@@ -207,17 +219,43 @@
   "print_hide": 1
  }, 
  {
+  "amend": 0, 
   "cancel": 0, 
   "create": 0, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Purchase Manager", 
+  "submit": 0, 
   "write": 0
  }, 
  {
+  "amend": 0, 
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Purchase Master Manager", 
+  "submit": 0, 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "role": "Employee", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Admin", 
   "write": 1
  }
 ]

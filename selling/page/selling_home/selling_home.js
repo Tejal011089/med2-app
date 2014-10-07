@@ -200,6 +200,26 @@ wn.module_page["Selling"] = [
 		icon: "icon-list",
 		items: [
 			{
+                                "label":wn._("Lead To Installation Creation Flow"),
+                                route: "query-report/Lead To Installation Creation Flow",
+                                doctype: "Lead"
+                        },
+			{
+                                "label":wn._("Lead Conversion Ratio Per Employee"),
+                                route: "query-report/Lead Conversion Ratio Per Employee",
+                                doctype: "Lead"
+                        },
+			{
+                                "label":wn._("Employee Wise Sales Order Report"),
+                                route: "query-report/Employee Wise Sales Order Report",
+                                doctype: "Sales Order"
+                        },
+			{
+                                "label":wn._("Net Profit Report"),
+                                route: "query-report/Net Profit Report",
+                                doctype: "Sales Order"
+                        },
+			{
 				"label":wn._("Lead Details"),
 				route: "query-report/Lead Details",
 				doctype: "Lead"

@@ -3,6 +3,9 @@
 
 wn.require('app/setup/doctype/contact_control/contact_control.js');
 
+cur_frm.add_fetch('employee', 'region', 'territory');
+cur_frm.add_fetch('employee', 'employee_name', 'employee_name');
+
 cur_frm.cscript.onload = function(doc,dt,dn){
 	cur_frm.cscript.load_defaults(doc, dt, dn);
 }
@@ -18,7 +21,8 @@ cur_frm.cscript.load_defaults = function(doc, dt, dn) {
 cur_frm.add_fetch('lead_name', 'company_name', 'customer_name');
 cur_frm.add_fetch('default_sales_partner','commission_rate','default_commission_rate');
 
-
+cur_frm.add_fetch('city_pin_code','city','city');
+cur_frm.add_fetch('city_pin_code','pin_code','pin_code');
 
 
 cur_frm.cscript.email = function(doc){
@@ -51,6 +55,11 @@ cur_frm.cscript.customer_no = function(doc){
 
 }
                             
+cur_frm.cscript.city_pin_code = function(doc,cdt,cdn){
+        //console.log("city_pin_code");
+        return { query: "selling.doctype.customer.customer.get_pincode" };
+ }
+
 
 
 cur_frm.cscript.refresh = function(doc,dt,dn) {
@@ -84,7 +93,8 @@ cur_frm.cscript.setup_dashboard = function(doc) {
 	cur_frm.dashboard.add_doctype_badge("Sales Order", "customer");
 	cur_frm.dashboard.add_doctype_badge("Delivery Note", "customer");
 	cur_frm.dashboard.add_doctype_badge("Sales Invoice", "customer");
-	
+	cur_frm.dashboard.add_doctype_badge("Internal Order Form", "customer");
+
 	return wn.call({
 		type: "GET",
 		method:"selling.doctype.customer.customer.get_dashboard_info",

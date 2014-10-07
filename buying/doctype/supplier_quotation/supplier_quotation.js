@@ -5,6 +5,7 @@
 cur_frm.cscript.tname = "Supplier Quotation Item";
 cur_frm.cscript.fname = "quotation_items";
 cur_frm.cscript.other_fname = "purchase_tax_details";
+cur_frm.add_fetch('employee', 'region', 'territory');
 
 // attach required files
 wn.require('app/accounts/doctype/purchase_taxes_and_charges_master/purchase_taxes_and_charges_master.js');

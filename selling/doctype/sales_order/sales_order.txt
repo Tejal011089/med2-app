@@ -2,7 +2,7 @@
  {
   "creation": "2013-06-18 12:39:59", 
   "docstatus": 0, 
-  "modified": "2014-03-11 17:39:48", 
+  "modified": "2014-08-09 00:52:24", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -86,8 +86,9 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "installation_note_no", 
+  "fieldname": "installation", 
   "fieldtype": "Link", 
+  "hidden": 1, 
   "label": "Installation Note No", 
   "options": "Installation Note"
  }, 
@@ -117,11 +118,9 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "contact_mobile", 
-  "fieldtype": "Text", 
-  "hidden": 1, 
-  "label": "Mobile No", 
-  "read_only": 1
+  "fieldname": "contact", 
+  "fieldtype": "Data", 
+  "label": "MObile Number"
  }, 
  {
   "doctype": "DocField", 
@@ -141,9 +140,16 @@
   "label": "Order Type", 
   "oldfieldname": "order_type", 
   "oldfieldtype": "Select", 
-  "options": "\nSales\nMaintenance", 
+  "options": "\nSales\nMaintenance\nShopping Cart", 
   "print_hide": 1, 
   "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "customer_type", 
+  "fieldtype": "Select", 
+  "label": "Customer Type", 
+  "options": "\nDirect\nOEM"
  }, 
  {
   "doctype": "DocField", 
@@ -224,6 +230,12 @@
   "width": "100px"
  }, 
  {
+  "doctype": "DocField", 
+  "fieldname": "invoice_no", 
+  "fieldtype": "Data", 
+  "label": "Proforma Invoice No"
+ }, 
+ {
   "depends_on": "eval:doc.po_no", 
   "description": "Customer's Purchase Order Date", 
   "doctype": "DocField", 
@@ -257,6 +269,34 @@
   "label": "Shipping Address", 
   "print_hide": 1, 
   "read_only": 1
+ }, 
+ {
+  "depends_on": "eval:doc.customer_type=='OEM'", 
+  "doctype": "DocField", 
+  "fieldname": "customer_details", 
+  "fieldtype": "Section Break", 
+  "label": "Customer Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "customer_table", 
+  "fieldtype": "Table", 
+  "label": "Customer Table", 
+  "options": "Customer Details"
+ }, 
+ {
+  "depends_on": "eval:doc.customer_type=='OEM'", 
+  "doctype": "DocField", 
+  "fieldname": "consignee_details", 
+  "fieldtype": "Section Break", 
+  "label": "Consignee Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "consignee_info", 
+  "fieldtype": "Table", 
+  "label": "Consignee Info", 
+  "options": "Consignee Details"
  }, 
  {
   "doctype": "DocField", 
@@ -333,6 +373,18 @@
   "label": "Items", 
   "oldfieldtype": "Section Break", 
   "options": "icon-shopping-cart"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "accessories_details", 
+  "fieldtype": "Table", 
+  "label": "Details", 
+  "options": "Accessories Details"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "section_break_30", 
+  "fieldtype": "Section Break"
  }, 
  {
   "allow_on_submit": 1, 
@@ -619,15 +671,22 @@
   "width": "50%"
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
   "doctype": "DocField", 
   "fieldname": "territory", 
-  "fieldtype": "Link", 
+  "fieldtype": "Data", 
   "in_filter": 1, 
   "label": "Territory", 
-  "options": "Territory", 
   "print_hide": 1, 
-  "reqd": 1, 
+  "read_only": 1, 
+  "reqd": 0, 
   "search_index": 1
  }, 
  {
@@ -931,5 +990,25 @@
   "doctype": "DocPerm", 
   "match": "customer", 
   "role": "Customer"
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "role": "Employee", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Admin", 
+  "write": 1
  }
 ]

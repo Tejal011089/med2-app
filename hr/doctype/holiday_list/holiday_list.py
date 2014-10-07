@@ -48,7 +48,7 @@ class DocType:
 		return webnotes.conn.sql("""select year_start_date, year_end_date
 			from `tabFiscal Year` where name=%s""", (self.doc.fiscal_year,))[0]
 
-	def get_weekly_off_date_list(self, year_start_date, year_end_date):
+	'''def get_weekly_off_date_list(self, year_start_date, year_end_date):
 		from webnotes.utils import getdate
 		year_start_date, year_end_date = getdate(year_start_date), getdate(year_end_date)
 		
@@ -65,7 +65,41 @@ class DocType:
 			reference_date += timedelta(days=7)
 		
 		return date_list
-	
+	'''
+        def get_weekly_off_date_list(self, year_start_date, year_end_date):
+                from webnotes.utils import getdate
+                year_start_date, year_end_date = getdate(year_start_date), getdate(year_end_date)
+
+                from dateutil import relativedelta
+                from datetime import timedelta
+                import calendar
+
+                date_list = []
+                date_list1 = []
+                if self.doc.weekly_off=='3rd Saturday':
+                        webnotes.errprint(self.doc.weekly_off)
+                        weekday = getattr(calendar, ('Saturday').upper())
+                        reference_date = year_start_date + relativedelta.relativedelta(weekday=weekday)
+                        while reference_date <= year_end_date:
+                                date_list1.append(reference_date)
+                                reference_date += timedelta(days=7)
+                        for dt in date_list1:
+                                if dt.day>14 :
+                                        if dt.day <22:
+                                                #webnotes.errprint(dt)
+                                                ch = addchild(self.doc, 'holiday_list_details', 'Holiday', self.doclist)
+                                                ch.description = self.doc.weekly_off
+                                                ch.holiday_date = dt
+                        return date_list
+                else:
+                        weekday = getattr(calendar, (self.doc.weekly_off).upper())
+                        reference_date = year_start_date + relativedelta.relativedelta(weekday=weekday)
+                        while reference_date <= year_end_date:
+                                date_list.append(reference_date)
+                                reference_date += timedelta(days=7)
+                        return date_list
+
+
 	def clear_table(self):
 		self.doclist = self.doc.clear_table(self.doclist, 'holiday_list_details')
 

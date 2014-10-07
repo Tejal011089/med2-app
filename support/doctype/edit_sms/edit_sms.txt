@@ -1,0 +1,57 @@
+[
+ {
+  "creation": "2014-05-05 00:51:17", 
+  "docstatus": 0, 
+  "modified": "2014-05-05 03:54:48", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "autoname": "edit sms", 
+  "doctype": "DocType", 
+  "document_type": "Transaction", 
+  "module": "Support", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "edit sms", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "create": 0, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "edit sms", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "edit sms"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "edit", 
+  "fieldtype": "Button", 
+  "hidden": 1, 
+  "label": "edit"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "edit_sms", 
+  "fieldtype": "Table", 
+  "label": "Edit sms", 
+  "options": "smslogeditchild"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]

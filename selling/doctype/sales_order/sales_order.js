@@ -8,6 +8,7 @@ cur_frm.cscript.fname = "sales_order_details";
 cur_frm.cscript.other_fname = "other_charges";
 cur_frm.cscript.sales_team_fname = "sales_team";
 
+cur_frm.add_fetch('employee', 'region', 'territory');
 
 wn.require('app/selling/sales_common.js');
 wn.require('app/accounts/doctype/sales_taxes_and_charges_master/sales_taxes_and_charges_master.js');
@@ -28,6 +29,10 @@ erpnext.selling.SalesOrderController = erpnext.selling.SellingController.extend(
 					doc.per_billed);
 
 				cur_frm.add_custom_button(wn._('Send SMS'), cur_frm.cscript.send_sms, "icon-mobile-phone");
+
+				cur_frm.add_custom_button(wn._('Make Internal Order'), 
+			 		cur_frm.cscript['Make Internal Order']);
+
 				// delivery note
 				if(flt(doc.per_delivered, 2) < 100 && doc.order_type=='Sales')
 					cur_frm.add_custom_button(wn._('Make Delivery'), this.make_delivery_note);
@@ -136,6 +141,15 @@ erpnext.selling.SalesOrderController = erpnext.selling.SellingController.extend(
 	},
 });
 
+
+cur_frm.cscript['Make Internal Order'] = function() {
+ 	wn.model.open_mapped_doc({
+ 		method: "selling.doctype.sales_order.sales_order.make_internal_order",
+ 		source_name: cur_frm.doc.name
+ 	})
+}
+
+
 // for backward compatibility: combine new and previous states
 $.extend(cur_frm.cscript, new erpnext.selling.SalesOrderController({frm: cur_frm}));
 
@@ -190,8 +204,54 @@ cur_frm.cscript['Unstop Sales Order'] = function() {
 	}
 }
 
+
+cur_frm.fields_dict.accessories_details.grid.get_field("item_code").get_query = function(doc){
+        //console.log("hhhh");
+
+        return "select name from `tabItem` where item_group='Products'"
+}
+
+cur_frm.fields_dict.accessories_details.grid.get_field("item").get_query = function(doc){
+        //console.log("hhhh");
+
+        return "select name from `tabItem` where item_group='Accessories'"
+}
+cur_frm.cscript.contact = function(doc,cdt,cdn){
+	//console.log("contact")
+	phone=doc.contact;
+	phone = phone.replace(/[^0-9]/g, '');
+	if(phone.length != 10) { 
+   		alert("Not 10 digits");
+	} 
+	//else {
+  	//	alert("yep, its 10 digits");
+  	//}
+}	 
+cur_frm.cscript.add = function(doc,cdt,cdn){
+                //console.log("hhh")
+                var d = locals[cdt][cdn];
+                //console.log(d.item)
+                if(d.item){
+
+                        //console.log("if loop")
+                        //get_server_fields('get_accessories_details', d.item, 'accessories_details', doc, cdt, cdn, 1,function(r,rt){refresh_field('accessories_details')});
+                        //return get_server_fields('get_accessories_details',d.item,'',doc,cdt,cdn,1,function(r,rt){refresh_field('accessories_details')});
+                        get_server_fields('get_accessories_details',d.item,'',doc,cdt,cdn,1,function(r,rt){refresh_field('sales_order_details')});
+                }
+                else
+                        alert("Accessories Field  can not be blank")
+ }
+
+
+
 cur_frm.cscript.on_submit = function(doc, cdt, cdn) {
 	if(cint(wn.boot.notification_settings.sales_order)) {
 		cur_frm.email_doc(wn.boot.notification_settings.sales_order_message);
 	}
+
+
+
+
+
+//
 };

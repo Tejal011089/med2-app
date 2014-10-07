@@ -13,11 +13,7 @@ cur_frm.cscript.refresh = function(doc,cdt,cdn){
 	var cl = getchildren('Delivery Tracking', doc.name, 'delivery_tracking');
 
 
-        //console.log(cl.length);
-
-        //if(cl.length>5)
-        //      msgprint("Sorry..!! Only Five Records can be added in insurance table");
-        //else
+        
 
         var arr= new Array();
 

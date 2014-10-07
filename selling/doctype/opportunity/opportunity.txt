@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 18:50:30", 
   "docstatus": 0, 
-  "modified": "2013-11-25 11:36:40", 
+  "modified": "2014-08-09 17:07:30", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -27,8 +27,6 @@
   "permlevel": 0
  }, 
  {
-  "amend": 1, 
-  "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
   "name": "__common__", 
@@ -37,8 +35,6 @@
   "parenttype": "DocType", 
   "permlevel": 0, 
   "read": 1, 
-  "report": 1, 
-  "submit": 1, 
   "write": 1
  }, 
  {
@@ -209,15 +205,21 @@
   "read_only": 1
  }, 
  {
-  "description": "<a href=\"#Sales Browser/Territory\">Add / Edit</a>", 
+  "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
   "doctype": "DocField", 
   "fieldname": "territory", 
-  "fieldtype": "Link", 
+  "fieldtype": "Data", 
   "in_filter": 1, 
   "label": "Territory", 
-  "options": "Territory", 
   "print_hide": 1, 
-  "read_only": 0, 
+  "read_only": 1, 
   "reqd": 0, 
   "search_index": 1
  }, 
@@ -333,7 +335,7 @@
   "label": "Source", 
   "oldfieldname": "source", 
   "oldfieldtype": "Select", 
-  "options": "\nExisting Customer\nReference\nAdvertisement\nCold Calling\nExhibition\nSupplier Reference\nMass Mailing\nCustomer's Vendor\nCampaign\nWalk In", 
+  "options": "\nAdvertisement\nBlog Post\nCold Calling\nCampaign\nCustomer's Vendor\nExhibition\nExisting Customer\nReference\nSupplier Reference\nMass Mailing\nWalk In\nWebsite", 
   "read_only": 0
  }, 
  {
@@ -433,11 +435,33 @@
   "print_hide": 1
  }, 
  {
+  "amend": 1, 
+  "cancel": 1, 
   "doctype": "DocPerm", 
-  "role": "Sales User"
+  "report": 1, 
+  "role": "Sales User", 
+  "submit": 1
+ }, 
+ {
+  "amend": 1, 
+  "cancel": 1, 
+  "doctype": "DocPerm", 
+  "report": 1, 
+  "role": "Sales Manager", 
+  "submit": 1
  }, 
  {
   "doctype": "DocPerm", 
-  "role": "Sales Manager"
+  "match": "employee", 
+  "role": "Employee"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager"
+ }, 
+ {
+  "doctype": "DocPerm", 
+  "role": "Admin"
  }
 ]

@@ -58,9 +58,9 @@ def update_bin(args):
 	is_stock_item = webnotes.conn.get_value('Item', args.get("item_code"), 'is_stock_item')
 	if is_stock_item == 'Yes':
 		bin = get_bin(args.get("item_code"), args.get("warehouse"))
-		webnotes.errprint(['in update bin',args])
+		#webnotes.errprint(['in update bin',args])
 		bin.update_stock(args)
-		webnotes.errprint(['bin',bin])
+		#webnotes.errprint(['bin',bin])
 		return bin
 	else:
 		msgprint("[Stock Update] Ignored %s since it is not a stock item" 

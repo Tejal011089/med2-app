@@ -2,7 +2,7 @@
  {
   "creation": "2013-05-21 16:16:45", 
   "docstatus": 0, 
-  "modified": "2013-12-14 17:27:47", 
+  "modified": "2014-08-09 00:25:32", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -34,8 +34,7 @@
   "parentfield": "permissions", 
   "parenttype": "DocType", 
   "permlevel": 0, 
-  "read": 1, 
-  "report": 1
+  "read": 1
  }, 
  {
   "doctype": "DocType", 
@@ -118,6 +117,14 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "employee", 
+  "fieldtype": "Link", 
+  "label": "Employee", 
+  "options": "Employee", 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "column_break1", 
   "fieldtype": "Column Break", 
   "oldfieldtype": "Column Break", 
@@ -163,6 +170,13 @@
   "print_hide": 1, 
   "reqd": 1, 
   "search_index": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "territory", 
+  "fieldtype": "Data", 
+  "label": "Territory", 
+  "read_only": 1
  }, 
  {
   "doctype": "DocField", 
@@ -596,6 +610,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Manufacturing Manager", 
   "submit": 1, 
   "write": 1
@@ -605,6 +620,7 @@
   "cancel": 1, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Purchase Manager", 
   "submit": 1, 
   "write": 1
@@ -614,6 +630,7 @@
   "cancel": 0, 
   "create": 1, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Purchase User", 
   "submit": 0, 
   "write": 1
@@ -623,6 +640,7 @@
   "cancel": 0, 
   "create": 0, 
   "doctype": "DocPerm", 
+  "report": 1, 
   "role": "Material User", 
   "submit": 0, 
   "write": 0
@@ -633,8 +651,29 @@
   "create": 0, 
   "doctype": "DocPerm", 
   "match": "supplier", 
+  "report": 1, 
   "role": "Supplier", 
   "submit": 0, 
   "write": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "employee", 
+  "role": "Employee", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "match": "territory", 
+  "role": "Regional Manager", 
+  "write": 1
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "role": "Admin", 
+  "write": 1
  }
 ]

@@ -52,6 +52,13 @@ cur_frm.fields_dict['default_bom'].get_query = function(doc) {
 }
 
 
+cur_frm.fields_dict.accessories_details.grid.get_field("item_code").get_query = function(doc,cdt,cdn)
+{
+	return { query: "stock.doctype.item.item.item_code_query" };
+}
+
+
+
 // Expense Account
 // ---------------------------------
 cur_frm.fields_dict['purchase_account'].get_query = function(doc){

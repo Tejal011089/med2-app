@@ -3,7 +3,16 @@
 
 cur_frm.add_fetch('employee','employee_name','employee_name');
 
+cur_frm.add_fetch('employee', 'region', 'territory');
+
 cur_frm.cscript.onload = function(doc, dt, dn) {
+
+	if(doc.leave_type=='Compensatory Off'){
+                alert("Compensatory Off")
+                set_field_permlevel('worked_day', 0);
+                refresh_field('worked_day');
+        }
+
 	if(!doc.posting_date) 
 		set_multiple(dt,dn,{posting_date:get_today()});
 	if(doc.__islocal) {
@@ -65,9 +74,9 @@ cur_frm.cscript.fiscal_year = function (doc, dt, dn){
 	cur_frm.cscript.get_leave_balance(doc, dt, dn);
 }
 
-cur_frm.cscript.leave_type = function (doc, dt, dn){
-	cur_frm.cscript.get_leave_balance(doc, dt, dn);
-}
+//cur_frm.cscript.leave_type = function (doc, dt, dn){
+//	cur_frm.cscript.get_leave_balance(doc, dt, dn);
+//}
 
 cur_frm.cscript.half_day = function(doc, dt, dn) {
 	if(doc.from_date) {
@@ -115,7 +124,22 @@ cur_frm.cscript.calculate_total_days = function(doc, dt, dn) {
 }
 
 cur_frm.fields_dict.employee.get_query = function() {
-	return {
-		query: "hr.doctype.leave_application.leave_application.query_for_permitted_employees"
-	};
+	// return {
+	// 	query: "hr.doctype.leave_application.leave_application.query_for_permitted_employees"
+	// };
+}
+
+
+cur_frm.cscript.leave_type = function(doc, dt, dn) {
+	if(doc.leave_type=='Compensatory Off'){
+		//alert("Compensatory Off")
+		set_field_permlevel('worked_day', 0);
+		refresh_field('worked_day');
+	}
+	else{
+                //alert("Compensatory Off")
+                set_field_permlevel('worked_day', 2);
+                refresh_field('worked_day');
+		cur_frm.cscript.get_leave_balance(doc, dt, dn);
+        }
 }
