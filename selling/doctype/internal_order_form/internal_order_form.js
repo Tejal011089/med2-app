@@ -96,10 +96,28 @@
 //}	
 
 //cur_frm.add_fetch('employee', 'region', 'territory');
-
+cur_frm.cscript.tname = "'Internal Order Item Details'";
+cur_frm.cscript.fname = "internal_order_item";
 
 cur_frm.add_fetch("contact_person", "designation","contact_person_designation");
 
+wn.require('app/selling/sales_common.js');
+
+erpnext.selling.InternalOrderFormController = erpnext.selling.SellingController.extend({
+  
+  onload: function(doc, dt, dn) {
+    this._super(doc, dt, dn);
+    console.log("hi")
+    // if(doc.customer && !doc.quotation_to)
+    //   doc.quotation_to = "Customer";
+    // else if(doc.lead && !doc.quotation_to)
+    //   doc.quotation_to = "Lead";
+  
+  }
+
+});
+
+cur_frm.script_manager.make(erpnext.selling.InternalOrderFormController);
 
 cur_frm.cscript.contact_email = function(doc){
 

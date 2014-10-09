@@ -2,7 +2,7 @@
  {
   "creation": "2014-04-02 11:21:27", 
   "docstatus": 0, 
-  "modified": "2014-07-21 17:27:03", 
+  "modified": "2014-10-08 13:30:37", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -26,8 +26,9 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "item_code", 
+  "fieldname": "itemcode", 
   "fieldtype": "Link", 
+  "hidden": 0, 
   "in_list_view": 1, 
   "label": "Product", 
   "options": "Item"

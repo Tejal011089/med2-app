@@ -30,6 +30,9 @@ def get_customer_list(doctype, txt, searchfield, start, page_len, filters):
 		name, customer_name limit %s, %s""" % 
 		(", ".join(fields), searchfield, "%s", "%s", "%s", "%s", "%s", "%s"), 
 		("%%%s%%" % txt, "%%%s%%" % txt, "%%%s%%" % txt, "%%%s%%" % txt, start, page_len))
+
+def get_accessories(doctype, txt, searchfield, start, page_len, filters):
+	webnotes.errprint("ijn init ")
 		
 @webnotes.whitelist()
 def get_item_details(args):
@@ -59,7 +62,7 @@ def get_item_details(args):
 	_validate_item_details(args, item_bean.doc)
 	
 	meta = webnotes.get_doctype(args.doctype)
-
+	#return args.item_code
 	# hack! for Sales Order Item
 	warehouse_fieldname = "warehouse"
 	if meta.get_field("reserved_warehouse", parentfield=args.parentfield):
@@ -88,8 +91,30 @@ def get_item_details(args):
 	if args.doctype in ("Sales Invoice", "Delivery Note"):
 		if item_bean.doc.has_serial_no == "Yes" and not args.serial_no:
 			out.serial_no = _get_serial_nos_by_fifo(args, item_bean)
+
+	# accessories= webnotes.conn.sql(""" select item_code from `tabAccessories` 
+	# 		      where parent='%s'"""%args.item_code,as_list=1)
+
+	# if accessories:
 		
+	# 	return out, accessories
+	# else:
 	return out
+		
+@webnotes.whitelist()
+def get_accssories_details(args):
+	if isinstance(args, basestring):
+		args = json.loads(args)
+	args = webnotes._dict(args)
+
+	accessories= webnotes.conn.sql(""" select item_code from `tabAccessories` 
+			      where parent='%s'"""%args.item_code,as_list=1)
+
+	if accessories:
+		
+		return accessories
+	else:
+		return ''
 
 def _get_serial_nos_by_fifo(args, item_bean):
 	return "\n".join(webnotes.conn.sql_list("""select name from `tabSerial No` 

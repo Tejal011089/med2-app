@@ -398,7 +398,7 @@ def _make_internal_order(source_name, target_doclist=None, ignore_permissions=Fa
 				}
 			}, 
 			"Accessories Details": {
-				"doctype": "Internal Order Accessories Details", 
+				"doctype": "Accessories Details", 
 				"field_map": {
 					"parent": "prevdoc_docname"
 				}

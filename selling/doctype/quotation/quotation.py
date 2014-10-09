@@ -369,6 +369,21 @@ class DocType(SellingController):
 			lst1.append(d.total)
 			print_lst.append(lst1)
 		return print_lst
+
+
+	# def get_accessories(self,item_code):
+	# 	webnotes.errprint("get_accessories")
+	# 	webnotes.errprint(item_code)
+	# 	accessories= webnotes.conn.sql(""" select item_code from `tabAccessories` 
+	# 		      where parent='%s'"""%item_code,debug=1)
+	# 	webnotes.errprint(accessories)
+	# 	if accessories:
+	# 		for i in accessories:
+	# 			webnotes.errprint(i)
+	# 			ch = addchild(self.doc, 'accessories_details',
+ #    				'Accessories', self.doclist)
+	# 			ch.itemcode=i
+				
 		
 	
 @webnotes.whitelist()
@@ -421,6 +436,12 @@ def _make_sales_order(source_name, target_doclist=None, ignore_permissions=False
 		
 	return [d.fields for d in doclist]
 
+def get_tax(doctype, txt, searchfield, start, page_len, filters):
+		webnotes.errprint("pincode")
+		return webnotes.conn.sql("""select parent from `tabApplicable Territory` 
+		where territory=%s 
+		or territory='All Territories'"""%self.doc.territory)
+		
 
 # @webnotes.whitelist()
 # def make_internal_order(source_name, target_doclist=None):

@@ -2,7 +2,7 @@
  {
   "creation": "2013-06-18 12:39:59", 
   "docstatus": 0, 
-  "modified": "2014-08-09 00:52:24", 
+  "modified": "2014-10-08 15:10:44", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -148,7 +148,7 @@
   "doctype": "DocField", 
   "fieldname": "customer_type", 
   "fieldtype": "Select", 
-  "label": "Customer Type", 
+  "label": "Customer Category", 
   "options": "\nDirect\nOEM"
  }, 
  {
@@ -375,18 +375,6 @@
   "options": "icon-shopping-cart"
  }, 
  {
-  "doctype": "DocField", 
-  "fieldname": "accessories_details", 
-  "fieldtype": "Table", 
-  "label": "Details", 
-  "options": "Accessories Details"
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "section_break_30", 
-  "fieldtype": "Section Break"
- }, 
- {
   "allow_on_submit": 1, 
   "doctype": "DocField", 
   "fieldname": "sales_order_details", 
@@ -397,6 +385,13 @@
   "options": "Sales Order Item", 
   "print_hide": 0, 
   "reqd": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "accessories_details", 
+  "fieldtype": "Table", 
+  "label": "Accessories Details", 
+  "options": "Accessories Details"
  }, 
  {
   "description": "Display all the individual items delivered with the main items", 

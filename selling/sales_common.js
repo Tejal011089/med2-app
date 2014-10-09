@@ -14,6 +14,7 @@ wn.require("app/js/controllers/accounts.js");
 
 erpnext.selling.SellingController = erpnext.TransactionController.extend({
 	onload: function() {
+		//console.log("hhhhhh");
 		this._super();
 		this.toggle_rounded_total();
 		this.setup_queries();
@@ -151,12 +152,14 @@ erpnext.selling.SellingController = erpnext.TransactionController.extend({
 	},
 	
 	item_code: function(doc, cdt, cdn) {
+		//console.log("in item code sales common");
 		var me = this;
 		var item = wn.model.get_doc(cdt, cdn);
 		if(item.item_code || item.barcode || item.serial_no) {
 			if(!this.validate_company_and_party("customer")) {
 				cur_frm.fields_dict[me.frm.cscript.fname].grid.grid_rows[item.idx - 1].remove();
 			} else {
+				me.get_accessories(doc, cdt, cdn)
 				return this.frm.call({
 					method: "selling.utils.get_item_details",
 					child: item,
@@ -181,6 +184,8 @@ erpnext.selling.SellingController = erpnext.TransactionController.extend({
 					},
 					callback: function(r) {
 						if(!r.exc) {
+							//console.log(r.message);
+							
 							me.frm.script_manager.trigger("ref_rate", cdt, cdn);
 						}
 					}
@@ -191,6 +196,34 @@ erpnext.selling.SellingController = erpnext.TransactionController.extend({
 	
 	selling_price_list: function() {
 		this.get_price_list_currency("Selling");
+	},
+
+
+	get_accessories: function(doc, cdt, cdn){
+		//console.log("in get Accessories");
+		var item = wn.model.get_doc(cdt, cdn);
+		//console.log(item.item_code)
+		return this.frm.call({
+					method: "selling.utils.get_accssories_details",
+					args: {
+						args: {
+							item_code: item.item_code
+						}
+					},
+					callback: function(r) {
+						if(!r.exc) {
+							//console.log(r.message);
+							for(i=0;i<r.message.length;i++){
+								//console.log(r.message[i])
+								var acc = wn.model.add_child(doc, "Accessories Details", "accessories_details");
+								acc.itemcode=item.item_code;
+								acc.item=r.message[i];
+								//console.log(acc.item);
+							}	
+							refresh_field("accessories_details");
+						}
+					}
+		});
 	},
 	
 	ref_rate: function(doc, cdt, cdn) {

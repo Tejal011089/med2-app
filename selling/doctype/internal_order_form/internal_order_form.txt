@@ -2,7 +2,7 @@
  {
   "creation": "2014-02-21 11:27:45", 
   "docstatus": 0, 
-  "modified": "2014-10-07 16:18:25", 
+  "modified": "2014-10-09 14:50:43", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -357,18 +357,6 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "accessories_details", 
-  "fieldtype": "Table", 
-  "label": "Details", 
-  "options": "Internal Order Accessories Details"
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "section_break_41", 
-  "fieldtype": "Section Break"
- }, 
- {
-  "doctype": "DocField", 
   "fieldname": "internal_order_item", 
   "fieldtype": "Table", 
   "hidden": 0, 
@@ -377,15 +365,15 @@
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "section_break_25", 
-  "fieldtype": "Section Break"
+  "fieldname": "accessories_details", 
+  "fieldtype": "Table", 
+  "label": "Accessories Details", 
+  "options": "Accessories Details"
  }, 
  {
   "doctype": "DocField", 
-  "fieldname": "accessory", 
-  "fieldtype": "Data", 
-  "hidden": 1, 
-  "label": "Accessory"
+  "fieldname": "section_break_25", 
+  "fieldtype": "Section Break"
  }, 
  {
   "doctype": "DocField", 

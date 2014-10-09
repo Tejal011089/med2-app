@@ -6,11 +6,20 @@
 from __future__ import unicode_literals
 from webnotes.model.doc import addchild
 from webnotes.utils import flt, cstr
+from controllers.selling_controller import SellingController
 import webnotes
 
-class DocType:
-	def __init__(self, d, dl):
-		self.doc, self.doclist = d, dl
+
+class DocType(SellingController):
+	# def __init__(self, d, dl):
+	# 	self.doc, self.doclist = d, dl
+	def __init__(self, doc, doclist=None):
+		#webnotes.errprint("in py ")
+		self.doc = doc
+		if not doclist: doclist = []
+		self.doclist = doclist
+		self.tname = 'Internal Order Item Details'
+		self.fname = 'internal_order_item'
 
 	def on_update(self):
 		#webnotes.errprint("hello")

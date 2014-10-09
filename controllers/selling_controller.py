@@ -265,6 +265,7 @@ class SellingController(StockController):
 					_("discount on Item Code") + ": " + cstr(d.item_code))
 					
 	def get_item_list(self):
+		webnotes.errprint("in get item list")
 		il = []
 		for d in self.doclist.get({"parentfield": self.fname}):
 			reserved_warehouse = ""

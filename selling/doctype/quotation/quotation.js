@@ -277,6 +277,31 @@ cur_frm.script_manager.make(erpnext.selling.QuotationController);
 cur_frm.fields_dict.lead.get_query = function(doc,cdt,cdn) {
 	return{	query:"controllers.queries.lead_query" } }
 
+
+cur_frm.fields_dict.charge.get_query = function(doc,cdt,cdn) {
+	return{	query:"selling.doctype.quotation.quotation.get_tax" } }
+
+// cur_frm.cscript.item_code = function(doc, cdt, cdn) {
+// 	var d = locals[cdt][cdn];
+// 	console.log("helllo")
+// 	if(doc.customer) {
+// 		//unhide_field('territory');
+// 		return cur_frm.call({
+// 			doc: cur_frm.doc,
+// 			method: "get_accessories",
+// 			args: d.item_code,
+// 			callback: function(r) {
+// 				if(!r.exc) {
+// 					console.log(r)
+// 					cur_frm.refresh_fields();
+// 				}
+// 			}
+// 		});
+// 	}
+	
+// }
+
+
 cur_frm.cscript.lead = function(doc, cdt, cdn) {
 	if(doc.lead) {
 		unhide_field('territory');
